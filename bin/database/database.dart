@@ -1,6 +1,4 @@
 import 'package:drift/drift.dart';
-import 'dart:io';
-import 'package:drift/native.dart';
 
 part 'database.g.dart';
 
@@ -36,14 +34,8 @@ class Reviews extends Table {
 
 @DriftDatabase(tables: [Professors, Users, Reviews])
 class AppDatabase extends _$AppDatabase {
-  //AppDatabase() : super(_openConnection());
-
   AppDatabase(super.e);
 
   @override
   int get schemaVersion => 1;
-
-  // static QueryExecutor _openConnection() {
-  //   return NativeDatabase.createInBackground(File('/bin'));
-  // }
 }

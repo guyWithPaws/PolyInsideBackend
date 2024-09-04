@@ -3,7 +3,8 @@ import 'dart:typed_data';
 import 'package:drift/drift.dart';
 import 'package:drift/native.dart';
 
-import 'database.dart';
+import 'database/database.dart';
+
 
 void main() async {
   final database = AppDatabase(NativeDatabase(File('db.sqlite')));
