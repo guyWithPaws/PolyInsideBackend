@@ -8,7 +8,7 @@ class Professors extends Table {
   TextColumn get avatar => text()();
 
   RealColumn get objectivity => real()();
-  RealColumn get loyality => real()();
+  RealColumn get loyalty => real()();
   RealColumn get professionalism => real()();
   RealColumn get harshness => real()();
 }
@@ -28,7 +28,7 @@ class Reviews extends Table {
 
   IntColumn get status => integer()();
   RealColumn get objectivity => real()();
-  RealColumn get loyality => real()();
+  RealColumn get loyalty => real()();
   RealColumn get professionalism => real()();
   RealColumn get harshness => real()();
 }
