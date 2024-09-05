@@ -3,8 +3,8 @@ import 'package:poly_inside_server/generated/protobufs/service.pbgrpc.dart';
 
 void main(List<String> args) {
   final channel = ClientChannel(
-    '127.0.0.1',
-    port: 8080,
+    '194.87.210.193',
+    port: 443,
     options: const ChannelOptions(
       credentials: ChannelCredentials.insecure(),
     ),
