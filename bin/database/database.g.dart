@@ -654,7 +654,11 @@ class $ReviewsTable extends Reviews with TableInfo<$ReviewsTable, Review> {
   @override
   late final GeneratedColumn<int> id = GeneratedColumn<int>(
       'id', aliasedName, false,
-      type: DriftSqlType.int, requiredDuringInsert: true);
+      hasAutoIncrement: true,
+      type: DriftSqlType.int,
+      requiredDuringInsert: false,
+      defaultConstraints:
+          GeneratedColumn.constraintIsAlways('PRIMARY KEY AUTOINCREMENT'));
   static const VerificationMeta _userIdMeta = const VerificationMeta('userId');
   @override
   late final GeneratedColumn<int> userId = GeneratedColumn<int>(
@@ -672,6 +676,11 @@ class $ReviewsTable extends Reviews with TableInfo<$ReviewsTable, Review> {
   late final GeneratedColumn<String> comment = GeneratedColumn<String>(
       'comment', aliasedName, false,
       type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _statusMeta = const VerificationMeta('status');
+  @override
+  late final GeneratedColumn<int> status = GeneratedColumn<int>(
+      'status', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
   static const VerificationMeta _objectivityMeta =
       const VerificationMeta('objectivity');
   @override
@@ -702,6 +711,7 @@ class $ReviewsTable extends Reviews with TableInfo<$ReviewsTable, Review> {
         userId,
         professorId,
         comment,
+        status,
         objectivity,
         loyality,
         professionalism,
@@ -719,8 +729,6 @@ class $ReviewsTable extends Reviews with TableInfo<$ReviewsTable, Review> {
     final data = instance.toColumns(true);
     if (data.containsKey('id')) {
       context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
-    } else if (isInserting) {
-      context.missing(_idMeta);
     }
     if (data.containsKey('user_id')) {
       context.handle(_userIdMeta,
@@ -741,6 +749,12 @@ class $ReviewsTable extends Reviews with TableInfo<$ReviewsTable, Review> {
           comment.isAcceptableOrUnknown(data['comment']!, _commentMeta));
     } else if (isInserting) {
       context.missing(_commentMeta);
+    }
+    if (data.containsKey('status')) {
+      context.handle(_statusMeta,
+          status.isAcceptableOrUnknown(data['status']!, _statusMeta));
+    } else if (isInserting) {
+      context.missing(_statusMeta);
     }
     if (data.containsKey('objectivity')) {
       context.handle(
@@ -774,7 +788,7 @@ class $ReviewsTable extends Reviews with TableInfo<$ReviewsTable, Review> {
   }
 
   @override
-  Set<GeneratedColumn> get $primaryKey => const {};
+  Set<GeneratedColumn> get $primaryKey => {id};
   @override
   Review map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
@@ -787,6 +801,8 @@ class $ReviewsTable extends Reviews with TableInfo<$ReviewsTable, Review> {
           .read(DriftSqlType.int, data['${effectivePrefix}professor_id'])!,
       comment: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}comment'])!,
+      status: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}status'])!,
       objectivity: attachedDatabase.typeMapping
           .read(DriftSqlType.double, data['${effectivePrefix}objectivity'])!,
       loyality: attachedDatabase.typeMapping
@@ -809,6 +825,7 @@ class Review extends DataClass implements Insertable<Review> {
   final int userId;
   final int professorId;
   final String comment;
+  final int status;
   final double objectivity;
   final double loyality;
   final double professionalism;
@@ -818,6 +835,7 @@ class Review extends DataClass implements Insertable<Review> {
       required this.userId,
       required this.professorId,
       required this.comment,
+      required this.status,
       required this.objectivity,
       required this.loyality,
       required this.professionalism,
@@ -829,6 +847,7 @@ class Review extends DataClass implements Insertable<Review> {
     map['user_id'] = Variable<int>(userId);
     map['professor_id'] = Variable<int>(professorId);
     map['comment'] = Variable<String>(comment);
+    map['status'] = Variable<int>(status);
     map['objectivity'] = Variable<double>(objectivity);
     map['loyality'] = Variable<double>(loyality);
     map['professionalism'] = Variable<double>(professionalism);
@@ -842,6 +861,7 @@ class Review extends DataClass implements Insertable<Review> {
       userId: Value(userId),
       professorId: Value(professorId),
       comment: Value(comment),
+      status: Value(status),
       objectivity: Value(objectivity),
       loyality: Value(loyality),
       professionalism: Value(professionalism),
@@ -857,6 +877,7 @@ class Review extends DataClass implements Insertable<Review> {
       userId: serializer.fromJson<int>(json['userId']),
       professorId: serializer.fromJson<int>(json['professorId']),
       comment: serializer.fromJson<String>(json['comment']),
+      status: serializer.fromJson<int>(json['status']),
       objectivity: serializer.fromJson<double>(json['objectivity']),
       loyality: serializer.fromJson<double>(json['loyality']),
       professionalism: serializer.fromJson<double>(json['professionalism']),
@@ -871,6 +892,7 @@ class Review extends DataClass implements Insertable<Review> {
       'userId': serializer.toJson<int>(userId),
       'professorId': serializer.toJson<int>(professorId),
       'comment': serializer.toJson<String>(comment),
+      'status': serializer.toJson<int>(status),
       'objectivity': serializer.toJson<double>(objectivity),
       'loyality': serializer.toJson<double>(loyality),
       'professionalism': serializer.toJson<double>(professionalism),
@@ -883,6 +905,7 @@ class Review extends DataClass implements Insertable<Review> {
           int? userId,
           int? professorId,
           String? comment,
+          int? status,
           double? objectivity,
           double? loyality,
           double? professionalism,
@@ -892,6 +915,7 @@ class Review extends DataClass implements Insertable<Review> {
         userId: userId ?? this.userId,
         professorId: professorId ?? this.professorId,
         comment: comment ?? this.comment,
+        status: status ?? this.status,
         objectivity: objectivity ?? this.objectivity,
         loyality: loyality ?? this.loyality,
         professionalism: professionalism ?? this.professionalism,
@@ -904,6 +928,7 @@ class Review extends DataClass implements Insertable<Review> {
       professorId:
           data.professorId.present ? data.professorId.value : this.professorId,
       comment: data.comment.present ? data.comment.value : this.comment,
+      status: data.status.present ? data.status.value : this.status,
       objectivity:
           data.objectivity.present ? data.objectivity.value : this.objectivity,
       loyality: data.loyality.present ? data.loyality.value : this.loyality,
@@ -921,6 +946,7 @@ class Review extends DataClass implements Insertable<Review> {
           ..write('userId: $userId, ')
           ..write('professorId: $professorId, ')
           ..write('comment: $comment, ')
+          ..write('status: $status, ')
           ..write('objectivity: $objectivity, ')
           ..write('loyality: $loyality, ')
           ..write('professionalism: $professionalism, ')
@@ -930,8 +956,8 @@ class Review extends DataClass implements Insertable<Review> {
   }
 
   @override
-  int get hashCode => Object.hash(id, userId, professorId, comment, objectivity,
-      loyality, professionalism, harshness);
+  int get hashCode => Object.hash(id, userId, professorId, comment, status,
+      objectivity, loyality, professionalism, harshness);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -940,6 +966,7 @@ class Review extends DataClass implements Insertable<Review> {
           other.userId == this.userId &&
           other.professorId == this.professorId &&
           other.comment == this.comment &&
+          other.status == this.status &&
           other.objectivity == this.objectivity &&
           other.loyality == this.loyality &&
           other.professionalism == this.professionalism &&
@@ -951,36 +978,36 @@ class ReviewsCompanion extends UpdateCompanion<Review> {
   final Value<int> userId;
   final Value<int> professorId;
   final Value<String> comment;
+  final Value<int> status;
   final Value<double> objectivity;
   final Value<double> loyality;
   final Value<double> professionalism;
   final Value<double> harshness;
-  final Value<int> rowid;
   const ReviewsCompanion({
     this.id = const Value.absent(),
     this.userId = const Value.absent(),
     this.professorId = const Value.absent(),
     this.comment = const Value.absent(),
+    this.status = const Value.absent(),
     this.objectivity = const Value.absent(),
     this.loyality = const Value.absent(),
     this.professionalism = const Value.absent(),
     this.harshness = const Value.absent(),
-    this.rowid = const Value.absent(),
   });
   ReviewsCompanion.insert({
-    required int id,
+    this.id = const Value.absent(),
     required int userId,
     required int professorId,
     required String comment,
+    required int status,
     required double objectivity,
     required double loyality,
     required double professionalism,
     required double harshness,
-    this.rowid = const Value.absent(),
-  })  : id = Value(id),
-        userId = Value(userId),
+  })  : userId = Value(userId),
         professorId = Value(professorId),
         comment = Value(comment),
+        status = Value(status),
         objectivity = Value(objectivity),
         loyality = Value(loyality),
         professionalism = Value(professionalism),
@@ -990,22 +1017,22 @@ class ReviewsCompanion extends UpdateCompanion<Review> {
     Expression<int>? userId,
     Expression<int>? professorId,
     Expression<String>? comment,
+    Expression<int>? status,
     Expression<double>? objectivity,
     Expression<double>? loyality,
     Expression<double>? professionalism,
     Expression<double>? harshness,
-    Expression<int>? rowid,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
       if (userId != null) 'user_id': userId,
       if (professorId != null) 'professor_id': professorId,
       if (comment != null) 'comment': comment,
+      if (status != null) 'status': status,
       if (objectivity != null) 'objectivity': objectivity,
       if (loyality != null) 'loyality': loyality,
       if (professionalism != null) 'professionalism': professionalism,
       if (harshness != null) 'harshness': harshness,
-      if (rowid != null) 'rowid': rowid,
     });
   }
 
@@ -1014,21 +1041,21 @@ class ReviewsCompanion extends UpdateCompanion<Review> {
       Value<int>? userId,
       Value<int>? professorId,
       Value<String>? comment,
+      Value<int>? status,
       Value<double>? objectivity,
       Value<double>? loyality,
       Value<double>? professionalism,
-      Value<double>? harshness,
-      Value<int>? rowid}) {
+      Value<double>? harshness}) {
     return ReviewsCompanion(
       id: id ?? this.id,
       userId: userId ?? this.userId,
       professorId: professorId ?? this.professorId,
       comment: comment ?? this.comment,
+      status: status ?? this.status,
       objectivity: objectivity ?? this.objectivity,
       loyality: loyality ?? this.loyality,
       professionalism: professionalism ?? this.professionalism,
       harshness: harshness ?? this.harshness,
-      rowid: rowid ?? this.rowid,
     );
   }
 
@@ -1047,6 +1074,9 @@ class ReviewsCompanion extends UpdateCompanion<Review> {
     if (comment.present) {
       map['comment'] = Variable<String>(comment.value);
     }
+    if (status.present) {
+      map['status'] = Variable<int>(status.value);
+    }
     if (objectivity.present) {
       map['objectivity'] = Variable<double>(objectivity.value);
     }
@@ -1059,9 +1089,6 @@ class ReviewsCompanion extends UpdateCompanion<Review> {
     if (harshness.present) {
       map['harshness'] = Variable<double>(harshness.value);
     }
-    if (rowid.present) {
-      map['rowid'] = Variable<int>(rowid.value);
-    }
     return map;
   }
 
@@ -1072,11 +1099,11 @@ class ReviewsCompanion extends UpdateCompanion<Review> {
           ..write('userId: $userId, ')
           ..write('professorId: $professorId, ')
           ..write('comment: $comment, ')
+          ..write('status: $status, ')
           ..write('objectivity: $objectivity, ')
           ..write('loyality: $loyality, ')
           ..write('professionalism: $professionalism, ')
-          ..write('harshness: $harshness, ')
-          ..write('rowid: $rowid')
+          ..write('harshness: $harshness')
           ..write(')'))
         .toString();
   }
@@ -1395,26 +1422,26 @@ typedef $$UsersTableProcessedTableManager = ProcessedTableManager<
     User,
     PrefetchHooks Function()>;
 typedef $$ReviewsTableCreateCompanionBuilder = ReviewsCompanion Function({
-  required int id,
+  Value<int> id,
   required int userId,
   required int professorId,
   required String comment,
+  required int status,
   required double objectivity,
   required double loyality,
   required double professionalism,
   required double harshness,
-  Value<int> rowid,
 });
 typedef $$ReviewsTableUpdateCompanionBuilder = ReviewsCompanion Function({
   Value<int> id,
   Value<int> userId,
   Value<int> professorId,
   Value<String> comment,
+  Value<int> status,
   Value<double> objectivity,
   Value<double> loyality,
   Value<double> professionalism,
   Value<double> harshness,
-  Value<int> rowid,
 });
 
 class $$ReviewsTableFilterComposer
@@ -1437,6 +1464,11 @@ class $$ReviewsTableFilterComposer
 
   ColumnFilters<String> get comment => $state.composableBuilder(
       column: $state.table.comment,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<int> get status => $state.composableBuilder(
+      column: $state.table.status,
       builder: (column, joinBuilders) =>
           ColumnFilters(column, joinBuilders: joinBuilders));
 
@@ -1481,6 +1513,11 @@ class $$ReviewsTableOrderingComposer
 
   ColumnOrderings<String> get comment => $state.composableBuilder(
       column: $state.table.comment,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<int> get status => $state.composableBuilder(
+      column: $state.table.status,
       builder: (column, joinBuilders) =>
           ColumnOrderings(column, joinBuilders: joinBuilders));
 
@@ -1529,44 +1566,44 @@ class $$ReviewsTableTableManager extends RootTableManager<
             Value<int> userId = const Value.absent(),
             Value<int> professorId = const Value.absent(),
             Value<String> comment = const Value.absent(),
+            Value<int> status = const Value.absent(),
             Value<double> objectivity = const Value.absent(),
             Value<double> loyality = const Value.absent(),
             Value<double> professionalism = const Value.absent(),
             Value<double> harshness = const Value.absent(),
-            Value<int> rowid = const Value.absent(),
           }) =>
               ReviewsCompanion(
             id: id,
             userId: userId,
             professorId: professorId,
             comment: comment,
+            status: status,
             objectivity: objectivity,
             loyality: loyality,
             professionalism: professionalism,
             harshness: harshness,
-            rowid: rowid,
           ),
           createCompanionCallback: ({
-            required int id,
+            Value<int> id = const Value.absent(),
             required int userId,
             required int professorId,
             required String comment,
+            required int status,
             required double objectivity,
             required double loyality,
             required double professionalism,
             required double harshness,
-            Value<int> rowid = const Value.absent(),
           }) =>
               ReviewsCompanion.insert(
             id: id,
             userId: userId,
             professorId: professorId,
             comment: comment,
+            status: status,
             objectivity: objectivity,
             loyality: loyality,
             professionalism: professionalism,
             harshness: harshness,
-            rowid: rowid,
           ),
           withReferenceMapper: (p0) => p0
               .map((e) => (e.readTable(table), BaseReferences(db, table, e)))

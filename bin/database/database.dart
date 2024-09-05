@@ -21,11 +21,12 @@ class Users extends Table {
 }
 
 class Reviews extends Table {
-  IntColumn get id => integer()();
+  IntColumn get id => integer().autoIncrement()();
   IntColumn get userId => integer()();
   IntColumn get professorId => integer()();
   TextColumn get comment => text()();
 
+  IntColumn get status => integer()();
   RealColumn get objectivity => real()();
   RealColumn get loyality => real()();
   RealColumn get professionalism => real()();
