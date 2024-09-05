@@ -34,11 +34,11 @@ class $ProfessorsTable extends Professors
   late final GeneratedColumn<double> objectivity = GeneratedColumn<double>(
       'objectivity', aliasedName, false,
       type: DriftSqlType.double, requiredDuringInsert: true);
-  static const VerificationMeta _loyalityMeta =
-      const VerificationMeta('loyality');
+  static const VerificationMeta _loyaltyMeta =
+      const VerificationMeta('loyalty');
   @override
-  late final GeneratedColumn<double> loyality = GeneratedColumn<double>(
-      'loyality', aliasedName, false,
+  late final GeneratedColumn<double> loyalty = GeneratedColumn<double>(
+      'loyalty', aliasedName, false,
       type: DriftSqlType.double, requiredDuringInsert: true);
   static const VerificationMeta _professionalismMeta =
       const VerificationMeta('professionalism');
@@ -54,7 +54,7 @@ class $ProfessorsTable extends Professors
       type: DriftSqlType.double, requiredDuringInsert: true);
   @override
   List<GeneratedColumn> get $columns =>
-      [id, name, avatar, objectivity, loyality, professionalism, harshness];
+      [id, name, avatar, objectivity, loyalty, professionalism, harshness];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
@@ -88,11 +88,11 @@ class $ProfessorsTable extends Professors
     } else if (isInserting) {
       context.missing(_objectivityMeta);
     }
-    if (data.containsKey('loyality')) {
-      context.handle(_loyalityMeta,
-          loyality.isAcceptableOrUnknown(data['loyality']!, _loyalityMeta));
+    if (data.containsKey('loyalty')) {
+      context.handle(_loyaltyMeta,
+          loyalty.isAcceptableOrUnknown(data['loyalty']!, _loyaltyMeta));
     } else if (isInserting) {
-      context.missing(_loyalityMeta);
+      context.missing(_loyaltyMeta);
     }
     if (data.containsKey('professionalism')) {
       context.handle(
@@ -125,8 +125,8 @@ class $ProfessorsTable extends Professors
           .read(DriftSqlType.string, data['${effectivePrefix}avatar'])!,
       objectivity: attachedDatabase.typeMapping
           .read(DriftSqlType.double, data['${effectivePrefix}objectivity'])!,
-      loyality: attachedDatabase.typeMapping
-          .read(DriftSqlType.double, data['${effectivePrefix}loyality'])!,
+      loyalty: attachedDatabase.typeMapping
+          .read(DriftSqlType.double, data['${effectivePrefix}loyalty'])!,
       professionalism: attachedDatabase.typeMapping.read(
           DriftSqlType.double, data['${effectivePrefix}professionalism'])!,
       harshness: attachedDatabase.typeMapping
@@ -145,7 +145,7 @@ class Professor extends DataClass implements Insertable<Professor> {
   final String name;
   final String avatar;
   final double objectivity;
-  final double loyality;
+  final double loyalty;
   final double professionalism;
   final double harshness;
   const Professor(
@@ -153,7 +153,7 @@ class Professor extends DataClass implements Insertable<Professor> {
       required this.name,
       required this.avatar,
       required this.objectivity,
-      required this.loyality,
+      required this.loyalty,
       required this.professionalism,
       required this.harshness});
   @override
@@ -163,7 +163,7 @@ class Professor extends DataClass implements Insertable<Professor> {
     map['name'] = Variable<String>(name);
     map['avatar'] = Variable<String>(avatar);
     map['objectivity'] = Variable<double>(objectivity);
-    map['loyality'] = Variable<double>(loyality);
+    map['loyalty'] = Variable<double>(loyalty);
     map['professionalism'] = Variable<double>(professionalism);
     map['harshness'] = Variable<double>(harshness);
     return map;
@@ -175,7 +175,7 @@ class Professor extends DataClass implements Insertable<Professor> {
       name: Value(name),
       avatar: Value(avatar),
       objectivity: Value(objectivity),
-      loyality: Value(loyality),
+      loyalty: Value(loyalty),
       professionalism: Value(professionalism),
       harshness: Value(harshness),
     );
@@ -189,7 +189,7 @@ class Professor extends DataClass implements Insertable<Professor> {
       name: serializer.fromJson<String>(json['name']),
       avatar: serializer.fromJson<String>(json['avatar']),
       objectivity: serializer.fromJson<double>(json['objectivity']),
-      loyality: serializer.fromJson<double>(json['loyality']),
+      loyalty: serializer.fromJson<double>(json['loyalty']),
       professionalism: serializer.fromJson<double>(json['professionalism']),
       harshness: serializer.fromJson<double>(json['harshness']),
     );
@@ -202,7 +202,7 @@ class Professor extends DataClass implements Insertable<Professor> {
       'name': serializer.toJson<String>(name),
       'avatar': serializer.toJson<String>(avatar),
       'objectivity': serializer.toJson<double>(objectivity),
-      'loyality': serializer.toJson<double>(loyality),
+      'loyalty': serializer.toJson<double>(loyalty),
       'professionalism': serializer.toJson<double>(professionalism),
       'harshness': serializer.toJson<double>(harshness),
     };
@@ -213,7 +213,7 @@ class Professor extends DataClass implements Insertable<Professor> {
           String? name,
           String? avatar,
           double? objectivity,
-          double? loyality,
+          double? loyalty,
           double? professionalism,
           double? harshness}) =>
       Professor(
@@ -221,7 +221,7 @@ class Professor extends DataClass implements Insertable<Professor> {
         name: name ?? this.name,
         avatar: avatar ?? this.avatar,
         objectivity: objectivity ?? this.objectivity,
-        loyality: loyality ?? this.loyality,
+        loyalty: loyalty ?? this.loyalty,
         professionalism: professionalism ?? this.professionalism,
         harshness: harshness ?? this.harshness,
       );
@@ -232,7 +232,7 @@ class Professor extends DataClass implements Insertable<Professor> {
       avatar: data.avatar.present ? data.avatar.value : this.avatar,
       objectivity:
           data.objectivity.present ? data.objectivity.value : this.objectivity,
-      loyality: data.loyality.present ? data.loyality.value : this.loyality,
+      loyalty: data.loyalty.present ? data.loyalty.value : this.loyalty,
       professionalism: data.professionalism.present
           ? data.professionalism.value
           : this.professionalism,
@@ -247,7 +247,7 @@ class Professor extends DataClass implements Insertable<Professor> {
           ..write('name: $name, ')
           ..write('avatar: $avatar, ')
           ..write('objectivity: $objectivity, ')
-          ..write('loyality: $loyality, ')
+          ..write('loyalty: $loyalty, ')
           ..write('professionalism: $professionalism, ')
           ..write('harshness: $harshness')
           ..write(')'))
@@ -256,7 +256,7 @@ class Professor extends DataClass implements Insertable<Professor> {
 
   @override
   int get hashCode => Object.hash(
-      id, name, avatar, objectivity, loyality, professionalism, harshness);
+      id, name, avatar, objectivity, loyalty, professionalism, harshness);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -265,7 +265,7 @@ class Professor extends DataClass implements Insertable<Professor> {
           other.name == this.name &&
           other.avatar == this.avatar &&
           other.objectivity == this.objectivity &&
-          other.loyality == this.loyality &&
+          other.loyalty == this.loyalty &&
           other.professionalism == this.professionalism &&
           other.harshness == this.harshness);
 }
@@ -275,7 +275,7 @@ class ProfessorsCompanion extends UpdateCompanion<Professor> {
   final Value<String> name;
   final Value<String> avatar;
   final Value<double> objectivity;
-  final Value<double> loyality;
+  final Value<double> loyalty;
   final Value<double> professionalism;
   final Value<double> harshness;
   const ProfessorsCompanion({
@@ -283,7 +283,7 @@ class ProfessorsCompanion extends UpdateCompanion<Professor> {
     this.name = const Value.absent(),
     this.avatar = const Value.absent(),
     this.objectivity = const Value.absent(),
-    this.loyality = const Value.absent(),
+    this.loyalty = const Value.absent(),
     this.professionalism = const Value.absent(),
     this.harshness = const Value.absent(),
   });
@@ -292,13 +292,13 @@ class ProfessorsCompanion extends UpdateCompanion<Professor> {
     required String name,
     required String avatar,
     required double objectivity,
-    required double loyality,
+    required double loyalty,
     required double professionalism,
     required double harshness,
   })  : name = Value(name),
         avatar = Value(avatar),
         objectivity = Value(objectivity),
-        loyality = Value(loyality),
+        loyalty = Value(loyalty),
         professionalism = Value(professionalism),
         harshness = Value(harshness);
   static Insertable<Professor> custom({
@@ -306,7 +306,7 @@ class ProfessorsCompanion extends UpdateCompanion<Professor> {
     Expression<String>? name,
     Expression<String>? avatar,
     Expression<double>? objectivity,
-    Expression<double>? loyality,
+    Expression<double>? loyalty,
     Expression<double>? professionalism,
     Expression<double>? harshness,
   }) {
@@ -315,7 +315,7 @@ class ProfessorsCompanion extends UpdateCompanion<Professor> {
       if (name != null) 'name': name,
       if (avatar != null) 'avatar': avatar,
       if (objectivity != null) 'objectivity': objectivity,
-      if (loyality != null) 'loyality': loyality,
+      if (loyalty != null) 'loyalty': loyalty,
       if (professionalism != null) 'professionalism': professionalism,
       if (harshness != null) 'harshness': harshness,
     });
@@ -326,7 +326,7 @@ class ProfessorsCompanion extends UpdateCompanion<Professor> {
       Value<String>? name,
       Value<String>? avatar,
       Value<double>? objectivity,
-      Value<double>? loyality,
+      Value<double>? loyalty,
       Value<double>? professionalism,
       Value<double>? harshness}) {
     return ProfessorsCompanion(
@@ -334,7 +334,7 @@ class ProfessorsCompanion extends UpdateCompanion<Professor> {
       name: name ?? this.name,
       avatar: avatar ?? this.avatar,
       objectivity: objectivity ?? this.objectivity,
-      loyality: loyality ?? this.loyality,
+      loyalty: loyalty ?? this.loyalty,
       professionalism: professionalism ?? this.professionalism,
       harshness: harshness ?? this.harshness,
     );
@@ -355,8 +355,8 @@ class ProfessorsCompanion extends UpdateCompanion<Professor> {
     if (objectivity.present) {
       map['objectivity'] = Variable<double>(objectivity.value);
     }
-    if (loyality.present) {
-      map['loyality'] = Variable<double>(loyality.value);
+    if (loyalty.present) {
+      map['loyalty'] = Variable<double>(loyalty.value);
     }
     if (professionalism.present) {
       map['professionalism'] = Variable<double>(professionalism.value);
@@ -374,7 +374,7 @@ class ProfessorsCompanion extends UpdateCompanion<Professor> {
           ..write('name: $name, ')
           ..write('avatar: $avatar, ')
           ..write('objectivity: $objectivity, ')
-          ..write('loyality: $loyality, ')
+          ..write('loyalty: $loyalty, ')
           ..write('professionalism: $professionalism, ')
           ..write('harshness: $harshness')
           ..write(')'))
@@ -687,11 +687,11 @@ class $ReviewsTable extends Reviews with TableInfo<$ReviewsTable, Review> {
   late final GeneratedColumn<double> objectivity = GeneratedColumn<double>(
       'objectivity', aliasedName, false,
       type: DriftSqlType.double, requiredDuringInsert: true);
-  static const VerificationMeta _loyalityMeta =
-      const VerificationMeta('loyality');
+  static const VerificationMeta _loyaltyMeta =
+      const VerificationMeta('loyalty');
   @override
-  late final GeneratedColumn<double> loyality = GeneratedColumn<double>(
-      'loyality', aliasedName, false,
+  late final GeneratedColumn<double> loyalty = GeneratedColumn<double>(
+      'loyalty', aliasedName, false,
       type: DriftSqlType.double, requiredDuringInsert: true);
   static const VerificationMeta _professionalismMeta =
       const VerificationMeta('professionalism');
@@ -713,7 +713,7 @@ class $ReviewsTable extends Reviews with TableInfo<$ReviewsTable, Review> {
         comment,
         status,
         objectivity,
-        loyality,
+        loyalty,
         professionalism,
         harshness
       ];
@@ -764,11 +764,11 @@ class $ReviewsTable extends Reviews with TableInfo<$ReviewsTable, Review> {
     } else if (isInserting) {
       context.missing(_objectivityMeta);
     }
-    if (data.containsKey('loyality')) {
-      context.handle(_loyalityMeta,
-          loyality.isAcceptableOrUnknown(data['loyality']!, _loyalityMeta));
+    if (data.containsKey('loyalty')) {
+      context.handle(_loyaltyMeta,
+          loyalty.isAcceptableOrUnknown(data['loyalty']!, _loyaltyMeta));
     } else if (isInserting) {
-      context.missing(_loyalityMeta);
+      context.missing(_loyaltyMeta);
     }
     if (data.containsKey('professionalism')) {
       context.handle(
@@ -805,8 +805,8 @@ class $ReviewsTable extends Reviews with TableInfo<$ReviewsTable, Review> {
           .read(DriftSqlType.int, data['${effectivePrefix}status'])!,
       objectivity: attachedDatabase.typeMapping
           .read(DriftSqlType.double, data['${effectivePrefix}objectivity'])!,
-      loyality: attachedDatabase.typeMapping
-          .read(DriftSqlType.double, data['${effectivePrefix}loyality'])!,
+      loyalty: attachedDatabase.typeMapping
+          .read(DriftSqlType.double, data['${effectivePrefix}loyalty'])!,
       professionalism: attachedDatabase.typeMapping.read(
           DriftSqlType.double, data['${effectivePrefix}professionalism'])!,
       harshness: attachedDatabase.typeMapping
@@ -827,7 +827,7 @@ class Review extends DataClass implements Insertable<Review> {
   final String comment;
   final int status;
   final double objectivity;
-  final double loyality;
+  final double loyalty;
   final double professionalism;
   final double harshness;
   const Review(
@@ -837,7 +837,7 @@ class Review extends DataClass implements Insertable<Review> {
       required this.comment,
       required this.status,
       required this.objectivity,
-      required this.loyality,
+      required this.loyalty,
       required this.professionalism,
       required this.harshness});
   @override
@@ -849,7 +849,7 @@ class Review extends DataClass implements Insertable<Review> {
     map['comment'] = Variable<String>(comment);
     map['status'] = Variable<int>(status);
     map['objectivity'] = Variable<double>(objectivity);
-    map['loyality'] = Variable<double>(loyality);
+    map['loyalty'] = Variable<double>(loyalty);
     map['professionalism'] = Variable<double>(professionalism);
     map['harshness'] = Variable<double>(harshness);
     return map;
@@ -863,7 +863,7 @@ class Review extends DataClass implements Insertable<Review> {
       comment: Value(comment),
       status: Value(status),
       objectivity: Value(objectivity),
-      loyality: Value(loyality),
+      loyalty: Value(loyalty),
       professionalism: Value(professionalism),
       harshness: Value(harshness),
     );
@@ -879,7 +879,7 @@ class Review extends DataClass implements Insertable<Review> {
       comment: serializer.fromJson<String>(json['comment']),
       status: serializer.fromJson<int>(json['status']),
       objectivity: serializer.fromJson<double>(json['objectivity']),
-      loyality: serializer.fromJson<double>(json['loyality']),
+      loyalty: serializer.fromJson<double>(json['loyalty']),
       professionalism: serializer.fromJson<double>(json['professionalism']),
       harshness: serializer.fromJson<double>(json['harshness']),
     );
@@ -894,7 +894,7 @@ class Review extends DataClass implements Insertable<Review> {
       'comment': serializer.toJson<String>(comment),
       'status': serializer.toJson<int>(status),
       'objectivity': serializer.toJson<double>(objectivity),
-      'loyality': serializer.toJson<double>(loyality),
+      'loyalty': serializer.toJson<double>(loyalty),
       'professionalism': serializer.toJson<double>(professionalism),
       'harshness': serializer.toJson<double>(harshness),
     };
@@ -907,7 +907,7 @@ class Review extends DataClass implements Insertable<Review> {
           String? comment,
           int? status,
           double? objectivity,
-          double? loyality,
+          double? loyalty,
           double? professionalism,
           double? harshness}) =>
       Review(
@@ -917,7 +917,7 @@ class Review extends DataClass implements Insertable<Review> {
         comment: comment ?? this.comment,
         status: status ?? this.status,
         objectivity: objectivity ?? this.objectivity,
-        loyality: loyality ?? this.loyality,
+        loyalty: loyalty ?? this.loyalty,
         professionalism: professionalism ?? this.professionalism,
         harshness: harshness ?? this.harshness,
       );
@@ -931,7 +931,7 @@ class Review extends DataClass implements Insertable<Review> {
       status: data.status.present ? data.status.value : this.status,
       objectivity:
           data.objectivity.present ? data.objectivity.value : this.objectivity,
-      loyality: data.loyality.present ? data.loyality.value : this.loyality,
+      loyalty: data.loyalty.present ? data.loyalty.value : this.loyalty,
       professionalism: data.professionalism.present
           ? data.professionalism.value
           : this.professionalism,
@@ -948,7 +948,7 @@ class Review extends DataClass implements Insertable<Review> {
           ..write('comment: $comment, ')
           ..write('status: $status, ')
           ..write('objectivity: $objectivity, ')
-          ..write('loyality: $loyality, ')
+          ..write('loyalty: $loyalty, ')
           ..write('professionalism: $professionalism, ')
           ..write('harshness: $harshness')
           ..write(')'))
@@ -957,7 +957,7 @@ class Review extends DataClass implements Insertable<Review> {
 
   @override
   int get hashCode => Object.hash(id, userId, professorId, comment, status,
-      objectivity, loyality, professionalism, harshness);
+      objectivity, loyalty, professionalism, harshness);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -968,7 +968,7 @@ class Review extends DataClass implements Insertable<Review> {
           other.comment == this.comment &&
           other.status == this.status &&
           other.objectivity == this.objectivity &&
-          other.loyality == this.loyality &&
+          other.loyalty == this.loyalty &&
           other.professionalism == this.professionalism &&
           other.harshness == this.harshness);
 }
@@ -980,7 +980,7 @@ class ReviewsCompanion extends UpdateCompanion<Review> {
   final Value<String> comment;
   final Value<int> status;
   final Value<double> objectivity;
-  final Value<double> loyality;
+  final Value<double> loyalty;
   final Value<double> professionalism;
   final Value<double> harshness;
   const ReviewsCompanion({
@@ -990,7 +990,7 @@ class ReviewsCompanion extends UpdateCompanion<Review> {
     this.comment = const Value.absent(),
     this.status = const Value.absent(),
     this.objectivity = const Value.absent(),
-    this.loyality = const Value.absent(),
+    this.loyalty = const Value.absent(),
     this.professionalism = const Value.absent(),
     this.harshness = const Value.absent(),
   });
@@ -1001,7 +1001,7 @@ class ReviewsCompanion extends UpdateCompanion<Review> {
     required String comment,
     required int status,
     required double objectivity,
-    required double loyality,
+    required double loyalty,
     required double professionalism,
     required double harshness,
   })  : userId = Value(userId),
@@ -1009,7 +1009,7 @@ class ReviewsCompanion extends UpdateCompanion<Review> {
         comment = Value(comment),
         status = Value(status),
         objectivity = Value(objectivity),
-        loyality = Value(loyality),
+        loyalty = Value(loyalty),
         professionalism = Value(professionalism),
         harshness = Value(harshness);
   static Insertable<Review> custom({
@@ -1019,7 +1019,7 @@ class ReviewsCompanion extends UpdateCompanion<Review> {
     Expression<String>? comment,
     Expression<int>? status,
     Expression<double>? objectivity,
-    Expression<double>? loyality,
+    Expression<double>? loyalty,
     Expression<double>? professionalism,
     Expression<double>? harshness,
   }) {
@@ -1030,7 +1030,7 @@ class ReviewsCompanion extends UpdateCompanion<Review> {
       if (comment != null) 'comment': comment,
       if (status != null) 'status': status,
       if (objectivity != null) 'objectivity': objectivity,
-      if (loyality != null) 'loyality': loyality,
+      if (loyalty != null) 'loyalty': loyalty,
       if (professionalism != null) 'professionalism': professionalism,
       if (harshness != null) 'harshness': harshness,
     });
@@ -1043,7 +1043,7 @@ class ReviewsCompanion extends UpdateCompanion<Review> {
       Value<String>? comment,
       Value<int>? status,
       Value<double>? objectivity,
-      Value<double>? loyality,
+      Value<double>? loyalty,
       Value<double>? professionalism,
       Value<double>? harshness}) {
     return ReviewsCompanion(
@@ -1053,7 +1053,7 @@ class ReviewsCompanion extends UpdateCompanion<Review> {
       comment: comment ?? this.comment,
       status: status ?? this.status,
       objectivity: objectivity ?? this.objectivity,
-      loyality: loyality ?? this.loyality,
+      loyalty: loyalty ?? this.loyalty,
       professionalism: professionalism ?? this.professionalism,
       harshness: harshness ?? this.harshness,
     );
@@ -1080,8 +1080,8 @@ class ReviewsCompanion extends UpdateCompanion<Review> {
     if (objectivity.present) {
       map['objectivity'] = Variable<double>(objectivity.value);
     }
-    if (loyality.present) {
-      map['loyality'] = Variable<double>(loyality.value);
+    if (loyalty.present) {
+      map['loyalty'] = Variable<double>(loyalty.value);
     }
     if (professionalism.present) {
       map['professionalism'] = Variable<double>(professionalism.value);
@@ -1101,7 +1101,7 @@ class ReviewsCompanion extends UpdateCompanion<Review> {
           ..write('comment: $comment, ')
           ..write('status: $status, ')
           ..write('objectivity: $objectivity, ')
-          ..write('loyality: $loyality, ')
+          ..write('loyalty: $loyalty, ')
           ..write('professionalism: $professionalism, ')
           ..write('harshness: $harshness')
           ..write(')'))
@@ -1128,7 +1128,7 @@ typedef $$ProfessorsTableCreateCompanionBuilder = ProfessorsCompanion Function({
   required String name,
   required String avatar,
   required double objectivity,
-  required double loyality,
+  required double loyalty,
   required double professionalism,
   required double harshness,
 });
@@ -1137,7 +1137,7 @@ typedef $$ProfessorsTableUpdateCompanionBuilder = ProfessorsCompanion Function({
   Value<String> name,
   Value<String> avatar,
   Value<double> objectivity,
-  Value<double> loyality,
+  Value<double> loyalty,
   Value<double> professionalism,
   Value<double> harshness,
 });
@@ -1165,8 +1165,8 @@ class $$ProfessorsTableFilterComposer
       builder: (column, joinBuilders) =>
           ColumnFilters(column, joinBuilders: joinBuilders));
 
-  ColumnFilters<double> get loyality => $state.composableBuilder(
-      column: $state.table.loyality,
+  ColumnFilters<double> get loyalty => $state.composableBuilder(
+      column: $state.table.loyalty,
       builder: (column, joinBuilders) =>
           ColumnFilters(column, joinBuilders: joinBuilders));
 
@@ -1204,8 +1204,8 @@ class $$ProfessorsTableOrderingComposer
       builder: (column, joinBuilders) =>
           ColumnOrderings(column, joinBuilders: joinBuilders));
 
-  ColumnOrderings<double> get loyality => $state.composableBuilder(
-      column: $state.table.loyality,
+  ColumnOrderings<double> get loyalty => $state.composableBuilder(
+      column: $state.table.loyalty,
       builder: (column, joinBuilders) =>
           ColumnOrderings(column, joinBuilders: joinBuilders));
 
@@ -1244,7 +1244,7 @@ class $$ProfessorsTableTableManager extends RootTableManager<
             Value<String> name = const Value.absent(),
             Value<String> avatar = const Value.absent(),
             Value<double> objectivity = const Value.absent(),
-            Value<double> loyality = const Value.absent(),
+            Value<double> loyalty = const Value.absent(),
             Value<double> professionalism = const Value.absent(),
             Value<double> harshness = const Value.absent(),
           }) =>
@@ -1253,7 +1253,7 @@ class $$ProfessorsTableTableManager extends RootTableManager<
             name: name,
             avatar: avatar,
             objectivity: objectivity,
-            loyality: loyality,
+            loyalty: loyalty,
             professionalism: professionalism,
             harshness: harshness,
           ),
@@ -1262,7 +1262,7 @@ class $$ProfessorsTableTableManager extends RootTableManager<
             required String name,
             required String avatar,
             required double objectivity,
-            required double loyality,
+            required double loyalty,
             required double professionalism,
             required double harshness,
           }) =>
@@ -1271,7 +1271,7 @@ class $$ProfessorsTableTableManager extends RootTableManager<
             name: name,
             avatar: avatar,
             objectivity: objectivity,
-            loyality: loyality,
+            loyalty: loyalty,
             professionalism: professionalism,
             harshness: harshness,
           ),
@@ -1428,7 +1428,7 @@ typedef $$ReviewsTableCreateCompanionBuilder = ReviewsCompanion Function({
   required String comment,
   required int status,
   required double objectivity,
-  required double loyality,
+  required double loyalty,
   required double professionalism,
   required double harshness,
 });
@@ -1439,7 +1439,7 @@ typedef $$ReviewsTableUpdateCompanionBuilder = ReviewsCompanion Function({
   Value<String> comment,
   Value<int> status,
   Value<double> objectivity,
-  Value<double> loyality,
+  Value<double> loyalty,
   Value<double> professionalism,
   Value<double> harshness,
 });
@@ -1477,8 +1477,8 @@ class $$ReviewsTableFilterComposer
       builder: (column, joinBuilders) =>
           ColumnFilters(column, joinBuilders: joinBuilders));
 
-  ColumnFilters<double> get loyality => $state.composableBuilder(
-      column: $state.table.loyality,
+  ColumnFilters<double> get loyalty => $state.composableBuilder(
+      column: $state.table.loyalty,
       builder: (column, joinBuilders) =>
           ColumnFilters(column, joinBuilders: joinBuilders));
 
@@ -1526,8 +1526,8 @@ class $$ReviewsTableOrderingComposer
       builder: (column, joinBuilders) =>
           ColumnOrderings(column, joinBuilders: joinBuilders));
 
-  ColumnOrderings<double> get loyality => $state.composableBuilder(
-      column: $state.table.loyality,
+  ColumnOrderings<double> get loyalty => $state.composableBuilder(
+      column: $state.table.loyalty,
       builder: (column, joinBuilders) =>
           ColumnOrderings(column, joinBuilders: joinBuilders));
 
@@ -1568,7 +1568,7 @@ class $$ReviewsTableTableManager extends RootTableManager<
             Value<String> comment = const Value.absent(),
             Value<int> status = const Value.absent(),
             Value<double> objectivity = const Value.absent(),
-            Value<double> loyality = const Value.absent(),
+            Value<double> loyalty = const Value.absent(),
             Value<double> professionalism = const Value.absent(),
             Value<double> harshness = const Value.absent(),
           }) =>
@@ -1579,7 +1579,7 @@ class $$ReviewsTableTableManager extends RootTableManager<
             comment: comment,
             status: status,
             objectivity: objectivity,
-            loyality: loyality,
+            loyalty: loyalty,
             professionalism: professionalism,
             harshness: harshness,
           ),
@@ -1590,7 +1590,7 @@ class $$ReviewsTableTableManager extends RootTableManager<
             required String comment,
             required int status,
             required double objectivity,
-            required double loyality,
+            required double loyalty,
             required double professionalism,
             required double harshness,
           }) =>
@@ -1601,7 +1601,7 @@ class $$ReviewsTableTableManager extends RootTableManager<
             comment: comment,
             status: status,
             objectivity: objectivity,
-            loyality: loyality,
+            loyalty: loyalty,
             professionalism: professionalism,
             harshness: harshness,
           ),
