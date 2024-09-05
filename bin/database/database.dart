@@ -5,7 +5,7 @@ part 'database.g.dart';
 class Professors extends Table {
   IntColumn get id => integer().autoIncrement()();
   TextColumn get name => text()();
-  BlobColumn get avatar => blob()();
+  TextColumn get avatar => text()();
 
   RealColumn get objectivity => real()();
   RealColumn get loyality => real()();
