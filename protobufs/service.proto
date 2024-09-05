@@ -1,0 +1,83 @@
+syntax = "proto3";
+
+service SearchService {
+  rpc GetUserInfoByUserId(UserInfoByUserIdRequest) returns (User);
+  rpc GetListProfessor(ListProfessorRequest) returns (stream Professor);
+  rpc ProfessorReviews(ReviewsByProfessorIdRequest) returns (stream Review);
+  rpc ReviewsFromUser(ReviewsByUserId) returns (stream Review);
+  rpc AddReview(AddReviewRequest) returns (AddReviewResponse);
+
+  rpc PendingReviews(PendingReviewsRequest) returns (stream Review);
+  rpc ChangeStatus(ChangeStatusRequest) returns (ChangeStatusResponse);
+}
+
+enum Response{
+  ok = 0;
+  not_acceptable = 1;
+}
+
+message ChangeStatusRequest{
+  int64 id = 1;
+  Status status = 2;
+}
+
+message ChangeStatusResponse {
+  
+}
+
+message PendingReviewsRequest {}
+message UserInfoByUserIdRequest {}
+
+message AddReviewRequest{
+  Review review = 1;
+}
+
+message AddReviewResponse{
+  int32 status = 1;
+}
+
+message ReviewsByUserId{
+  int64 id = 1;
+}
+
+message ListProfessorRequest{}
+
+message ReviewsByProfessorIdRequest {
+  int64 id = 1;
+}
+
+message User {
+  int64 id = 1;
+  string name = 2;
+  bytes avatar = 3;
+  int32 rating = 4;
+}
+
+message Professor {
+  int64 id = 1;
+  string name = 2;
+  bytes avatar = 3;
+  float objectivity = 4;
+  float loyalty = 5;
+  float professionalism = 6;
+  float harshness = 7;
+}
+
+enum Status{
+  pending = 0;
+  approved = 1;
+  rejected = 2;
+}
+
+message Review {
+  int64 review_id = 1;
+  int64 user_id = 2;
+  string comment = 3;
+  float objectivity = 4;
+  float loyalty = 5;
+  float professionalism = 6;
+  float harshness = 7;
+  int64 review_date = 8;
+  int64 review_raiting = 9;
+  Status status = 10;
+}
