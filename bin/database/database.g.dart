@@ -25,9 +25,9 @@ class $ProfessorsTable extends Professors
       type: DriftSqlType.string, requiredDuringInsert: true);
   static const VerificationMeta _avatarMeta = const VerificationMeta('avatar');
   @override
-  late final GeneratedColumn<Uint8List> avatar = GeneratedColumn<Uint8List>(
+  late final GeneratedColumn<String> avatar = GeneratedColumn<String>(
       'avatar', aliasedName, false,
-      type: DriftSqlType.blob, requiredDuringInsert: true);
+      type: DriftSqlType.string, requiredDuringInsert: true);
   static const VerificationMeta _objectivityMeta =
       const VerificationMeta('objectivity');
   @override
@@ -122,7 +122,7 @@ class $ProfessorsTable extends Professors
       name: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}name'])!,
       avatar: attachedDatabase.typeMapping
-          .read(DriftSqlType.blob, data['${effectivePrefix}avatar'])!,
+          .read(DriftSqlType.string, data['${effectivePrefix}avatar'])!,
       objectivity: attachedDatabase.typeMapping
           .read(DriftSqlType.double, data['${effectivePrefix}objectivity'])!,
       loyality: attachedDatabase.typeMapping
@@ -143,7 +143,7 @@ class $ProfessorsTable extends Professors
 class Professor extends DataClass implements Insertable<Professor> {
   final int id;
   final String name;
-  final Uint8List avatar;
+  final String avatar;
   final double objectivity;
   final double loyality;
   final double professionalism;
@@ -161,7 +161,7 @@ class Professor extends DataClass implements Insertable<Professor> {
     final map = <String, Expression>{};
     map['id'] = Variable<int>(id);
     map['name'] = Variable<String>(name);
-    map['avatar'] = Variable<Uint8List>(avatar);
+    map['avatar'] = Variable<String>(avatar);
     map['objectivity'] = Variable<double>(objectivity);
     map['loyality'] = Variable<double>(loyality);
     map['professionalism'] = Variable<double>(professionalism);
@@ -187,7 +187,7 @@ class Professor extends DataClass implements Insertable<Professor> {
     return Professor(
       id: serializer.fromJson<int>(json['id']),
       name: serializer.fromJson<String>(json['name']),
-      avatar: serializer.fromJson<Uint8List>(json['avatar']),
+      avatar: serializer.fromJson<String>(json['avatar']),
       objectivity: serializer.fromJson<double>(json['objectivity']),
       loyality: serializer.fromJson<double>(json['loyality']),
       professionalism: serializer.fromJson<double>(json['professionalism']),
@@ -200,7 +200,7 @@ class Professor extends DataClass implements Insertable<Professor> {
     return <String, dynamic>{
       'id': serializer.toJson<int>(id),
       'name': serializer.toJson<String>(name),
-      'avatar': serializer.toJson<Uint8List>(avatar),
+      'avatar': serializer.toJson<String>(avatar),
       'objectivity': serializer.toJson<double>(objectivity),
       'loyality': serializer.toJson<double>(loyality),
       'professionalism': serializer.toJson<double>(professionalism),
@@ -211,7 +211,7 @@ class Professor extends DataClass implements Insertable<Professor> {
   Professor copyWith(
           {int? id,
           String? name,
-          Uint8List? avatar,
+          String? avatar,
           double? objectivity,
           double? loyality,
           double? professionalism,
@@ -255,15 +255,15 @@ class Professor extends DataClass implements Insertable<Professor> {
   }
 
   @override
-  int get hashCode => Object.hash(id, name, $driftBlobEquality.hash(avatar),
-      objectivity, loyality, professionalism, harshness);
+  int get hashCode => Object.hash(
+      id, name, avatar, objectivity, loyality, professionalism, harshness);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
       (other is Professor &&
           other.id == this.id &&
           other.name == this.name &&
-          $driftBlobEquality.equals(other.avatar, this.avatar) &&
+          other.avatar == this.avatar &&
           other.objectivity == this.objectivity &&
           other.loyality == this.loyality &&
           other.professionalism == this.professionalism &&
@@ -273,7 +273,7 @@ class Professor extends DataClass implements Insertable<Professor> {
 class ProfessorsCompanion extends UpdateCompanion<Professor> {
   final Value<int> id;
   final Value<String> name;
-  final Value<Uint8List> avatar;
+  final Value<String> avatar;
   final Value<double> objectivity;
   final Value<double> loyality;
   final Value<double> professionalism;
@@ -290,7 +290,7 @@ class ProfessorsCompanion extends UpdateCompanion<Professor> {
   ProfessorsCompanion.insert({
     this.id = const Value.absent(),
     required String name,
-    required Uint8List avatar,
+    required String avatar,
     required double objectivity,
     required double loyality,
     required double professionalism,
@@ -304,7 +304,7 @@ class ProfessorsCompanion extends UpdateCompanion<Professor> {
   static Insertable<Professor> custom({
     Expression<int>? id,
     Expression<String>? name,
-    Expression<Uint8List>? avatar,
+    Expression<String>? avatar,
     Expression<double>? objectivity,
     Expression<double>? loyality,
     Expression<double>? professionalism,
@@ -324,7 +324,7 @@ class ProfessorsCompanion extends UpdateCompanion<Professor> {
   ProfessorsCompanion copyWith(
       {Value<int>? id,
       Value<String>? name,
-      Value<Uint8List>? avatar,
+      Value<String>? avatar,
       Value<double>? objectivity,
       Value<double>? loyality,
       Value<double>? professionalism,
@@ -350,7 +350,7 @@ class ProfessorsCompanion extends UpdateCompanion<Professor> {
       map['name'] = Variable<String>(name.value);
     }
     if (avatar.present) {
-      map['avatar'] = Variable<Uint8List>(avatar.value);
+      map['avatar'] = Variable<String>(avatar.value);
     }
     if (objectivity.present) {
       map['objectivity'] = Variable<double>(objectivity.value);
@@ -1126,7 +1126,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
 typedef $$ProfessorsTableCreateCompanionBuilder = ProfessorsCompanion Function({
   Value<int> id,
   required String name,
-  required Uint8List avatar,
+  required String avatar,
   required double objectivity,
   required double loyality,
   required double professionalism,
@@ -1135,7 +1135,7 @@ typedef $$ProfessorsTableCreateCompanionBuilder = ProfessorsCompanion Function({
 typedef $$ProfessorsTableUpdateCompanionBuilder = ProfessorsCompanion Function({
   Value<int> id,
   Value<String> name,
-  Value<Uint8List> avatar,
+  Value<String> avatar,
   Value<double> objectivity,
   Value<double> loyality,
   Value<double> professionalism,
@@ -1155,7 +1155,7 @@ class $$ProfessorsTableFilterComposer
       builder: (column, joinBuilders) =>
           ColumnFilters(column, joinBuilders: joinBuilders));
 
-  ColumnFilters<Uint8List> get avatar => $state.composableBuilder(
+  ColumnFilters<String> get avatar => $state.composableBuilder(
       column: $state.table.avatar,
       builder: (column, joinBuilders) =>
           ColumnFilters(column, joinBuilders: joinBuilders));
@@ -1194,7 +1194,7 @@ class $$ProfessorsTableOrderingComposer
       builder: (column, joinBuilders) =>
           ColumnOrderings(column, joinBuilders: joinBuilders));
 
-  ColumnOrderings<Uint8List> get avatar => $state.composableBuilder(
+  ColumnOrderings<String> get avatar => $state.composableBuilder(
       column: $state.table.avatar,
       builder: (column, joinBuilders) =>
           ColumnOrderings(column, joinBuilders: joinBuilders));
@@ -1242,7 +1242,7 @@ class $$ProfessorsTableTableManager extends RootTableManager<
           updateCompanionCallback: ({
             Value<int> id = const Value.absent(),
             Value<String> name = const Value.absent(),
-            Value<Uint8List> avatar = const Value.absent(),
+            Value<String> avatar = const Value.absent(),
             Value<double> objectivity = const Value.absent(),
             Value<double> loyality = const Value.absent(),
             Value<double> professionalism = const Value.absent(),
@@ -1260,7 +1260,7 @@ class $$ProfessorsTableTableManager extends RootTableManager<
           createCompanionCallback: ({
             Value<int> id = const Value.absent(),
             required String name,
-            required Uint8List avatar,
+            required String avatar,
             required double objectivity,
             required double loyality,
             required double professionalism,
