@@ -416,7 +416,7 @@ class User extends $pb.GeneratedMessage {
   factory User({
     $fixnum.Int64? id,
     $core.String? name,
-    $core.List<$core.int>? avatar,
+    $core.String? avatar,
     $core.int? rating,
   }) {
     final $result = create();
@@ -441,7 +441,7 @@ class User extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'User', createEmptyInstance: create)
     ..aInt64(1, _omitFieldNames ? '' : 'id')
     ..aOS(2, _omitFieldNames ? '' : 'name')
-    ..a<$core.List<$core.int>>(3, _omitFieldNames ? '' : 'avatar', $pb.PbFieldType.OY)
+    ..aOS(3, _omitFieldNames ? '' : 'avatar')
     ..a<$core.int>(4, _omitFieldNames ? '' : 'rating', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
@@ -486,9 +486,9 @@ class User extends $pb.GeneratedMessage {
   void clearName() => clearField(2);
 
   @$pb.TagNumber(3)
-  $core.List<$core.int> get avatar => $_getN(2);
+  $core.String get avatar => $_getSZ(2);
   @$pb.TagNumber(3)
-  set avatar($core.List<$core.int> v) { $_setBytes(2, v); }
+  set avatar($core.String v) { $_setString(2, v); }
   @$pb.TagNumber(3)
   $core.bool hasAvatar() => $_has(2);
   @$pb.TagNumber(3)
@@ -506,9 +506,9 @@ class User extends $pb.GeneratedMessage {
 
 class Professor extends $pb.GeneratedMessage {
   factory Professor({
-    $fixnum.Int64? id,
+    $core.int? id,
     $core.String? name,
-    $core.List<$core.int>? avatar,
+    $core.String? avatar,
     $core.double? objectivity,
     $core.double? loyalty,
     $core.double? professionalism,
@@ -543,9 +543,9 @@ class Professor extends $pb.GeneratedMessage {
   factory Professor.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Professor', createEmptyInstance: create)
-    ..aInt64(1, _omitFieldNames ? '' : 'id')
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'id', $pb.PbFieldType.O3)
     ..aOS(2, _omitFieldNames ? '' : 'name')
-    ..a<$core.List<$core.int>>(3, _omitFieldNames ? '' : 'avatar', $pb.PbFieldType.OY)
+    ..aOS(3, _omitFieldNames ? '' : 'avatar')
     ..a<$core.double>(4, _omitFieldNames ? '' : 'objectivity', $pb.PbFieldType.OF)
     ..a<$core.double>(5, _omitFieldNames ? '' : 'loyalty', $pb.PbFieldType.OF)
     ..a<$core.double>(6, _omitFieldNames ? '' : 'professionalism', $pb.PbFieldType.OF)
@@ -575,9 +575,9 @@ class Professor extends $pb.GeneratedMessage {
   static Professor? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $fixnum.Int64 get id => $_getI64(0);
+  $core.int get id => $_getIZ(0);
   @$pb.TagNumber(1)
-  set id($fixnum.Int64 v) { $_setInt64(0, v); }
+  set id($core.int v) { $_setSignedInt32(0, v); }
   @$pb.TagNumber(1)
   $core.bool hasId() => $_has(0);
   @$pb.TagNumber(1)
@@ -593,9 +593,9 @@ class Professor extends $pb.GeneratedMessage {
   void clearName() => clearField(2);
 
   @$pb.TagNumber(3)
-  $core.List<$core.int> get avatar => $_getN(2);
+  $core.String get avatar => $_getSZ(2);
   @$pb.TagNumber(3)
-  set avatar($core.List<$core.int> v) { $_setBytes(2, v); }
+  set avatar($core.String v) { $_setString(2, v); }
   @$pb.TagNumber(3)
   $core.bool hasAvatar() => $_has(2);
   @$pb.TagNumber(3)

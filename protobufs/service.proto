@@ -49,14 +49,14 @@ message ReviewsByProfessorIdRequest {
 message User {
   int64 id = 1;
   string name = 2;
-  bytes avatar = 3;
+  string avatar = 3;
   int32 rating = 4;
 }
 
 message Professor {
-  int64 id = 1;
+  int32 id = 1;
   string name = 2;
-  bytes avatar = 3;
+  string avatar = 3;
   float objectivity = 4;
   float loyalty = 5;
   float professionalism = 6;

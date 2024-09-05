@@ -144,7 +144,7 @@ const User$json = {
   '2': [
     {'1': 'id', '3': 1, '4': 1, '5': 3, '10': 'id'},
     {'1': 'name', '3': 2, '4': 1, '5': 9, '10': 'name'},
-    {'1': 'avatar', '3': 3, '4': 1, '5': 12, '10': 'avatar'},
+    {'1': 'avatar', '3': 3, '4': 1, '5': 9, '10': 'avatar'},
     {'1': 'rating', '3': 4, '4': 1, '5': 5, '10': 'rating'},
   ],
 };
@@ -152,15 +152,15 @@ const User$json = {
 /// Descriptor for `User`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List userDescriptor = $convert.base64Decode(
     'CgRVc2VyEg4KAmlkGAEgASgDUgJpZBISCgRuYW1lGAIgASgJUgRuYW1lEhYKBmF2YXRhchgDIA'
-    'EoDFIGYXZhdGFyEhYKBnJhdGluZxgEIAEoBVIGcmF0aW5n');
+    'EoCVIGYXZhdGFyEhYKBnJhdGluZxgEIAEoBVIGcmF0aW5n');
 
 @$core.Deprecated('Use professorDescriptor instead')
 const Professor$json = {
   '1': 'Professor',
   '2': [
-    {'1': 'id', '3': 1, '4': 1, '5': 3, '10': 'id'},
+    {'1': 'id', '3': 1, '4': 1, '5': 5, '10': 'id'},
     {'1': 'name', '3': 2, '4': 1, '5': 9, '10': 'name'},
-    {'1': 'avatar', '3': 3, '4': 1, '5': 12, '10': 'avatar'},
+    {'1': 'avatar', '3': 3, '4': 1, '5': 9, '10': 'avatar'},
     {'1': 'objectivity', '3': 4, '4': 1, '5': 2, '10': 'objectivity'},
     {'1': 'loyalty', '3': 5, '4': 1, '5': 2, '10': 'loyalty'},
     {'1': 'professionalism', '3': 6, '4': 1, '5': 2, '10': 'professionalism'},
@@ -170,8 +170,8 @@ const Professor$json = {
 
 /// Descriptor for `Professor`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List professorDescriptor = $convert.base64Decode(
-    'CglQcm9mZXNzb3ISDgoCaWQYASABKANSAmlkEhIKBG5hbWUYAiABKAlSBG5hbWUSFgoGYXZhdG'
-    'FyGAMgASgMUgZhdmF0YXISIAoLb2JqZWN0aXZpdHkYBCABKAJSC29iamVjdGl2aXR5EhgKB2xv'
+    'CglQcm9mZXNzb3ISDgoCaWQYASABKAVSAmlkEhIKBG5hbWUYAiABKAlSBG5hbWUSFgoGYXZhdG'
+    'FyGAMgASgJUgZhdmF0YXISIAoLb2JqZWN0aXZpdHkYBCABKAJSC29iamVjdGl2aXR5EhgKB2xv'
     'eWFsdHkYBSABKAJSB2xveWFsdHkSKAoPcHJvZmVzc2lvbmFsaXNtGAYgASgCUg9wcm9mZXNzaW'
     '9uYWxpc20SHAoJaGFyc2huZXNzGAcgASgCUgloYXJzaG5lc3M=');
 
