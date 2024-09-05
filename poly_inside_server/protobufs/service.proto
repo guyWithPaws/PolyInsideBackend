@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+service SearchService {
+  rpc GetListProfessor(GetListProfessorRequest) returns (stream Professor);
+  rpc ProfessorInfo(GetInfoRequest) returns (stream Review);
+}
+
+message GetListProfessorRequest{
+
+}
+
+message Professor {
+  int64 id = 1;
+  string name = 2;
+  bytes avatar = 3;
+  float objectivity = 4;
+  float loyalty = 5;
+  float professionalism = 6;
+  float harshness = 7;
+}
+
+message Review {
+  int64 review_id = 1;
+  int64 user_id = 2;
+  string comment = 3;
+  float objectivity = 4;
+  float loyalty = 5;
+  float professionalism = 6;
+  float harshness = 7;
+  int64 review_date = 8;
+  int64 review_raiting = 9;
+}
