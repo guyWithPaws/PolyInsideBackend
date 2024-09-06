@@ -10,14 +10,14 @@ class ServerCredentials {
   Duration connectionTimeout;
 
   factory ServerCredentials.fromJSON(String fileName) {
-    File jsonFile = File(fileName);
-    String jsonString = jsonFile.readAsStringSync();
-    Map<String, dynamic> json = jsonDecode(jsonString);
+    final jsonFile = File(fileName);
+    final jsonString = jsonFile.readAsStringSync();
+    final json = jsonDecode(jsonString) as Map<String, Object>;
     return ServerCredentials(
-      ip: json['ip'],
-      port: json['port'],
+      ip: json['ip'] as String,
+      port: json['port'] as int,
       connectionTimeout: json.containsKey('connectionTimeout')
-          ? Duration(seconds: json['connectionTimeout'])
+          ? Duration(seconds: json['connectionTimeout'] as int)
           : const Duration(seconds: 30),
     );
   }

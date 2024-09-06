@@ -1,6 +1,6 @@
 import 'package:drift/drift.dart';
-import 'database.dart';
-import 'provider.dart';
+import 'package:poly_inside_server/database/database.dart';
+import 'package:poly_inside_server/database/provider.dart';
 
 class DatabaseProviderImpl implements DatabaseProvider {
   DatabaseProviderImpl({required this.database});

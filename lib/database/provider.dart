@@ -1,4 +1,4 @@
-import 'database.dart';
+import 'package:poly_inside_server/database/database.dart';
 
 abstract interface class DatabaseProvider{
   Stream<List<Professor>> getAllProfessors();
