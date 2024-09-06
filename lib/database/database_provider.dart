@@ -1,8 +1,6 @@
 import 'package:drift/drift.dart';
 import 'package:poly_inside_server/database/database.dart';
 import 'package:poly_inside_server/database/provider.dart';
-import 'package:poly_inside_server/generated/protobufs/service.pbgrpc.dart'
-    as grpc;
 
 class DatabaseProviderImpl implements DatabaseProvider {
   DatabaseProviderImpl({required this.database});
