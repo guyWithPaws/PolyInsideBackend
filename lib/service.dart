@@ -24,20 +24,18 @@ class GRPCService extends SearchServiceBase {
   @override
   Stream<Professor> getListProfessor(
       ServiceCall call, ListProfessorRequest request) async* {
-    final professors = provider.getAllProfessors();
-    await for (final a in professors) {
-      yield* Stream.fromIterable(
-        a.map(
-          (e) => Professor()
-            ..id = e.id
-            ..avatar = e.avatar
-            ..loyalty = e.loyalty
-            ..objectivity = e.objectivity
-            ..name = e.name
-            ..professionalism = e.professionalism
-            ..harshness = e.harshness,
-        ),
-      );
+    final stream = provider.getAllProfessors();
+    await for (final list in stream) {
+      for (final professor in list) {
+        yield Professor()
+          ..id = professor.id
+          ..avatar = professor.avatar
+          ..loyalty = professor.loyalty
+          ..objectivity = professor.objectivity
+          ..name = professor.name
+          ..professionalism = professor.professionalism
+          ..harshness = professor.harshness;
+      }
     }
   }
 

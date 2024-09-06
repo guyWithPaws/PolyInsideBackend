@@ -12,7 +12,7 @@ class ServerCredentials {
   factory ServerCredentials.fromJSON(String fileName) {
     final jsonFile = File(fileName);
     final jsonString = jsonFile.readAsStringSync();
-    final json = jsonDecode(jsonString) as Map<String, Object>;
+    final json = jsonDecode(jsonString) as Map<String, dynamic>;
     return ServerCredentials(
       ip: json['ip'] as String,
       port: json['port'] as int,
@@ -29,7 +29,7 @@ class ServerCredentials {
 }
 
 void main(List<String> args) {
-  final credentials = ServerCredentials.fromJSON(r'secrets\credentials.json');
+  final credentials = ServerCredentials.fromJSON('/Users/guywithpaws/PolyInsideBackend/secrets/credentials.json');
   final channel = ClientChannel(
         credentials.ip,
         port: credentials.port,
@@ -39,4 +39,5 @@ void main(List<String> args) {
       );
   final client = SearchServiceClient(channel);
   final professors = client.getListProfessor(ListProfessorRequest());
+  professors.forEach((e) => print(e.name));
 }
