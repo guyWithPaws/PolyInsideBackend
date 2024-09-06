@@ -142,12 +142,21 @@ class PendingReviewsRequest extends $pb.GeneratedMessage {
 }
 
 class UserInfoByUserIdRequest extends $pb.GeneratedMessage {
-  factory UserInfoByUserIdRequest() => create();
+  factory UserInfoByUserIdRequest({
+    $core.int? id,
+  }) {
+    final $result = create();
+    if (id != null) {
+      $result.id = id;
+    }
+    return $result;
+  }
   UserInfoByUserIdRequest._() : super();
   factory UserInfoByUserIdRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory UserInfoByUserIdRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UserInfoByUserIdRequest', createEmptyInstance: create)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'id', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
 
@@ -171,6 +180,15 @@ class UserInfoByUserIdRequest extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static UserInfoByUserIdRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UserInfoByUserIdRequest>(create);
   static UserInfoByUserIdRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.int get id => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set id($core.int v) { $_setSignedInt32(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearId() => clearField(1);
 }
 
 class AddReviewRequest extends $pb.GeneratedMessage {
@@ -257,8 +275,8 @@ class AddReviewResponse extends $pb.GeneratedMessage {
   static AddReviewResponse? _defaultInstance;
 }
 
-class ReviewsByUserId extends $pb.GeneratedMessage {
-  factory ReviewsByUserId({
+class ReviewsByUserIdRequest extends $pb.GeneratedMessage {
+  factory ReviewsByUserIdRequest({
     $core.int? id,
   }) {
     final $result = create();
@@ -267,11 +285,11 @@ class ReviewsByUserId extends $pb.GeneratedMessage {
     }
     return $result;
   }
-  ReviewsByUserId._() : super();
-  factory ReviewsByUserId.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory ReviewsByUserId.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  ReviewsByUserIdRequest._() : super();
+  factory ReviewsByUserIdRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ReviewsByUserIdRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ReviewsByUserId', createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ReviewsByUserIdRequest', createEmptyInstance: create)
     ..a<$core.int>(1, _omitFieldNames ? '' : 'id', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
@@ -280,22 +298,22 @@ class ReviewsByUserId extends $pb.GeneratedMessage {
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
   'Will be removed in next major version')
-  ReviewsByUserId clone() => ReviewsByUserId()..mergeFromMessage(this);
+  ReviewsByUserIdRequest clone() => ReviewsByUserIdRequest()..mergeFromMessage(this);
   @$core.Deprecated(
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
   'Will be removed in next major version')
-  ReviewsByUserId copyWith(void Function(ReviewsByUserId) updates) => super.copyWith((message) => updates(message as ReviewsByUserId)) as ReviewsByUserId;
+  ReviewsByUserIdRequest copyWith(void Function(ReviewsByUserIdRequest) updates) => super.copyWith((message) => updates(message as ReviewsByUserIdRequest)) as ReviewsByUserIdRequest;
 
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static ReviewsByUserId create() => ReviewsByUserId._();
-  ReviewsByUserId createEmptyInstance() => create();
-  static $pb.PbList<ReviewsByUserId> createRepeated() => $pb.PbList<ReviewsByUserId>();
+  static ReviewsByUserIdRequest create() => ReviewsByUserIdRequest._();
+  ReviewsByUserIdRequest createEmptyInstance() => create();
+  static $pb.PbList<ReviewsByUserIdRequest> createRepeated() => $pb.PbList<ReviewsByUserIdRequest>();
   @$core.pragma('dart2js:noInline')
-  static ReviewsByUserId getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ReviewsByUserId>(create);
-  static ReviewsByUserId? _defaultInstance;
+  static ReviewsByUserIdRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ReviewsByUserIdRequest>(create);
+  static ReviewsByUserIdRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
   $core.int get id => $_getIZ(0);
@@ -393,7 +411,7 @@ class User extends $pb.GeneratedMessage {
   factory User({
     $core.int? id,
     $core.String? name,
-    $core.String? avatar,
+    $core.List<$core.int>? avatar,
     $core.int? rating,
   }) {
     final $result = create();
@@ -418,7 +436,7 @@ class User extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'User', createEmptyInstance: create)
     ..a<$core.int>(1, _omitFieldNames ? '' : 'id', $pb.PbFieldType.O3)
     ..aOS(2, _omitFieldNames ? '' : 'name')
-    ..aOS(3, _omitFieldNames ? '' : 'avatar')
+    ..a<$core.List<$core.int>>(3, _omitFieldNames ? '' : 'avatar', $pb.PbFieldType.OY)
     ..a<$core.int>(4, _omitFieldNames ? '' : 'rating', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
@@ -463,9 +481,9 @@ class User extends $pb.GeneratedMessage {
   void clearName() => clearField(2);
 
   @$pb.TagNumber(3)
-  $core.String get avatar => $_getSZ(2);
+  $core.List<$core.int> get avatar => $_getN(2);
   @$pb.TagNumber(3)
-  set avatar($core.String v) { $_setString(2, v); }
+  set avatar($core.List<$core.int> v) { $_setBytes(2, v); }
   @$pb.TagNumber(3)
   $core.bool hasAvatar() => $_has(2);
   @$pb.TagNumber(3)
@@ -486,10 +504,6 @@ class Professor extends $pb.GeneratedMessage {
     $core.int? id,
     $core.String? name,
     $core.String? avatar,
-    $core.double? objectivity,
-    $core.double? loyalty,
-    $core.double? professionalism,
-    $core.double? harshness,
   }) {
     final $result = create();
     if (id != null) {
@@ -501,18 +515,6 @@ class Professor extends $pb.GeneratedMessage {
     if (avatar != null) {
       $result.avatar = avatar;
     }
-    if (objectivity != null) {
-      $result.objectivity = objectivity;
-    }
-    if (loyalty != null) {
-      $result.loyalty = loyalty;
-    }
-    if (professionalism != null) {
-      $result.professionalism = professionalism;
-    }
-    if (harshness != null) {
-      $result.harshness = harshness;
-    }
     return $result;
   }
   Professor._() : super();
@@ -523,10 +525,6 @@ class Professor extends $pb.GeneratedMessage {
     ..a<$core.int>(1, _omitFieldNames ? '' : 'id', $pb.PbFieldType.O3)
     ..aOS(2, _omitFieldNames ? '' : 'name')
     ..aOS(3, _omitFieldNames ? '' : 'avatar')
-    ..a<$core.double>(4, _omitFieldNames ? '' : 'objectivity', $pb.PbFieldType.OF)
-    ..a<$core.double>(5, _omitFieldNames ? '' : 'loyalty', $pb.PbFieldType.OF)
-    ..a<$core.double>(6, _omitFieldNames ? '' : 'professionalism', $pb.PbFieldType.OF)
-    ..a<$core.double>(7, _omitFieldNames ? '' : 'harshness', $pb.PbFieldType.OF)
     ..hasRequiredFields = false
   ;
 
@@ -577,47 +575,11 @@ class Professor extends $pb.GeneratedMessage {
   $core.bool hasAvatar() => $_has(2);
   @$pb.TagNumber(3)
   void clearAvatar() => clearField(3);
-
-  @$pb.TagNumber(4)
-  $core.double get objectivity => $_getN(3);
-  @$pb.TagNumber(4)
-  set objectivity($core.double v) { $_setFloat(3, v); }
-  @$pb.TagNumber(4)
-  $core.bool hasObjectivity() => $_has(3);
-  @$pb.TagNumber(4)
-  void clearObjectivity() => clearField(4);
-
-  @$pb.TagNumber(5)
-  $core.double get loyalty => $_getN(4);
-  @$pb.TagNumber(5)
-  set loyalty($core.double v) { $_setFloat(4, v); }
-  @$pb.TagNumber(5)
-  $core.bool hasLoyalty() => $_has(4);
-  @$pb.TagNumber(5)
-  void clearLoyalty() => clearField(5);
-
-  @$pb.TagNumber(6)
-  $core.double get professionalism => $_getN(5);
-  @$pb.TagNumber(6)
-  set professionalism($core.double v) { $_setFloat(5, v); }
-  @$pb.TagNumber(6)
-  $core.bool hasProfessionalism() => $_has(5);
-  @$pb.TagNumber(6)
-  void clearProfessionalism() => clearField(6);
-
-  @$pb.TagNumber(7)
-  $core.double get harshness => $_getN(6);
-  @$pb.TagNumber(7)
-  set harshness($core.double v) { $_setFloat(6, v); }
-  @$pb.TagNumber(7)
-  $core.bool hasHarshness() => $_has(6);
-  @$pb.TagNumber(7)
-  void clearHarshness() => clearField(7);
 }
 
 class Review extends $pb.GeneratedMessage {
   factory Review({
-    $core.int? reviewId,
+    $core.String? reviewId,
     $core.int? userId,
     $core.String? comment,
     $core.double? objectivity,
@@ -674,7 +636,7 @@ class Review extends $pb.GeneratedMessage {
   factory Review.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Review', createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'reviewId', $pb.PbFieldType.O3)
+    ..aOS(1, _omitFieldNames ? '' : 'reviewId')
     ..a<$core.int>(2, _omitFieldNames ? '' : 'userId', $pb.PbFieldType.O3)
     ..aOS(3, _omitFieldNames ? '' : 'comment')
     ..a<$core.double>(4, _omitFieldNames ? '' : 'objectivity', $pb.PbFieldType.OF)
@@ -711,9 +673,9 @@ class Review extends $pb.GeneratedMessage {
   static Review? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.int get reviewId => $_getIZ(0);
+  $core.String get reviewId => $_getSZ(0);
   @$pb.TagNumber(1)
-  set reviewId($core.int v) { $_setSignedInt32(0, v); }
+  set reviewId($core.String v) { $_setString(0, v); }
   @$pb.TagNumber(1)
   $core.bool hasReviewId() => $_has(0);
   @$pb.TagNumber(1)

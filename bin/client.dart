@@ -39,7 +39,15 @@ Future<void> main(List<String> args) async {
     ),
   );
   final client = SearchServiceClient(channel);
-  final data = client.professorReviews(ReviewsByProfessorIdRequest(id:12334));
-  data.forEach((e) => print(e.comment));
+  final data = client.addReview(
+    AddReviewRequest(
+      review: Review(
+        userId: 123456,
+        comment: 'etot prepod prosto imba',
+        professorId: 342123,
+        reviewId: 123456.toString() + DateTime.now().toUtc().toString(),
+      ),
+    ),
+  );
   return;
 }

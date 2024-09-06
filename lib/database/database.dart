@@ -1,18 +1,16 @@
 import 'package:drift/drift.dart';
+import 'package:poly_inside_server/generated/protobufs/service.pb.dart';
 
 part 'database.g.dart';
 
+@UseRowClass(Professor)
 class Professors extends Table {
   IntColumn get id => integer().autoIncrement()();
   TextColumn get name => text()();
   TextColumn get avatar => text()();
-
-  RealColumn get objectivity => real()();
-  RealColumn get loyalty => real()();
-  RealColumn get professionalism => real()();
-  RealColumn get harshness => real()();
 }
 
+@UseRowClass(User)
 class Users extends Table {
   IntColumn get id => integer()();
   TextColumn get name => text()();
@@ -20,12 +18,12 @@ class Users extends Table {
   IntColumn get rating => integer().withDefault(const Constant<int>(0))();
 }
 
+@UseRowClass(Review)
 class Reviews extends Table {
-  IntColumn get id => integer().autoIncrement()();
+  TextColumn get id => text().unique()();
   IntColumn get userId => integer()();
   IntColumn get professorId => integer()();
   TextColumn get comment => text()();
-
   TextColumn get status => text()();
   RealColumn get objectivity => real()();
   RealColumn get loyalty => real()();

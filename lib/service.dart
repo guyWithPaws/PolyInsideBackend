@@ -1,7 +1,6 @@
 // ignore: implementation_imports
 import 'package:grpc/src/server/call.dart';
 import 'package:poly_inside_server/database/database_provider.dart' as db;
-import 'package:poly_inside_server/extension.dart';
 import 'package:poly_inside_server/generated/protobufs/service.pbgrpc.dart';
 
 class GRPCService extends SearchServiceBase {
@@ -12,7 +11,7 @@ class GRPCService extends SearchServiceBase {
   @override
   Future<AddReviewResponse> addReview(
       ServiceCall call, AddReviewRequest request) async {
-    await provider.sendReview(request.review.castFromGRPCToDrift());
+    await provider.sendReview(request.review);
     return AddReviewResponse();
   }
 
@@ -32,21 +31,15 @@ class GRPCService extends SearchServiceBase {
         yield Professor()
           ..id = professor.id
           ..avatar = professor.avatar
-          ..loyalty = professor.loyalty
-          ..objectivity = professor.objectivity
-          ..name = professor.name
-          ..professionalism = professor.professionalism
-          ..harshness = professor.harshness;
+          ..name = professor.name;
       }
     }
   }
 
   @override
   Future<User> getUserInfoByUserId(
-      ServiceCall call, UserInfoByUserIdRequest request) {
-    // TODO: implement getUserInfoByUserId
-    throw UnimplementedError();
-  }
+          ServiceCall call, UserInfoByUserIdRequest request) async =>
+      throw UnimplementedError();
 
   @override
   Stream<Review> pendingReviews(
@@ -56,43 +49,23 @@ class GRPCService extends SearchServiceBase {
   }
 
   @override
-  Stream<Review> professorReviews(
+  Stream<Review> getReviewsByProfessorId(
       ServiceCall call, ReviewsByProfessorIdRequest request) async* {
     final stream = provider.getAllReviewsByProfessor(request.id);
     await for (final list in stream) {
       for (final e in list) {
-        yield Review()
-          ..comment = e.comment
-          ..harshness = e.harshness
-          ..loyalty = e.loyalty
-          ..objectivity = e.objectivity
-          ..professionalism = e.professionalism
-          ..date = e.date
-          ..reviewId = e.id
-          ..rating = e.rating
-          ..status = e.status
-          ..userId = e.userId;
+        yield e;
       }
     }
   }
 
   @override
-  Stream<Review> reviewsFromUser(
-      ServiceCall call, ReviewsByUserId request) async* {
+  Stream<Review> getReviewsByUserId(
+      ServiceCall call, ReviewsByUserIdRequest request) async* {
     final stream = provider.getAllReviewByUser(request.id);
     await for (final list in stream) {
       for (final e in list) {
-        yield Review()
-          ..comment = e.comment
-          ..harshness = e.harshness
-          ..loyalty = e.loyalty
-          ..objectivity = e.objectivity
-          ..professionalism = e.professionalism
-          ..date = e.date
-          ..reviewId = e.id
-          ..rating = e.rating
-          ..status = e.status
-          ..userId = e.userId;
+        yield e;
       }
     }
   }

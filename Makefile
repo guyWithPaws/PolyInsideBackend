@@ -24,3 +24,6 @@ server:
 	@dart compile exe bin/server.dart
 	@./bin/server.exe
 
+codegen:
+	@protoc --dart_out=grpc:lib/generated protobufs/service.proto
+	@dart run build_runner build

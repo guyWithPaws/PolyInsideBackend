@@ -1,6 +1,7 @@
 import 'package:drift/drift.dart';
 import 'package:poly_inside_server/database/database.dart';
 import 'package:poly_inside_server/database/provider.dart';
+import 'package:poly_inside_server/generated/protobufs/service.pb.dart';
 
 class DatabaseProviderImpl implements DatabaseProvider {
   DatabaseProviderImpl({required this.database});
@@ -19,7 +20,7 @@ class DatabaseProviderImpl implements DatabaseProvider {
 
   @override
   Stream<List<Review>> getAllReviewByUser(int userId) =>
-      (database.select(database.reviews)..where((u) => u.id.equals(userId)))
+      (database.select(database.reviews)..where((u) => u.userId.equals(userId)))
           .watch();
 
   @override
@@ -32,6 +33,7 @@ class DatabaseProviderImpl implements DatabaseProvider {
   Future<void> sendReview(Review review) =>
       database.into(database.reviews).insert(
             ReviewsCompanion(
+              id: Value(review.reviewId),
               rating: Value(review.rating),
               professorId: Value(review.professorId),
               professionalism: Value(review.professionalism),
@@ -44,4 +46,9 @@ class DatabaseProviderImpl implements DatabaseProvider {
               harshness: Value(review.harshness),
             ),
           );
+
+  @override
+  Future<User> getUserByUserId(int userId) async =>
+      (database.select(database.users)..where((u) => u.id.equals(userId)))
+          .getSingle();
 }

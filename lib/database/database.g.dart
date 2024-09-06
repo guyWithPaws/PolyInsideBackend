@@ -28,33 +28,8 @@ class $ProfessorsTable extends Professors
   late final GeneratedColumn<String> avatar = GeneratedColumn<String>(
       'avatar', aliasedName, false,
       type: DriftSqlType.string, requiredDuringInsert: true);
-  static const VerificationMeta _objectivityMeta =
-      const VerificationMeta('objectivity');
   @override
-  late final GeneratedColumn<double> objectivity = GeneratedColumn<double>(
-      'objectivity', aliasedName, false,
-      type: DriftSqlType.double, requiredDuringInsert: true);
-  static const VerificationMeta _loyaltyMeta =
-      const VerificationMeta('loyalty');
-  @override
-  late final GeneratedColumn<double> loyalty = GeneratedColumn<double>(
-      'loyalty', aliasedName, false,
-      type: DriftSqlType.double, requiredDuringInsert: true);
-  static const VerificationMeta _professionalismMeta =
-      const VerificationMeta('professionalism');
-  @override
-  late final GeneratedColumn<double> professionalism = GeneratedColumn<double>(
-      'professionalism', aliasedName, false,
-      type: DriftSqlType.double, requiredDuringInsert: true);
-  static const VerificationMeta _harshnessMeta =
-      const VerificationMeta('harshness');
-  @override
-  late final GeneratedColumn<double> harshness = GeneratedColumn<double>(
-      'harshness', aliasedName, false,
-      type: DriftSqlType.double, requiredDuringInsert: true);
-  @override
-  List<GeneratedColumn> get $columns =>
-      [id, name, avatar, objectivity, loyalty, professionalism, harshness];
+  List<GeneratedColumn> get $columns => [id, name, avatar];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
@@ -80,34 +55,6 @@ class $ProfessorsTable extends Professors
     } else if (isInserting) {
       context.missing(_avatarMeta);
     }
-    if (data.containsKey('objectivity')) {
-      context.handle(
-          _objectivityMeta,
-          objectivity.isAcceptableOrUnknown(
-              data['objectivity']!, _objectivityMeta));
-    } else if (isInserting) {
-      context.missing(_objectivityMeta);
-    }
-    if (data.containsKey('loyalty')) {
-      context.handle(_loyaltyMeta,
-          loyalty.isAcceptableOrUnknown(data['loyalty']!, _loyaltyMeta));
-    } else if (isInserting) {
-      context.missing(_loyaltyMeta);
-    }
-    if (data.containsKey('professionalism')) {
-      context.handle(
-          _professionalismMeta,
-          professionalism.isAcceptableOrUnknown(
-              data['professionalism']!, _professionalismMeta));
-    } else if (isInserting) {
-      context.missing(_professionalismMeta);
-    }
-    if (data.containsKey('harshness')) {
-      context.handle(_harshnessMeta,
-          harshness.isAcceptableOrUnknown(data['harshness']!, _harshnessMeta));
-    } else if (isInserting) {
-      context.missing(_harshnessMeta);
-    }
     return context;
   }
 
@@ -123,14 +70,6 @@ class $ProfessorsTable extends Professors
           .read(DriftSqlType.string, data['${effectivePrefix}name'])!,
       avatar: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}avatar'])!,
-      objectivity: attachedDatabase.typeMapping
-          .read(DriftSqlType.double, data['${effectivePrefix}objectivity'])!,
-      loyalty: attachedDatabase.typeMapping
-          .read(DriftSqlType.double, data['${effectivePrefix}loyalty'])!,
-      professionalism: attachedDatabase.typeMapping.read(
-          DriftSqlType.double, data['${effectivePrefix}professionalism'])!,
-      harshness: attachedDatabase.typeMapping
-          .read(DriftSqlType.double, data['${effectivePrefix}harshness'])!,
     );
   }
 
@@ -140,203 +79,39 @@ class $ProfessorsTable extends Professors
   }
 }
 
-class Professor extends DataClass implements Insertable<Professor> {
-  final int id;
-  final String name;
-  final String avatar;
-  final double objectivity;
-  final double loyalty;
-  final double professionalism;
-  final double harshness;
-  const Professor(
-      {required this.id,
-      required this.name,
-      required this.avatar,
-      required this.objectivity,
-      required this.loyalty,
-      required this.professionalism,
-      required this.harshness});
-  @override
-  Map<String, Expression> toColumns(bool nullToAbsent) {
-    final map = <String, Expression>{};
-    map['id'] = Variable<int>(id);
-    map['name'] = Variable<String>(name);
-    map['avatar'] = Variable<String>(avatar);
-    map['objectivity'] = Variable<double>(objectivity);
-    map['loyalty'] = Variable<double>(loyalty);
-    map['professionalism'] = Variable<double>(professionalism);
-    map['harshness'] = Variable<double>(harshness);
-    return map;
-  }
-
-  ProfessorsCompanion toCompanion(bool nullToAbsent) {
-    return ProfessorsCompanion(
-      id: Value(id),
-      name: Value(name),
-      avatar: Value(avatar),
-      objectivity: Value(objectivity),
-      loyalty: Value(loyalty),
-      professionalism: Value(professionalism),
-      harshness: Value(harshness),
-    );
-  }
-
-  factory Professor.fromJson(Map<String, dynamic> json,
-      {ValueSerializer? serializer}) {
-    serializer ??= driftRuntimeOptions.defaultSerializer;
-    return Professor(
-      id: serializer.fromJson<int>(json['id']),
-      name: serializer.fromJson<String>(json['name']),
-      avatar: serializer.fromJson<String>(json['avatar']),
-      objectivity: serializer.fromJson<double>(json['objectivity']),
-      loyalty: serializer.fromJson<double>(json['loyalty']),
-      professionalism: serializer.fromJson<double>(json['professionalism']),
-      harshness: serializer.fromJson<double>(json['harshness']),
-    );
-  }
-  @override
-  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
-    serializer ??= driftRuntimeOptions.defaultSerializer;
-    return <String, dynamic>{
-      'id': serializer.toJson<int>(id),
-      'name': serializer.toJson<String>(name),
-      'avatar': serializer.toJson<String>(avatar),
-      'objectivity': serializer.toJson<double>(objectivity),
-      'loyalty': serializer.toJson<double>(loyalty),
-      'professionalism': serializer.toJson<double>(professionalism),
-      'harshness': serializer.toJson<double>(harshness),
-    };
-  }
-
-  Professor copyWith(
-          {int? id,
-          String? name,
-          String? avatar,
-          double? objectivity,
-          double? loyalty,
-          double? professionalism,
-          double? harshness}) =>
-      Professor(
-        id: id ?? this.id,
-        name: name ?? this.name,
-        avatar: avatar ?? this.avatar,
-        objectivity: objectivity ?? this.objectivity,
-        loyalty: loyalty ?? this.loyalty,
-        professionalism: professionalism ?? this.professionalism,
-        harshness: harshness ?? this.harshness,
-      );
-  Professor copyWithCompanion(ProfessorsCompanion data) {
-    return Professor(
-      id: data.id.present ? data.id.value : this.id,
-      name: data.name.present ? data.name.value : this.name,
-      avatar: data.avatar.present ? data.avatar.value : this.avatar,
-      objectivity:
-          data.objectivity.present ? data.objectivity.value : this.objectivity,
-      loyalty: data.loyalty.present ? data.loyalty.value : this.loyalty,
-      professionalism: data.professionalism.present
-          ? data.professionalism.value
-          : this.professionalism,
-      harshness: data.harshness.present ? data.harshness.value : this.harshness,
-    );
-  }
-
-  @override
-  String toString() {
-    return (StringBuffer('Professor(')
-          ..write('id: $id, ')
-          ..write('name: $name, ')
-          ..write('avatar: $avatar, ')
-          ..write('objectivity: $objectivity, ')
-          ..write('loyalty: $loyalty, ')
-          ..write('professionalism: $professionalism, ')
-          ..write('harshness: $harshness')
-          ..write(')'))
-        .toString();
-  }
-
-  @override
-  int get hashCode => Object.hash(
-      id, name, avatar, objectivity, loyalty, professionalism, harshness);
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      (other is Professor &&
-          other.id == this.id &&
-          other.name == this.name &&
-          other.avatar == this.avatar &&
-          other.objectivity == this.objectivity &&
-          other.loyalty == this.loyalty &&
-          other.professionalism == this.professionalism &&
-          other.harshness == this.harshness);
-}
-
 class ProfessorsCompanion extends UpdateCompanion<Professor> {
   final Value<int> id;
   final Value<String> name;
   final Value<String> avatar;
-  final Value<double> objectivity;
-  final Value<double> loyalty;
-  final Value<double> professionalism;
-  final Value<double> harshness;
   const ProfessorsCompanion({
     this.id = const Value.absent(),
     this.name = const Value.absent(),
     this.avatar = const Value.absent(),
-    this.objectivity = const Value.absent(),
-    this.loyalty = const Value.absent(),
-    this.professionalism = const Value.absent(),
-    this.harshness = const Value.absent(),
   });
   ProfessorsCompanion.insert({
     this.id = const Value.absent(),
     required String name,
     required String avatar,
-    required double objectivity,
-    required double loyalty,
-    required double professionalism,
-    required double harshness,
   })  : name = Value(name),
-        avatar = Value(avatar),
-        objectivity = Value(objectivity),
-        loyalty = Value(loyalty),
-        professionalism = Value(professionalism),
-        harshness = Value(harshness);
+        avatar = Value(avatar);
   static Insertable<Professor> custom({
     Expression<int>? id,
     Expression<String>? name,
     Expression<String>? avatar,
-    Expression<double>? objectivity,
-    Expression<double>? loyalty,
-    Expression<double>? professionalism,
-    Expression<double>? harshness,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
       if (name != null) 'name': name,
       if (avatar != null) 'avatar': avatar,
-      if (objectivity != null) 'objectivity': objectivity,
-      if (loyalty != null) 'loyalty': loyalty,
-      if (professionalism != null) 'professionalism': professionalism,
-      if (harshness != null) 'harshness': harshness,
     });
   }
 
   ProfessorsCompanion copyWith(
-      {Value<int>? id,
-      Value<String>? name,
-      Value<String>? avatar,
-      Value<double>? objectivity,
-      Value<double>? loyalty,
-      Value<double>? professionalism,
-      Value<double>? harshness}) {
+      {Value<int>? id, Value<String>? name, Value<String>? avatar}) {
     return ProfessorsCompanion(
       id: id ?? this.id,
       name: name ?? this.name,
       avatar: avatar ?? this.avatar,
-      objectivity: objectivity ?? this.objectivity,
-      loyalty: loyalty ?? this.loyalty,
-      professionalism: professionalism ?? this.professionalism,
-      harshness: harshness ?? this.harshness,
     );
   }
 
@@ -352,18 +127,6 @@ class ProfessorsCompanion extends UpdateCompanion<Professor> {
     if (avatar.present) {
       map['avatar'] = Variable<String>(avatar.value);
     }
-    if (objectivity.present) {
-      map['objectivity'] = Variable<double>(objectivity.value);
-    }
-    if (loyalty.present) {
-      map['loyalty'] = Variable<double>(loyalty.value);
-    }
-    if (professionalism.present) {
-      map['professionalism'] = Variable<double>(professionalism.value);
-    }
-    if (harshness.present) {
-      map['harshness'] = Variable<double>(harshness.value);
-    }
     return map;
   }
 
@@ -372,11 +135,7 @@ class ProfessorsCompanion extends UpdateCompanion<Professor> {
     return (StringBuffer('ProfessorsCompanion(')
           ..write('id: $id, ')
           ..write('name: $name, ')
-          ..write('avatar: $avatar, ')
-          ..write('objectivity: $objectivity, ')
-          ..write('loyalty: $loyalty, ')
-          ..write('professionalism: $professionalism, ')
-          ..write('harshness: $harshness')
+          ..write('avatar: $avatar')
           ..write(')'))
         .toString();
   }
@@ -466,96 +225,6 @@ class $UsersTable extends Users with TableInfo<$UsersTable, User> {
   $UsersTable createAlias(String alias) {
     return $UsersTable(attachedDatabase, alias);
   }
-}
-
-class User extends DataClass implements Insertable<User> {
-  final int id;
-  final String name;
-  final Uint8List avatar;
-  final int rating;
-  const User(
-      {required this.id,
-      required this.name,
-      required this.avatar,
-      required this.rating});
-  @override
-  Map<String, Expression> toColumns(bool nullToAbsent) {
-    final map = <String, Expression>{};
-    map['id'] = Variable<int>(id);
-    map['name'] = Variable<String>(name);
-    map['avatar'] = Variable<Uint8List>(avatar);
-    map['rating'] = Variable<int>(rating);
-    return map;
-  }
-
-  UsersCompanion toCompanion(bool nullToAbsent) {
-    return UsersCompanion(
-      id: Value(id),
-      name: Value(name),
-      avatar: Value(avatar),
-      rating: Value(rating),
-    );
-  }
-
-  factory User.fromJson(Map<String, dynamic> json,
-      {ValueSerializer? serializer}) {
-    serializer ??= driftRuntimeOptions.defaultSerializer;
-    return User(
-      id: serializer.fromJson<int>(json['id']),
-      name: serializer.fromJson<String>(json['name']),
-      avatar: serializer.fromJson<Uint8List>(json['avatar']),
-      rating: serializer.fromJson<int>(json['rating']),
-    );
-  }
-  @override
-  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
-    serializer ??= driftRuntimeOptions.defaultSerializer;
-    return <String, dynamic>{
-      'id': serializer.toJson<int>(id),
-      'name': serializer.toJson<String>(name),
-      'avatar': serializer.toJson<Uint8List>(avatar),
-      'rating': serializer.toJson<int>(rating),
-    };
-  }
-
-  User copyWith({int? id, String? name, Uint8List? avatar, int? rating}) =>
-      User(
-        id: id ?? this.id,
-        name: name ?? this.name,
-        avatar: avatar ?? this.avatar,
-        rating: rating ?? this.rating,
-      );
-  User copyWithCompanion(UsersCompanion data) {
-    return User(
-      id: data.id.present ? data.id.value : this.id,
-      name: data.name.present ? data.name.value : this.name,
-      avatar: data.avatar.present ? data.avatar.value : this.avatar,
-      rating: data.rating.present ? data.rating.value : this.rating,
-    );
-  }
-
-  @override
-  String toString() {
-    return (StringBuffer('User(')
-          ..write('id: $id, ')
-          ..write('name: $name, ')
-          ..write('avatar: $avatar, ')
-          ..write('rating: $rating')
-          ..write(')'))
-        .toString();
-  }
-
-  @override
-  int get hashCode =>
-      Object.hash(id, name, $driftBlobEquality.hash(avatar), rating);
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      (other is User &&
-          other.id == this.id &&
-          other.name == this.name &&
-          $driftBlobEquality.equals(other.avatar, this.avatar) &&
-          other.rating == this.rating);
 }
 
 class UsersCompanion extends UpdateCompanion<User> {
@@ -652,13 +321,9 @@ class $ReviewsTable extends Reviews with TableInfo<$ReviewsTable, Review> {
   $ReviewsTable(this.attachedDatabase, [this._alias]);
   static const VerificationMeta _idMeta = const VerificationMeta('id');
   @override
-  late final GeneratedColumn<int> id = GeneratedColumn<int>(
+  late final GeneratedColumn<String> id = GeneratedColumn<String>(
       'id', aliasedName, false,
-      hasAutoIncrement: true,
-      type: DriftSqlType.int,
-      requiredDuringInsert: false,
-      defaultConstraints:
-          GeneratedColumn.constraintIsAlways('PRIMARY KEY AUTOINCREMENT'));
+      type: DriftSqlType.string, requiredDuringInsert: true);
   static const VerificationMeta _userIdMeta = const VerificationMeta('userId');
   @override
   late final GeneratedColumn<int> userId = GeneratedColumn<int>(
@@ -741,6 +406,8 @@ class $ReviewsTable extends Reviews with TableInfo<$ReviewsTable, Review> {
     final data = instance.toColumns(true);
     if (data.containsKey('id')) {
       context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    } else if (isInserting) {
+      context.missing(_idMeta);
     }
     if (data.containsKey('user_id')) {
       context.handle(_userIdMeta,
@@ -812,21 +479,15 @@ class $ReviewsTable extends Reviews with TableInfo<$ReviewsTable, Review> {
   }
 
   @override
-  Set<GeneratedColumn> get $primaryKey => {id};
+  Set<GeneratedColumn> get $primaryKey => const {};
   @override
   Review map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return Review(
-      id: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}id'])!,
       userId: attachedDatabase.typeMapping
           .read(DriftSqlType.int, data['${effectivePrefix}user_id'])!,
-      professorId: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}professor_id'])!,
       comment: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}comment'])!,
-      status: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}status'])!,
       objectivity: attachedDatabase.typeMapping
           .read(DriftSqlType.double, data['${effectivePrefix}objectivity'])!,
       loyalty: attachedDatabase.typeMapping
@@ -837,6 +498,10 @@ class $ReviewsTable extends Reviews with TableInfo<$ReviewsTable, Review> {
           .read(DriftSqlType.double, data['${effectivePrefix}harshness'])!,
       date: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}date'])!,
+      status: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}status'])!,
+      professorId: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}professor_id'])!,
       rating: attachedDatabase.typeMapping
           .read(DriftSqlType.int, data['${effectivePrefix}rating'])!,
     );
@@ -848,183 +513,8 @@ class $ReviewsTable extends Reviews with TableInfo<$ReviewsTable, Review> {
   }
 }
 
-class Review extends DataClass implements Insertable<Review> {
-  final int id;
-  final int userId;
-  final int professorId;
-  final String comment;
-  final String status;
-  final double objectivity;
-  final double loyalty;
-  final double professionalism;
-  final double harshness;
-  final String date;
-  final int rating;
-  const Review(
-      {required this.id,
-      required this.userId,
-      required this.professorId,
-      required this.comment,
-      required this.status,
-      required this.objectivity,
-      required this.loyalty,
-      required this.professionalism,
-      required this.harshness,
-      required this.date,
-      required this.rating});
-  @override
-  Map<String, Expression> toColumns(bool nullToAbsent) {
-    final map = <String, Expression>{};
-    map['id'] = Variable<int>(id);
-    map['user_id'] = Variable<int>(userId);
-    map['professor_id'] = Variable<int>(professorId);
-    map['comment'] = Variable<String>(comment);
-    map['status'] = Variable<String>(status);
-    map['objectivity'] = Variable<double>(objectivity);
-    map['loyalty'] = Variable<double>(loyalty);
-    map['professionalism'] = Variable<double>(professionalism);
-    map['harshness'] = Variable<double>(harshness);
-    map['date'] = Variable<String>(date);
-    map['rating'] = Variable<int>(rating);
-    return map;
-  }
-
-  ReviewsCompanion toCompanion(bool nullToAbsent) {
-    return ReviewsCompanion(
-      id: Value(id),
-      userId: Value(userId),
-      professorId: Value(professorId),
-      comment: Value(comment),
-      status: Value(status),
-      objectivity: Value(objectivity),
-      loyalty: Value(loyalty),
-      professionalism: Value(professionalism),
-      harshness: Value(harshness),
-      date: Value(date),
-      rating: Value(rating),
-    );
-  }
-
-  factory Review.fromJson(Map<String, dynamic> json,
-      {ValueSerializer? serializer}) {
-    serializer ??= driftRuntimeOptions.defaultSerializer;
-    return Review(
-      id: serializer.fromJson<int>(json['id']),
-      userId: serializer.fromJson<int>(json['userId']),
-      professorId: serializer.fromJson<int>(json['professorId']),
-      comment: serializer.fromJson<String>(json['comment']),
-      status: serializer.fromJson<String>(json['status']),
-      objectivity: serializer.fromJson<double>(json['objectivity']),
-      loyalty: serializer.fromJson<double>(json['loyalty']),
-      professionalism: serializer.fromJson<double>(json['professionalism']),
-      harshness: serializer.fromJson<double>(json['harshness']),
-      date: serializer.fromJson<String>(json['date']),
-      rating: serializer.fromJson<int>(json['rating']),
-    );
-  }
-  @override
-  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
-    serializer ??= driftRuntimeOptions.defaultSerializer;
-    return <String, dynamic>{
-      'id': serializer.toJson<int>(id),
-      'userId': serializer.toJson<int>(userId),
-      'professorId': serializer.toJson<int>(professorId),
-      'comment': serializer.toJson<String>(comment),
-      'status': serializer.toJson<String>(status),
-      'objectivity': serializer.toJson<double>(objectivity),
-      'loyalty': serializer.toJson<double>(loyalty),
-      'professionalism': serializer.toJson<double>(professionalism),
-      'harshness': serializer.toJson<double>(harshness),
-      'date': serializer.toJson<String>(date),
-      'rating': serializer.toJson<int>(rating),
-    };
-  }
-
-  Review copyWith(
-          {int? id,
-          int? userId,
-          int? professorId,
-          String? comment,
-          String? status,
-          double? objectivity,
-          double? loyalty,
-          double? professionalism,
-          double? harshness,
-          String? date,
-          int? rating}) =>
-      Review(
-        id: id ?? this.id,
-        userId: userId ?? this.userId,
-        professorId: professorId ?? this.professorId,
-        comment: comment ?? this.comment,
-        status: status ?? this.status,
-        objectivity: objectivity ?? this.objectivity,
-        loyalty: loyalty ?? this.loyalty,
-        professionalism: professionalism ?? this.professionalism,
-        harshness: harshness ?? this.harshness,
-        date: date ?? this.date,
-        rating: rating ?? this.rating,
-      );
-  Review copyWithCompanion(ReviewsCompanion data) {
-    return Review(
-      id: data.id.present ? data.id.value : this.id,
-      userId: data.userId.present ? data.userId.value : this.userId,
-      professorId:
-          data.professorId.present ? data.professorId.value : this.professorId,
-      comment: data.comment.present ? data.comment.value : this.comment,
-      status: data.status.present ? data.status.value : this.status,
-      objectivity:
-          data.objectivity.present ? data.objectivity.value : this.objectivity,
-      loyalty: data.loyalty.present ? data.loyalty.value : this.loyalty,
-      professionalism: data.professionalism.present
-          ? data.professionalism.value
-          : this.professionalism,
-      harshness: data.harshness.present ? data.harshness.value : this.harshness,
-      date: data.date.present ? data.date.value : this.date,
-      rating: data.rating.present ? data.rating.value : this.rating,
-    );
-  }
-
-  @override
-  String toString() {
-    return (StringBuffer('Review(')
-          ..write('id: $id, ')
-          ..write('userId: $userId, ')
-          ..write('professorId: $professorId, ')
-          ..write('comment: $comment, ')
-          ..write('status: $status, ')
-          ..write('objectivity: $objectivity, ')
-          ..write('loyalty: $loyalty, ')
-          ..write('professionalism: $professionalism, ')
-          ..write('harshness: $harshness, ')
-          ..write('date: $date, ')
-          ..write('rating: $rating')
-          ..write(')'))
-        .toString();
-  }
-
-  @override
-  int get hashCode => Object.hash(id, userId, professorId, comment, status,
-      objectivity, loyalty, professionalism, harshness, date, rating);
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      (other is Review &&
-          other.id == this.id &&
-          other.userId == this.userId &&
-          other.professorId == this.professorId &&
-          other.comment == this.comment &&
-          other.status == this.status &&
-          other.objectivity == this.objectivity &&
-          other.loyalty == this.loyalty &&
-          other.professionalism == this.professionalism &&
-          other.harshness == this.harshness &&
-          other.date == this.date &&
-          other.rating == this.rating);
-}
-
 class ReviewsCompanion extends UpdateCompanion<Review> {
-  final Value<int> id;
+  final Value<String> id;
   final Value<int> userId;
   final Value<int> professorId;
   final Value<String> comment;
@@ -1035,6 +525,7 @@ class ReviewsCompanion extends UpdateCompanion<Review> {
   final Value<double> harshness;
   final Value<String> date;
   final Value<int> rating;
+  final Value<int> rowid;
   const ReviewsCompanion({
     this.id = const Value.absent(),
     this.userId = const Value.absent(),
@@ -1047,9 +538,10 @@ class ReviewsCompanion extends UpdateCompanion<Review> {
     this.harshness = const Value.absent(),
     this.date = const Value.absent(),
     this.rating = const Value.absent(),
+    this.rowid = const Value.absent(),
   });
   ReviewsCompanion.insert({
-    this.id = const Value.absent(),
+    required String id,
     required int userId,
     required int professorId,
     required String comment,
@@ -1060,7 +552,9 @@ class ReviewsCompanion extends UpdateCompanion<Review> {
     required double harshness,
     required String date,
     required int rating,
-  })  : userId = Value(userId),
+    this.rowid = const Value.absent(),
+  })  : id = Value(id),
+        userId = Value(userId),
         professorId = Value(professorId),
         comment = Value(comment),
         status = Value(status),
@@ -1071,7 +565,7 @@ class ReviewsCompanion extends UpdateCompanion<Review> {
         date = Value(date),
         rating = Value(rating);
   static Insertable<Review> custom({
-    Expression<int>? id,
+    Expression<String>? id,
     Expression<int>? userId,
     Expression<int>? professorId,
     Expression<String>? comment,
@@ -1082,6 +576,7 @@ class ReviewsCompanion extends UpdateCompanion<Review> {
     Expression<double>? harshness,
     Expression<String>? date,
     Expression<int>? rating,
+    Expression<int>? rowid,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
@@ -1095,11 +590,12 @@ class ReviewsCompanion extends UpdateCompanion<Review> {
       if (harshness != null) 'harshness': harshness,
       if (date != null) 'date': date,
       if (rating != null) 'rating': rating,
+      if (rowid != null) 'rowid': rowid,
     });
   }
 
   ReviewsCompanion copyWith(
-      {Value<int>? id,
+      {Value<String>? id,
       Value<int>? userId,
       Value<int>? professorId,
       Value<String>? comment,
@@ -1109,7 +605,8 @@ class ReviewsCompanion extends UpdateCompanion<Review> {
       Value<double>? professionalism,
       Value<double>? harshness,
       Value<String>? date,
-      Value<int>? rating}) {
+      Value<int>? rating,
+      Value<int>? rowid}) {
     return ReviewsCompanion(
       id: id ?? this.id,
       userId: userId ?? this.userId,
@@ -1122,6 +619,7 @@ class ReviewsCompanion extends UpdateCompanion<Review> {
       harshness: harshness ?? this.harshness,
       date: date ?? this.date,
       rating: rating ?? this.rating,
+      rowid: rowid ?? this.rowid,
     );
   }
 
@@ -1129,7 +627,7 @@ class ReviewsCompanion extends UpdateCompanion<Review> {
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     if (id.present) {
-      map['id'] = Variable<int>(id.value);
+      map['id'] = Variable<String>(id.value);
     }
     if (userId.present) {
       map['user_id'] = Variable<int>(userId.value);
@@ -1161,6 +659,9 @@ class ReviewsCompanion extends UpdateCompanion<Review> {
     if (rating.present) {
       map['rating'] = Variable<int>(rating.value);
     }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
     return map;
   }
 
@@ -1177,7 +678,8 @@ class ReviewsCompanion extends UpdateCompanion<Review> {
           ..write('professionalism: $professionalism, ')
           ..write('harshness: $harshness, ')
           ..write('date: $date, ')
-          ..write('rating: $rating')
+          ..write('rating: $rating, ')
+          ..write('rowid: $rowid')
           ..write(')'))
         .toString();
   }
@@ -1201,19 +703,11 @@ typedef $$ProfessorsTableCreateCompanionBuilder = ProfessorsCompanion Function({
   Value<int> id,
   required String name,
   required String avatar,
-  required double objectivity,
-  required double loyalty,
-  required double professionalism,
-  required double harshness,
 });
 typedef $$ProfessorsTableUpdateCompanionBuilder = ProfessorsCompanion Function({
   Value<int> id,
   Value<String> name,
   Value<String> avatar,
-  Value<double> objectivity,
-  Value<double> loyalty,
-  Value<double> professionalism,
-  Value<double> harshness,
 });
 
 class $$ProfessorsTableFilterComposer
@@ -1233,26 +727,6 @@ class $$ProfessorsTableFilterComposer
       column: $state.table.avatar,
       builder: (column, joinBuilders) =>
           ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<double> get objectivity => $state.composableBuilder(
-      column: $state.table.objectivity,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<double> get loyalty => $state.composableBuilder(
-      column: $state.table.loyalty,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<double> get professionalism => $state.composableBuilder(
-      column: $state.table.professionalism,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<double> get harshness => $state.composableBuilder(
-      column: $state.table.harshness,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
 }
 
 class $$ProfessorsTableOrderingComposer
@@ -1270,26 +744,6 @@ class $$ProfessorsTableOrderingComposer
 
   ColumnOrderings<String> get avatar => $state.composableBuilder(
       column: $state.table.avatar,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<double> get objectivity => $state.composableBuilder(
-      column: $state.table.objectivity,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<double> get loyalty => $state.composableBuilder(
-      column: $state.table.loyalty,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<double> get professionalism => $state.composableBuilder(
-      column: $state.table.professionalism,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<double> get harshness => $state.composableBuilder(
-      column: $state.table.harshness,
       builder: (column, joinBuilders) =>
           ColumnOrderings(column, joinBuilders: joinBuilders));
 }
@@ -1317,37 +771,21 @@ class $$ProfessorsTableTableManager extends RootTableManager<
             Value<int> id = const Value.absent(),
             Value<String> name = const Value.absent(),
             Value<String> avatar = const Value.absent(),
-            Value<double> objectivity = const Value.absent(),
-            Value<double> loyalty = const Value.absent(),
-            Value<double> professionalism = const Value.absent(),
-            Value<double> harshness = const Value.absent(),
           }) =>
               ProfessorsCompanion(
             id: id,
             name: name,
             avatar: avatar,
-            objectivity: objectivity,
-            loyalty: loyalty,
-            professionalism: professionalism,
-            harshness: harshness,
           ),
           createCompanionCallback: ({
             Value<int> id = const Value.absent(),
             required String name,
             required String avatar,
-            required double objectivity,
-            required double loyalty,
-            required double professionalism,
-            required double harshness,
           }) =>
               ProfessorsCompanion.insert(
             id: id,
             name: name,
             avatar: avatar,
-            objectivity: objectivity,
-            loyalty: loyalty,
-            professionalism: professionalism,
-            harshness: harshness,
           ),
           withReferenceMapper: (p0) => p0
               .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
@@ -1496,7 +934,7 @@ typedef $$UsersTableProcessedTableManager = ProcessedTableManager<
     User,
     PrefetchHooks Function()>;
 typedef $$ReviewsTableCreateCompanionBuilder = ReviewsCompanion Function({
-  Value<int> id,
+  required String id,
   required int userId,
   required int professorId,
   required String comment,
@@ -1507,9 +945,10 @@ typedef $$ReviewsTableCreateCompanionBuilder = ReviewsCompanion Function({
   required double harshness,
   required String date,
   required int rating,
+  Value<int> rowid,
 });
 typedef $$ReviewsTableUpdateCompanionBuilder = ReviewsCompanion Function({
-  Value<int> id,
+  Value<String> id,
   Value<int> userId,
   Value<int> professorId,
   Value<String> comment,
@@ -1520,12 +959,13 @@ typedef $$ReviewsTableUpdateCompanionBuilder = ReviewsCompanion Function({
   Value<double> harshness,
   Value<String> date,
   Value<int> rating,
+  Value<int> rowid,
 });
 
 class $$ReviewsTableFilterComposer
     extends FilterComposer<_$AppDatabase, $ReviewsTable> {
   $$ReviewsTableFilterComposer(super.$state);
-  ColumnFilters<int> get id => $state.composableBuilder(
+  ColumnFilters<String> get id => $state.composableBuilder(
       column: $state.table.id,
       builder: (column, joinBuilders) =>
           ColumnFilters(column, joinBuilders: joinBuilders));
@@ -1584,7 +1024,7 @@ class $$ReviewsTableFilterComposer
 class $$ReviewsTableOrderingComposer
     extends OrderingComposer<_$AppDatabase, $ReviewsTable> {
   $$ReviewsTableOrderingComposer(super.$state);
-  ColumnOrderings<int> get id => $state.composableBuilder(
+  ColumnOrderings<String> get id => $state.composableBuilder(
       column: $state.table.id,
       builder: (column, joinBuilders) =>
           ColumnOrderings(column, joinBuilders: joinBuilders));
@@ -1660,7 +1100,7 @@ class $$ReviewsTableTableManager extends RootTableManager<
           orderingComposer:
               $$ReviewsTableOrderingComposer(ComposerState(db, table)),
           updateCompanionCallback: ({
-            Value<int> id = const Value.absent(),
+            Value<String> id = const Value.absent(),
             Value<int> userId = const Value.absent(),
             Value<int> professorId = const Value.absent(),
             Value<String> comment = const Value.absent(),
@@ -1671,6 +1111,7 @@ class $$ReviewsTableTableManager extends RootTableManager<
             Value<double> harshness = const Value.absent(),
             Value<String> date = const Value.absent(),
             Value<int> rating = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
           }) =>
               ReviewsCompanion(
             id: id,
@@ -1684,9 +1125,10 @@ class $$ReviewsTableTableManager extends RootTableManager<
             harshness: harshness,
             date: date,
             rating: rating,
+            rowid: rowid,
           ),
           createCompanionCallback: ({
-            Value<int> id = const Value.absent(),
+            required String id,
             required int userId,
             required int professorId,
             required String comment,
@@ -1697,6 +1139,7 @@ class $$ReviewsTableTableManager extends RootTableManager<
             required double harshness,
             required String date,
             required int rating,
+            Value<int> rowid = const Value.absent(),
           }) =>
               ReviewsCompanion.insert(
             id: id,
@@ -1710,6 +1153,7 @@ class $$ReviewsTableTableManager extends RootTableManager<
             harshness: harshness,
             date: date,
             rating: rating,
+            rowid: rowid,
           ),
           withReferenceMapper: (p0) => p0
               .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
