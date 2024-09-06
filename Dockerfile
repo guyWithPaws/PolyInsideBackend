@@ -1,4 +1,4 @@
-FROM ubuntu
+FROM dart:stable AS build
 RUN apt update
 RUN cd /home/goxa/dart_project/
 RUN rm -rv PolyInsideBackend

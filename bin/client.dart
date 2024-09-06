@@ -29,8 +29,7 @@ class ServerCredentials {
 }
 
 Future<void> main(List<String> args) async {
-  final credentials = ServerCredentials.fromJSON(
-      '/Users/guywithpaws/PolyInsideBackend/secrets/credentials.json');
+  final credentials = ServerCredentials.fromJSON(r'secrets\credential.json');
   final channel = ClientChannel(
     credentials.ip,
     port: credentials.port,
