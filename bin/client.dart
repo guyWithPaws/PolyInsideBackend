@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'dart:isolate';
 
 import 'package:grpc/grpc.dart';
 import 'package:poly_inside_server/generated/protobufs/service.pbgrpc.dart';
@@ -28,16 +29,18 @@ class ServerCredentials {
       this.connectionTimeout = const Duration(seconds: 30)});
 }
 
-void main(List<String> args) {
-  final credentials = ServerCredentials.fromJSON('/Users/guywithpaws/PolyInsideBackend/secrets/credentials.json');
+Future<void> main(List<String> args) async {
+  final credentials = ServerCredentials.fromJSON(
+      '/Users/guywithpaws/PolyInsideBackend/secrets/credentials.json');
   final channel = ClientChannel(
-        credentials.ip,
-        port: credentials.port,
-        options: const ChannelOptions(
-          credentials: ChannelCredentials.insecure(),
-        ),
-      );
+    credentials.ip,
+    port: credentials.port,
+    options: const ChannelOptions(
+      credentials: ChannelCredentials.insecure(),
+    ),
+  );
   final client = SearchServiceClient(channel);
-  final professors = client.getListProfessor(ListProfessorRequest());
-  professors.forEach((e) => print(e.name));
+  final data = client.professorReviews(ReviewsByProfessorIdRequest(id:12334));
+  data.forEach((e) => print(e.comment));
+  return;
 }

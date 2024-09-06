@@ -9,15 +9,23 @@ import 'package:poly_inside_server/database/database_provider.dart';
 import 'package:poly_inside_server/service.dart';
 
 Future<void> main() async {
-  await runZonedGuarded(
+  await l.capture(
     () async {
-      final database = AppDatabase(NativeDatabase(File('db.sqlite')));
-      final provider = DatabaseProviderImpl(database: database);
-      final server = Server.create(services: [GRPCService(provider: provider)]);
+      await runZonedGuarded(
+        () async {
+          final database = AppDatabase(NativeDatabase(File('db.sqlite')));
+          final provider = DatabaseProviderImpl(database: database);
+          final server =
+              Server.create(services: [GRPCService(provider: provider)]);
 
-      await server.serve(port: 8080);
-      l.i('Server listening on ${server.port}');
+          await server.serve(port: 8080);
+          print('Server listening on ${server.port}');
+        },
+        (e, st) => l.e,
+      );
     },
-    (e, st) => l.e,
+    const LogOptions(
+      outputInRelease: true,
+    ),
   );
 }

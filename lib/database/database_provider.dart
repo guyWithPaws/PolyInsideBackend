@@ -1,6 +1,8 @@
 import 'package:drift/drift.dart';
 import 'package:poly_inside_server/database/database.dart';
 import 'package:poly_inside_server/database/provider.dart';
+import 'package:poly_inside_server/generated/protobufs/service.pbgrpc.dart'
+    as grpc;
 
 class DatabaseProviderImpl implements DatabaseProvider {
   DatabaseProviderImpl({required this.database});
@@ -30,5 +32,18 @@ class DatabaseProviderImpl implements DatabaseProvider {
 
   @override
   Future<void> sendReview(Review review) =>
-      database.into(database.reviews).insert(review);
+      database.into(database.reviews).insert(
+            ReviewsCompanion(
+              rating: Value(review.rating),
+              professorId: Value(review.professorId),
+              professionalism: Value(review.professionalism),
+              userId: Value(review.userId),
+              comment: Value(review.comment),
+              date: Value(review.date),
+              status: const Value('pending'),
+              objectivity: Value(review.objectivity),
+              loyalty: Value(review.loyalty),
+              harshness: Value(review.harshness),
+            ),
+          );
 }

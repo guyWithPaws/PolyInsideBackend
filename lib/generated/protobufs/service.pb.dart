@@ -11,17 +11,12 @@
 
 import 'dart:core' as $core;
 
-import 'package:fixnum/fixnum.dart' as $fixnum;
 import 'package:protobuf/protobuf.dart' as $pb;
-
-import 'service.pbenum.dart';
-
-export 'service.pbenum.dart';
 
 class ChangeStatusRequest extends $pb.GeneratedMessage {
   factory ChangeStatusRequest({
-    $fixnum.Int64? id,
-    Status? status,
+    $core.int? id,
+    $core.String? status,
   }) {
     final $result = create();
     if (id != null) {
@@ -37,8 +32,8 @@ class ChangeStatusRequest extends $pb.GeneratedMessage {
   factory ChangeStatusRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ChangeStatusRequest', createEmptyInstance: create)
-    ..aInt64(1, _omitFieldNames ? '' : 'id')
-    ..e<Status>(2, _omitFieldNames ? '' : 'status', $pb.PbFieldType.OE, defaultOrMaker: Status.pending, valueOf: Status.valueOf, enumValues: Status.values)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'id', $pb.PbFieldType.O3)
+    ..aOS(2, _omitFieldNames ? '' : 'status')
     ..hasRequiredFields = false
   ;
 
@@ -64,18 +59,18 @@ class ChangeStatusRequest extends $pb.GeneratedMessage {
   static ChangeStatusRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $fixnum.Int64 get id => $_getI64(0);
+  $core.int get id => $_getIZ(0);
   @$pb.TagNumber(1)
-  set id($fixnum.Int64 v) { $_setInt64(0, v); }
+  set id($core.int v) { $_setSignedInt32(0, v); }
   @$pb.TagNumber(1)
   $core.bool hasId() => $_has(0);
   @$pb.TagNumber(1)
   void clearId() => clearField(1);
 
   @$pb.TagNumber(2)
-  Status get status => $_getN(1);
+  $core.String get status => $_getSZ(1);
   @$pb.TagNumber(2)
-  set status(Status v) { setField(2, v); }
+  set status($core.String v) { $_setString(1, v); }
   @$pb.TagNumber(2)
   $core.bool hasStatus() => $_has(1);
   @$pb.TagNumber(2)
@@ -231,21 +226,12 @@ class AddReviewRequest extends $pb.GeneratedMessage {
 }
 
 class AddReviewResponse extends $pb.GeneratedMessage {
-  factory AddReviewResponse({
-    $core.int? status,
-  }) {
-    final $result = create();
-    if (status != null) {
-      $result.status = status;
-    }
-    return $result;
-  }
+  factory AddReviewResponse() => create();
   AddReviewResponse._() : super();
   factory AddReviewResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory AddReviewResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'AddReviewResponse', createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'status', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
 
@@ -269,20 +255,11 @@ class AddReviewResponse extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static AddReviewResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<AddReviewResponse>(create);
   static AddReviewResponse? _defaultInstance;
-
-  @$pb.TagNumber(1)
-  $core.int get status => $_getIZ(0);
-  @$pb.TagNumber(1)
-  set status($core.int v) { $_setSignedInt32(0, v); }
-  @$pb.TagNumber(1)
-  $core.bool hasStatus() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearStatus() => clearField(1);
 }
 
 class ReviewsByUserId extends $pb.GeneratedMessage {
   factory ReviewsByUserId({
-    $fixnum.Int64? id,
+    $core.int? id,
   }) {
     final $result = create();
     if (id != null) {
@@ -295,7 +272,7 @@ class ReviewsByUserId extends $pb.GeneratedMessage {
   factory ReviewsByUserId.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ReviewsByUserId', createEmptyInstance: create)
-    ..aInt64(1, _omitFieldNames ? '' : 'id')
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'id', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
 
@@ -321,9 +298,9 @@ class ReviewsByUserId extends $pb.GeneratedMessage {
   static ReviewsByUserId? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $fixnum.Int64 get id => $_getI64(0);
+  $core.int get id => $_getIZ(0);
   @$pb.TagNumber(1)
-  set id($fixnum.Int64 v) { $_setInt64(0, v); }
+  set id($core.int v) { $_setSignedInt32(0, v); }
   @$pb.TagNumber(1)
   $core.bool hasId() => $_has(0);
   @$pb.TagNumber(1)
@@ -364,7 +341,7 @@ class ListProfessorRequest extends $pb.GeneratedMessage {
 
 class ReviewsByProfessorIdRequest extends $pb.GeneratedMessage {
   factory ReviewsByProfessorIdRequest({
-    $fixnum.Int64? id,
+    $core.int? id,
   }) {
     final $result = create();
     if (id != null) {
@@ -377,7 +354,7 @@ class ReviewsByProfessorIdRequest extends $pb.GeneratedMessage {
   factory ReviewsByProfessorIdRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ReviewsByProfessorIdRequest', createEmptyInstance: create)
-    ..aInt64(1, _omitFieldNames ? '' : 'id')
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'id', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
 
@@ -403,9 +380,9 @@ class ReviewsByProfessorIdRequest extends $pb.GeneratedMessage {
   static ReviewsByProfessorIdRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $fixnum.Int64 get id => $_getI64(0);
+  $core.int get id => $_getIZ(0);
   @$pb.TagNumber(1)
-  set id($fixnum.Int64 v) { $_setInt64(0, v); }
+  set id($core.int v) { $_setSignedInt32(0, v); }
   @$pb.TagNumber(1)
   $core.bool hasId() => $_has(0);
   @$pb.TagNumber(1)
@@ -414,7 +391,7 @@ class ReviewsByProfessorIdRequest extends $pb.GeneratedMessage {
 
 class User extends $pb.GeneratedMessage {
   factory User({
-    $fixnum.Int64? id,
+    $core.int? id,
     $core.String? name,
     $core.String? avatar,
     $core.int? rating,
@@ -439,7 +416,7 @@ class User extends $pb.GeneratedMessage {
   factory User.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'User', createEmptyInstance: create)
-    ..aInt64(1, _omitFieldNames ? '' : 'id')
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'id', $pb.PbFieldType.O3)
     ..aOS(2, _omitFieldNames ? '' : 'name')
     ..aOS(3, _omitFieldNames ? '' : 'avatar')
     ..a<$core.int>(4, _omitFieldNames ? '' : 'rating', $pb.PbFieldType.O3)
@@ -468,9 +445,9 @@ class User extends $pb.GeneratedMessage {
   static User? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $fixnum.Int64 get id => $_getI64(0);
+  $core.int get id => $_getIZ(0);
   @$pb.TagNumber(1)
-  set id($fixnum.Int64 v) { $_setInt64(0, v); }
+  set id($core.int v) { $_setSignedInt32(0, v); }
   @$pb.TagNumber(1)
   $core.bool hasId() => $_has(0);
   @$pb.TagNumber(1)
@@ -640,16 +617,18 @@ class Professor extends $pb.GeneratedMessage {
 
 class Review extends $pb.GeneratedMessage {
   factory Review({
-    $fixnum.Int64? reviewId,
-    $fixnum.Int64? userId,
+    $core.int? reviewId,
+    $core.int? userId,
     $core.String? comment,
     $core.double? objectivity,
     $core.double? loyalty,
     $core.double? professionalism,
     $core.double? harshness,
-    $fixnum.Int64? reviewDate,
-    $fixnum.Int64? reviewRaiting,
-    Status? status,
+    $core.String? date,
+    $core.int? raiting,
+    $core.String? status,
+    $core.int? professorId,
+    $core.int? rating,
   }) {
     final $result = create();
     if (reviewId != null) {
@@ -673,14 +652,20 @@ class Review extends $pb.GeneratedMessage {
     if (harshness != null) {
       $result.harshness = harshness;
     }
-    if (reviewDate != null) {
-      $result.reviewDate = reviewDate;
+    if (date != null) {
+      $result.date = date;
     }
-    if (reviewRaiting != null) {
-      $result.reviewRaiting = reviewRaiting;
+    if (raiting != null) {
+      $result.raiting = raiting;
     }
     if (status != null) {
       $result.status = status;
+    }
+    if (professorId != null) {
+      $result.professorId = professorId;
+    }
+    if (rating != null) {
+      $result.rating = rating;
     }
     return $result;
   }
@@ -689,16 +674,18 @@ class Review extends $pb.GeneratedMessage {
   factory Review.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Review', createEmptyInstance: create)
-    ..aInt64(1, _omitFieldNames ? '' : 'reviewId')
-    ..aInt64(2, _omitFieldNames ? '' : 'userId')
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'reviewId', $pb.PbFieldType.O3)
+    ..a<$core.int>(2, _omitFieldNames ? '' : 'userId', $pb.PbFieldType.O3)
     ..aOS(3, _omitFieldNames ? '' : 'comment')
     ..a<$core.double>(4, _omitFieldNames ? '' : 'objectivity', $pb.PbFieldType.OF)
     ..a<$core.double>(5, _omitFieldNames ? '' : 'loyalty', $pb.PbFieldType.OF)
     ..a<$core.double>(6, _omitFieldNames ? '' : 'professionalism', $pb.PbFieldType.OF)
     ..a<$core.double>(7, _omitFieldNames ? '' : 'harshness', $pb.PbFieldType.OF)
-    ..aInt64(8, _omitFieldNames ? '' : 'reviewDate')
-    ..aInt64(9, _omitFieldNames ? '' : 'reviewRaiting')
-    ..e<Status>(10, _omitFieldNames ? '' : 'status', $pb.PbFieldType.OE, defaultOrMaker: Status.pending, valueOf: Status.valueOf, enumValues: Status.values)
+    ..aOS(8, _omitFieldNames ? '' : 'date')
+    ..a<$core.int>(9, _omitFieldNames ? '' : 'raiting', $pb.PbFieldType.O3)
+    ..aOS(10, _omitFieldNames ? '' : 'status')
+    ..a<$core.int>(11, _omitFieldNames ? '' : 'professorId', $pb.PbFieldType.O3)
+    ..a<$core.int>(13, _omitFieldNames ? '' : 'rating', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
 
@@ -724,18 +711,18 @@ class Review extends $pb.GeneratedMessage {
   static Review? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $fixnum.Int64 get reviewId => $_getI64(0);
+  $core.int get reviewId => $_getIZ(0);
   @$pb.TagNumber(1)
-  set reviewId($fixnum.Int64 v) { $_setInt64(0, v); }
+  set reviewId($core.int v) { $_setSignedInt32(0, v); }
   @$pb.TagNumber(1)
   $core.bool hasReviewId() => $_has(0);
   @$pb.TagNumber(1)
   void clearReviewId() => clearField(1);
 
   @$pb.TagNumber(2)
-  $fixnum.Int64 get userId => $_getI64(1);
+  $core.int get userId => $_getIZ(1);
   @$pb.TagNumber(2)
-  set userId($fixnum.Int64 v) { $_setInt64(1, v); }
+  set userId($core.int v) { $_setSignedInt32(1, v); }
   @$pb.TagNumber(2)
   $core.bool hasUserId() => $_has(1);
   @$pb.TagNumber(2)
@@ -787,31 +774,49 @@ class Review extends $pb.GeneratedMessage {
   void clearHarshness() => clearField(7);
 
   @$pb.TagNumber(8)
-  $fixnum.Int64 get reviewDate => $_getI64(7);
+  $core.String get date => $_getSZ(7);
   @$pb.TagNumber(8)
-  set reviewDate($fixnum.Int64 v) { $_setInt64(7, v); }
+  set date($core.String v) { $_setString(7, v); }
   @$pb.TagNumber(8)
-  $core.bool hasReviewDate() => $_has(7);
+  $core.bool hasDate() => $_has(7);
   @$pb.TagNumber(8)
-  void clearReviewDate() => clearField(8);
+  void clearDate() => clearField(8);
 
   @$pb.TagNumber(9)
-  $fixnum.Int64 get reviewRaiting => $_getI64(8);
+  $core.int get raiting => $_getIZ(8);
   @$pb.TagNumber(9)
-  set reviewRaiting($fixnum.Int64 v) { $_setInt64(8, v); }
+  set raiting($core.int v) { $_setSignedInt32(8, v); }
   @$pb.TagNumber(9)
-  $core.bool hasReviewRaiting() => $_has(8);
+  $core.bool hasRaiting() => $_has(8);
   @$pb.TagNumber(9)
-  void clearReviewRaiting() => clearField(9);
+  void clearRaiting() => clearField(9);
 
   @$pb.TagNumber(10)
-  Status get status => $_getN(9);
+  $core.String get status => $_getSZ(9);
   @$pb.TagNumber(10)
-  set status(Status v) { setField(10, v); }
+  set status($core.String v) { $_setString(9, v); }
   @$pb.TagNumber(10)
   $core.bool hasStatus() => $_has(9);
   @$pb.TagNumber(10)
   void clearStatus() => clearField(10);
+
+  @$pb.TagNumber(11)
+  $core.int get professorId => $_getIZ(10);
+  @$pb.TagNumber(11)
+  set professorId($core.int v) { $_setSignedInt32(10, v); }
+  @$pb.TagNumber(11)
+  $core.bool hasProfessorId() => $_has(10);
+  @$pb.TagNumber(11)
+  void clearProfessorId() => clearField(11);
+
+  @$pb.TagNumber(13)
+  $core.int get rating => $_getIZ(11);
+  @$pb.TagNumber(13)
+  set rating($core.int v) { $_setSignedInt32(11, v); }
+  @$pb.TagNumber(13)
+  $core.bool hasRating() => $_has(11);
+  @$pb.TagNumber(13)
+  void clearRating() => clearField(13);
 }
 
 

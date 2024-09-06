@@ -26,11 +26,13 @@ class Reviews extends Table {
   IntColumn get professorId => integer()();
   TextColumn get comment => text()();
 
-  IntColumn get status => integer()();
+  TextColumn get status => text()();
   RealColumn get objectivity => real()();
   RealColumn get loyalty => real()();
   RealColumn get professionalism => real()();
   RealColumn get harshness => real()();
+  TextColumn get date => text()();
+  IntColumn get rating => integer()();
 }
 
 @DriftDatabase(tables: [Professors, Users, Reviews])

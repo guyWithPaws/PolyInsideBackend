@@ -8,4 +8,3 @@
 pubspec.lock
 db.sqlite
 *.exe
-*.g.dart
