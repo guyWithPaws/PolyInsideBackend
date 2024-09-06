@@ -1,6 +1,7 @@
-import 'package:poly_inside_server/database/database.dart';
+import 'package:poly_inside_server/generated/protobufs/service.pb.dart';
 
-abstract interface class DatabaseProvider{
+abstract interface class DatabaseProvider {
+  Future<User> getUserByUserId(int userId);
   Stream<List<Professor>> getAllProfessors();
   Stream<List<Review>> getAllReviewsByProfessor(int professorId);
   Stream<List<Professor>> findProfessorByName(String name);

@@ -48,11 +48,14 @@ final $typed_data.Uint8List pendingReviewsRequestDescriptor = $convert.base64Dec
 @$core.Deprecated('Use userInfoByUserIdRequestDescriptor instead')
 const UserInfoByUserIdRequest$json = {
   '1': 'UserInfoByUserIdRequest',
+  '2': [
+    {'1': 'id', '3': 1, '4': 1, '5': 5, '10': 'id'},
+  ],
 };
 
 /// Descriptor for `UserInfoByUserIdRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List userInfoByUserIdRequestDescriptor = $convert.base64Decode(
-    'ChdVc2VySW5mb0J5VXNlcklkUmVxdWVzdA==');
+    'ChdVc2VySW5mb0J5VXNlcklkUmVxdWVzdBIOCgJpZBgBIAEoBVICaWQ=');
 
 @$core.Deprecated('Use addReviewRequestDescriptor instead')
 const AddReviewRequest$json = {
@@ -75,17 +78,17 @@ const AddReviewResponse$json = {
 final $typed_data.Uint8List addReviewResponseDescriptor = $convert.base64Decode(
     'ChFBZGRSZXZpZXdSZXNwb25zZQ==');
 
-@$core.Deprecated('Use reviewsByUserIdDescriptor instead')
-const ReviewsByUserId$json = {
-  '1': 'ReviewsByUserId',
+@$core.Deprecated('Use reviewsByUserIdRequestDescriptor instead')
+const ReviewsByUserIdRequest$json = {
+  '1': 'ReviewsByUserIdRequest',
   '2': [
     {'1': 'id', '3': 1, '4': 1, '5': 5, '10': 'id'},
   ],
 };
 
-/// Descriptor for `ReviewsByUserId`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List reviewsByUserIdDescriptor = $convert.base64Decode(
-    'Cg9SZXZpZXdzQnlVc2VySWQSDgoCaWQYASABKAVSAmlk');
+/// Descriptor for `ReviewsByUserIdRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List reviewsByUserIdRequestDescriptor = $convert.base64Decode(
+    'ChZSZXZpZXdzQnlVc2VySWRSZXF1ZXN0Eg4KAmlkGAEgASgFUgJpZA==');
 
 @$core.Deprecated('Use listProfessorRequestDescriptor instead')
 const ListProfessorRequest$json = {
@@ -114,7 +117,7 @@ const User$json = {
   '2': [
     {'1': 'id', '3': 1, '4': 1, '5': 5, '10': 'id'},
     {'1': 'name', '3': 2, '4': 1, '5': 9, '10': 'name'},
-    {'1': 'avatar', '3': 3, '4': 1, '5': 9, '10': 'avatar'},
+    {'1': 'avatar', '3': 3, '4': 1, '5': 12, '10': 'avatar'},
     {'1': 'rating', '3': 4, '4': 1, '5': 5, '10': 'rating'},
   ],
 };
@@ -122,7 +125,7 @@ const User$json = {
 /// Descriptor for `User`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List userDescriptor = $convert.base64Decode(
     'CgRVc2VyEg4KAmlkGAEgASgFUgJpZBISCgRuYW1lGAIgASgJUgRuYW1lEhYKBmF2YXRhchgDIA'
-    'EoCVIGYXZhdGFyEhYKBnJhdGluZxgEIAEoBVIGcmF0aW5n');
+    'EoDFIGYXZhdGFyEhYKBnJhdGluZxgEIAEoBVIGcmF0aW5n');
 
 @$core.Deprecated('Use professorDescriptor instead')
 const Professor$json = {
@@ -131,25 +134,19 @@ const Professor$json = {
     {'1': 'id', '3': 1, '4': 1, '5': 5, '10': 'id'},
     {'1': 'name', '3': 2, '4': 1, '5': 9, '10': 'name'},
     {'1': 'avatar', '3': 3, '4': 1, '5': 9, '10': 'avatar'},
-    {'1': 'objectivity', '3': 4, '4': 1, '5': 2, '10': 'objectivity'},
-    {'1': 'loyalty', '3': 5, '4': 1, '5': 2, '10': 'loyalty'},
-    {'1': 'professionalism', '3': 6, '4': 1, '5': 2, '10': 'professionalism'},
-    {'1': 'harshness', '3': 7, '4': 1, '5': 2, '10': 'harshness'},
   ],
 };
 
 /// Descriptor for `Professor`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List professorDescriptor = $convert.base64Decode(
     'CglQcm9mZXNzb3ISDgoCaWQYASABKAVSAmlkEhIKBG5hbWUYAiABKAlSBG5hbWUSFgoGYXZhdG'
-    'FyGAMgASgJUgZhdmF0YXISIAoLb2JqZWN0aXZpdHkYBCABKAJSC29iamVjdGl2aXR5EhgKB2xv'
-    'eWFsdHkYBSABKAJSB2xveWFsdHkSKAoPcHJvZmVzc2lvbmFsaXNtGAYgASgCUg9wcm9mZXNzaW'
-    '9uYWxpc20SHAoJaGFyc2huZXNzGAcgASgCUgloYXJzaG5lc3M=');
+    'FyGAMgASgJUgZhdmF0YXI=');
 
 @$core.Deprecated('Use reviewDescriptor instead')
 const Review$json = {
   '1': 'Review',
   '2': [
-    {'1': 'review_id', '3': 1, '4': 1, '5': 5, '10': 'reviewId'},
+    {'1': 'review_id', '3': 1, '4': 1, '5': 9, '10': 'reviewId'},
     {'1': 'user_id', '3': 2, '4': 1, '5': 5, '10': 'userId'},
     {'1': 'comment', '3': 3, '4': 1, '5': 9, '10': 'comment'},
     {'1': 'objectivity', '3': 4, '4': 1, '5': 2, '10': 'objectivity'},
@@ -166,7 +163,7 @@ const Review$json = {
 
 /// Descriptor for `Review`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List reviewDescriptor = $convert.base64Decode(
-    'CgZSZXZpZXcSGwoJcmV2aWV3X2lkGAEgASgFUghyZXZpZXdJZBIXCgd1c2VyX2lkGAIgASgFUg'
+    'CgZSZXZpZXcSGwoJcmV2aWV3X2lkGAEgASgJUghyZXZpZXdJZBIXCgd1c2VyX2lkGAIgASgFUg'
     'Z1c2VySWQSGAoHY29tbWVudBgDIAEoCVIHY29tbWVudBIgCgtvYmplY3Rpdml0eRgEIAEoAlIL'
     'b2JqZWN0aXZpdHkSGAoHbG95YWx0eRgFIAEoAlIHbG95YWx0eRIoCg9wcm9mZXNzaW9uYWxpc2'
     '0YBiABKAJSD3Byb2Zlc3Npb25hbGlzbRIcCgloYXJzaG5lc3MYByABKAJSCWhhcnNobmVzcxIS'
