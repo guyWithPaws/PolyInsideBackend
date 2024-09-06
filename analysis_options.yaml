@@ -46,7 +46,6 @@ analyzer:
 linter:
   rules:
     # Public packages
-    public_member_api_docs: true
     lines_longer_than_80_chars: true
 
     # Enabling rules

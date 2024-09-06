@@ -17,7 +17,7 @@ class Users extends Table {
   IntColumn get id => integer()();
   TextColumn get name => text()();
   BlobColumn get avatar => blob()();
-  IntColumn get rating => integer().withDefault(Constant<int>(0))();
+  IntColumn get rating => integer().withDefault(const Constant<int>(0))();
 }
 
 class Reviews extends Table {

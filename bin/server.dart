@@ -1,10 +1,10 @@
 import 'dart:io';
+
 import 'package:drift/native.dart';
 import 'package:grpc/grpc.dart';
+import 'package:poly_inside_server/database/database.dart';
 import 'package:poly_inside_server/database/database_provider.dart';
 import 'package:poly_inside_server/service.dart';
-
-import 'package:poly_inside_server/database/database.dart';
 
 void main() async {
   final database = AppDatabase(NativeDatabase(File('db.sqlite')));

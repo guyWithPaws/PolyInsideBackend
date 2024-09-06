@@ -25,7 +25,7 @@ class GRPCService extends SearchServiceBase {
   Stream<Professor> getListProfessor(
       ServiceCall call, ListProfessorRequest request) async* {
     final professors = provider.getAllProfessors();
-    await for (var a in professors) {
+    await for (final a in professors) {
       yield* Stream.fromIterable(
         a.map(
           (e) => Professor()

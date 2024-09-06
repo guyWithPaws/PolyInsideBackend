@@ -5,9 +5,9 @@ import 'package:grpc/grpc.dart';
 import 'package:poly_inside_server/generated/protobufs/service.pbgrpc.dart';
 
 class ServerCredentials {
-  String ip;
-  int port;
-  Duration connectionTimeout;
+  final String ip;
+  final int port;
+  final Duration connectionTimeout;
 
   factory ServerCredentials.fromJSON(String fileName) {
     final jsonFile = File(fileName);
@@ -28,35 +28,15 @@ class ServerCredentials {
       this.connectionTimeout = const Duration(seconds: 30)});
 }
 
-class DatabaseManager {
-  static late final ClientChannel _clientChannel;
-  static late final SearchServiceClient _searchServiceClient;
-  static late final ServerCredentials _serverCredentials;
-
-  static SearchServiceClient initializeApp(String fileName) {
-    _serverCredentials = ServerCredentials.fromJSON(fileName);
-    try {
-      _clientChannel = ClientChannel(
-        _serverCredentials.ip,
-        port: _serverCredentials.port,
+void main(List<String> args) {
+  final credentials = ServerCredentials.fromJSON(r'secrets\credentials.json');
+  final channel = ClientChannel(
+        credentials.ip,
+        port: credentials.port,
         options: const ChannelOptions(
           credentials: ChannelCredentials.insecure(),
         ),
       );
-
-      _searchServiceClient = SearchServiceClient(_clientChannel,
-          options: CallOptions(timeout: _serverCredentials.connectionTimeout));
-      return _searchServiceClient;
-    } catch (error) {
-      throw Exception(
-          'Failed to connect to a server with ip ${_serverCredentials.ip}, port ${_serverCredentials.port}');
-    }
-  }
-}
-
-void main(List<String> args) {
-  final database = DatabaseManager.initializeApp('secrets\\credentials.json');
-
-  final professors = database.getListProfessor(ListProfessorRequest());
-  professors.forEach((element) => print(element.name));
+  final client = SearchServiceClient(channel);
+  final professors = client.getListProfessor(ListProfessorRequest());
 }
