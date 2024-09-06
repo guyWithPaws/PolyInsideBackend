@@ -1,16 +1,62 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:grpc/grpc.dart';
 import 'package:poly_inside_server/generated/protobufs/service.pbgrpc.dart';
 
+class ServerCredentials {
+  String ip;
+  int port;
+  Duration connectionTimeout;
+
+  factory ServerCredentials.fromJSON(String fileName) {
+    File jsonFile = File(fileName);
+    String jsonString = jsonFile.readAsStringSync();
+    Map<String, dynamic> json = jsonDecode(jsonString);
+    return ServerCredentials(
+      ip: json['ip'],
+      port: json['port'],
+      connectionTimeout: json.containsKey('connectionTimeout')
+          ? Duration(seconds: json['connectionTimeout'])
+          : const Duration(seconds: 30),
+    );
+  }
+
+  ServerCredentials(
+      {required this.ip,
+      required this.port,
+      this.connectionTimeout = const Duration(seconds: 30)});
+}
+
+class DatabaseManager {
+  static late final ClientChannel _clientChannel;
+  static late final SearchServiceClient _searchServiceClient;
+  static late final ServerCredentials _serverCredentials;
+
+  static SearchServiceClient initializeApp(String fileName) {
+    _serverCredentials = ServerCredentials.fromJSON(fileName);
+    try {
+      _clientChannel = ClientChannel(
+        _serverCredentials.ip,
+        port: _serverCredentials.port,
+        options: const ChannelOptions(
+          credentials: ChannelCredentials.insecure(),
+        ),
+      );
+
+      _searchServiceClient = SearchServiceClient(_clientChannel,
+          options: CallOptions(timeout: _serverCredentials.connectionTimeout));
+      return _searchServiceClient;
+    } catch (error) {
+      throw Exception(
+          'Failed to connect to a server with ip ${_serverCredentials.ip}, port ${_serverCredentials.port}');
+    }
+  }
+}
+
 void main(List<String> args) {
-  final channel = ClientChannel(
-    '127.0.0.1',
-    port: 8080,
-    options: const ChannelOptions(
-      credentials: ChannelCredentials.insecure(),
-    ),
-  );
-  final stub = SearchServiceClient(channel,
-    options: CallOptions(timeout: Duration(seconds: 30)));
-  final data = stub.getListProfessor(ListProfessorRequest());
-  data.forEach((element) => print(element.name));
+  final database = DatabaseManager.initializeApp('secrets\\credentials.json');
+
+  final professors = database.getListProfessor(ListProfessorRequest());
+  professors.forEach((element) => print(element.name));
 }

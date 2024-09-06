@@ -13,7 +13,7 @@ void main() async {
 
   await server.serve(port: 8080);
 
-  List<Professor> userList = await database.select(database.professors).get();
+  //List<Professor> userList = await database.select(database.professors).get();
 
-  print('length ${userList.length}');
+  //print('length ${userList.length}');
 }
