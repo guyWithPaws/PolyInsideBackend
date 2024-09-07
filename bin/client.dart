@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:core';
 import 'dart:io';
 
 import 'package:grpc/grpc.dart';
@@ -31,9 +32,16 @@ class ServerCredentials {
 
 Future<void> main(List<String> args) async {
   await Filter.instance.initializeAsyncLoaders();
-  const text =
-      'препод я люблю его очень сильно лучший наш слон';
-  print(Filter.instance.check(text));
+  const text = 'хуй препод я люблю его очень сильно лучший наш слон';
+
+  final stopwatch = Stopwatch()..start();
+  final result = Filter.instance.check(text);
+  stopwatch.stop();
+
+  print('Execution time: ${stopwatch.elapsed}');
+  print('Result: $result');
+
+  return;
 
   final credentials = ServerCredentials.fromJSON(r'secrets\credential.json');
   final channel = ClientChannel(
