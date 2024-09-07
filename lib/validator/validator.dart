@@ -1,16 +1,30 @@
 import 'dart:convert';
 import 'dart:io';
 
+enum FilterTypes {
+  accepted,
+  rejected;
+
+  String get name {
+    switch (this) {
+      case FilterTypes.accepted:
+        return 'Accepted';
+      case FilterTypes.rejected:
+        return 'Rejected';
+    }
+  }
+}
+
 class Filter {
   late String message;
-  late Map<String, String> alphabet;
-  late Set<String> badWords;
+  Map<String, String> alphabet = {};
+  List<String> badWords = [];
 
   List<String> words = [];
   final RegExp space = RegExp(r'\s+');
 
-  static File jsonFile = File('/data/alphabet.json');
-  static File txtFile = File('/data/bad_words.txt');
+  static File jsonFile = File(r'lib\validator\data\alphabet.json');
+  static File txtFile = File(r'lib\validator\data\bad_words.txt');
   static int numberOfBadWords = 4;
 
   Filter(this.message) {
@@ -22,18 +36,18 @@ class Filter {
     badWords = await loadWordsFromFile();
   }
 
-  Future<Set<String>> loadWordsFromFile() async {
-    final contents = await txtFile.readAsString();
-    final words = contents.split(RegExp(r'\W+'));
+  Future<List<String>> loadWordsFromFile() async {
+    final contents = await txtFile.readAsLines(encoding: const Utf8Codec());
+    //final words_ = contents.split(RegExp(r'\W+'));
     final badWords = <String>{};
 
-    for (final word in words) {
+    for (final word in contents) {
       if (word.isNotEmpty) {
         badWords.add(word.toLowerCase());
       }
     }
 
-    return badWords;
+    return badWords.toList();
   }
 
   Future<Map<String, String>> loadAlphabetFromJsonFile() async {
@@ -70,10 +84,11 @@ class Filter {
       for (final badWord in badWords) {
         regExpWord = RegExp(word);
         if (regExpWord.hasMatch(badWord)) {
-          return false;
+          print(FilterTypes.rejected.name);
+          return true;
         }
       }
     }
-    return true;
+    return false;
   }
 }

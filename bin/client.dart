@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:grpc/grpc.dart';
 import 'package:poly_inside_server/generated/protobufs/service.pbgrpc.dart';
+import 'package:poly_inside_server/validator/validator.dart';
 
 class ServerCredentials {
   final String ip;
@@ -30,9 +31,9 @@ class ServerCredentials {
 
 Future<void> main(List<String> args) async {
 
-  String test = 'хуй';
+  String test = 'Привет';
 
-  
+  print(Filter(test).toString());
 
 
   // final credentials = ServerCredentials.fromJSON(r'secrets\credential.json');
