@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:drift/drift.dart';
+
 enum FilterTypes {
   accepted,
   rejected;
@@ -27,8 +29,12 @@ class Filter {
   static File txtFile = File(r'lib\validator\data\bad_words.txt');
   static int numberOfBadWords = 4;
 
-  Filter(this.message) {
-    initializeAsyncLoaders().then((e) => messageAnalyzer());
+  Filter._();
+  static final Filter instance = Filter._();
+
+  String check(String message_) {
+    message = message_;
+    return messageAnalyzer();
   }
 
   Future<void> initializeAsyncLoaders() async {
@@ -38,7 +44,6 @@ class Filter {
 
   Future<List<String>> loadWordsFromFile() async {
     final contents = await txtFile.readAsLines(encoding: const Utf8Codec());
-    //final words_ = contents.split(RegExp(r'\W+'));
     final badWords = <String>{};
 
     for (final word in contents) {
@@ -66,9 +71,11 @@ class Filter {
     return alphabet;
   }
 
-  bool messageAnalyzer() {
+  String messageAnalyzer() {
     message = message.replaceAll(space, ' ');
 
+    
+    
     words = message
         .split(' ')
         .map((word) =>
@@ -78,17 +85,33 @@ class Filter {
     return searchBadWord();
   }
 
-  bool searchBadWord() {
-    var regExpWord = RegExp('');
+  String searchBadWord() {
+    var regExpBadWord = RegExp('');
     for (final word in words) {
       for (final badWord in badWords) {
-        regExpWord = RegExp(word);
-        if (regExpWord.hasMatch(badWord)) {
-          print(FilterTypes.rejected.name);
-          return true;
+        regExpBadWord = RegExp(badWord);
+        if (word.replaceAll(regExpBadWord, '').isEmpty) {
+          return FilterTypes.rejected.name;
         }
       }
     }
-    return false;
+    return FilterTypes.accepted.name;
   }
 }
+
+
+
+// ".": "",
+// ",": "",
+// "!": "",
+// "?": "",
+// "&": "",
+// ")": "",
+// "(": "",
+// "|": "",
+// "/": "",
+// "-": "",
+// "_": "",
+// "\"": "",
+// ";": "",
+// "®": ""
