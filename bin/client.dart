@@ -29,24 +29,30 @@ class ServerCredentials {
 }
 
 Future<void> main(List<String> args) async {
-  final credentials = ServerCredentials.fromJSON(r'secrets\credential.json');
-  final channel = ClientChannel(
-    credentials.ip,
-    port: credentials.port,
-    options: const ChannelOptions(
-      credentials: ChannelCredentials.insecure(),
-    ),
-  );
-  final client = SearchServiceClient(channel);
-  final data = client.addReview(
-    AddReviewRequest(
-      review: Review(
-        userId: 123456,
-        comment: 'etot prepod prosto imba',
-        professorId: 342123,
-        reviewId: 123456.toString() + DateTime.now().toUtc().toString(),
-      ),
-    ),
-  );
-  return;
+
+  String test = 'хуй';
+
+  
+
+
+  // final credentials = ServerCredentials.fromJSON(r'secrets\credential.json');
+  // final channel = ClientChannel(
+  //   credentials.ip,
+  //   port: credentials.port,
+  //   options: const ChannelOptions(
+  //     credentials: ChannelCredentials.insecure(),
+  //   ),
+  // );
+  // final client = SearchServiceClient(channel);
+  // final data = client.addReview(
+  //   AddReviewRequest(
+  //     review: Review(
+  //       userId: 123456,
+  //       comment: 'etot prepod prosto imba',
+  //       professorId: 342123,
+  //       reviewId: 123456.toString() + DateTime.now().toUtc().toString(),
+  //     ),
+  //   ),
+  // );
+  // return;
 }
