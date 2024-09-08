@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:core';
 import 'dart:io';
 
 import 'package:grpc/grpc.dart';
@@ -29,8 +30,19 @@ class ServerCredentials {
 }
 
 Future<void> main(List<String> args) async {
-  final credentials = ServerCredentials.fromJSON(
-      '/Users/guywithpaws/PolyInsideBackend/secrets/credentials.json');
+  await Filter.instance.initializeAsyncLoaders();
+  const text = 'препод пизда люблю его очень сильно лучший наш слон';
+
+  final stopwatch = Stopwatch()..start();
+  final result = Filter.instance.check(text);
+  stopwatch.stop();
+
+  print('Execution time: ${stopwatch.elapsed}');
+  print('Result: $result');
+
+  return;
+
+  final credentials = ServerCredentials.fromJSON(r'secrets\credential.json');
   final channel = ClientChannel(
     credentials.ip,
     port: credentials.port,
@@ -39,16 +51,5 @@ Future<void> main(List<String> args) async {
     ),
   );
   final client = SearchServiceClient(channel);
-  // await client.addProfile(
-  //   User(
-  //     id: 123,
-  //     name: 'Goxa',
-  //     avatar: [],
-  //     rating: 100,
-  //   ),
-  // );
-  await client.updateProfile(
-    User(id: 112312, name: 'Goxa', avatar: [], rating: 99),
   );
-  return;
 }
