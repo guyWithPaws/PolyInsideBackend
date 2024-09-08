@@ -3,7 +3,6 @@ import 'dart:io';
 
 import 'package:grpc/grpc.dart';
 import 'package:poly_inside_server/generated/protobufs/service.pbgrpc.dart';
-import 'package:poly_inside_server/validator/validator.dart';
 
 class ServerCredentials {
   final String ip;
@@ -30,30 +29,36 @@ class ServerCredentials {
 }
 
 Future<void> main(List<String> args) async {
-
-  String test = 'Привет';
-
-  print(Filter(test).toString());
-
-
-  // final credentials = ServerCredentials.fromJSON(r'secrets\credential.json');
-  // final channel = ClientChannel(
-  //   credentials.ip,
-  //   port: credentials.port,
-  //   options: const ChannelOptions(
-  //     credentials: ChannelCredentials.insecure(),
+  final credentials = ServerCredentials.fromJSON(
+      '/Users/guywithpaws/PolyInsideBackend/secrets/credentials.json');
+  final channel = ClientChannel(
+    credentials.ip,
+    port: credentials.port,
+    options: const ChannelOptions(
+      credentials: ChannelCredentials.insecure(),
+    ),
+  );
+  final client = SearchServiceClient(channel);
+  // await client.addProfile(
+  //   User(
+  //     id: 123,
+  //     name: 'Goxa',
+  //     avatar: [],
+  //     rating: 100,
   //   ),
   // );
-  // final client = SearchServiceClient(channel);
-  // final data = client.addReview(
-  //   AddReviewRequest(
-  //     review: Review(
-  //       userId: 123456,
-  //       comment: 'etot prepod prosto imba',
-  //       professorId: 342123,
-  //       reviewId: 123456.toString() + DateTime.now().toUtc().toString(),
-  //     ),
-  //   ),
-  // );
-  // return;
+  await client.addReview(
+    Review(
+      userId: 123,
+      professorId: 34,
+      comment: 'prepod dushka',
+      date: DateTime.now().toIso8601String(),
+      raiting: 98,
+      professionalism: 1,
+      loyalty: 1,
+      objectivity: 1,
+      
+    ),
+  );
+  return;
 }

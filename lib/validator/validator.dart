@@ -84,7 +84,7 @@ class Filter {
       for (final badWord in badWords) {
         regExpWord = RegExp(word);
         if (regExpWord.hasMatch(badWord)) {
-          print(FilterTypes.rejected.name);
+          // print(FilterTypes.rejected.name);
           return true;
         }
       }

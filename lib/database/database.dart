@@ -24,7 +24,6 @@ class Reviews extends Table {
   IntColumn get userId => integer()();
   IntColumn get professorId => integer()();
   TextColumn get comment => text()();
-  TextColumn get status => text()();
   RealColumn get objectivity => real()();
   RealColumn get loyalty => real()();
   RealColumn get professionalism => real()();

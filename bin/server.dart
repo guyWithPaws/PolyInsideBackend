@@ -5,7 +5,7 @@ import 'package:drift/native.dart';
 import 'package:grpc/grpc.dart';
 import 'package:l/l.dart';
 import 'package:poly_inside_server/database/database.dart';
-import 'package:poly_inside_server/database/database_provider.dart';
+import 'package:poly_inside_server/database/provider_impl.dart';
 import 'package:poly_inside_server/service.dart';
 
 Future<void> main() async {
@@ -16,9 +16,14 @@ Future<void> main() async {
         () async {
           final database = AppDatabase(NativeDatabase(File('db.sqlite')));
           final provider = DatabaseProviderImpl(database: database);
-          final server =
-              Server.create(services: [GRPCService(provider: provider)]);
-
+          final server = Server.create(
+            services: [
+              GRPCService(provider: provider),
+            ],
+            interceptors: [
+              
+            ]
+          );
           await server.serve(port: 8080);
           l.i('Server listening on ${server.port}');
         },
@@ -30,8 +35,10 @@ Future<void> main() async {
         },
       );
     },
-    const LogOptions(
+    LogOptions(
       outputInRelease: true,
+      messageFormatting: (message, logLevel, dateTime) =>
+          '${dateTime.toString().substring(0, dateTime.toString().length - 7)} | $message',
     ),
   );
 }

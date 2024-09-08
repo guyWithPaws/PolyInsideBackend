@@ -1,30 +1,25 @@
 // ignore: implementation_imports
 import 'package:grpc/src/server/call.dart';
-import 'package:poly_inside_server/database/database_provider.dart' as db;
+import 'package:l/l.dart';
+import 'package:poly_inside_server/database/provider.dart';
 import 'package:poly_inside_server/generated/protobufs/service.pbgrpc.dart';
 
 class GRPCService extends SearchServiceBase {
   GRPCService({required this.provider});
 
-  final db.DatabaseProviderImpl provider;
+  final DatabaseProvider provider;
 
   @override
-  Future<AddReviewResponse> addReview(
-      ServiceCall call, AddReviewRequest request) async {
-    await provider.sendReview(request.review);
+  Future<AddReviewResponse> addReview(ServiceCall call, Review request) async {
+    l.v('AddReview with ${request.toString()}');
+    await provider.sendReview(request);
     return AddReviewResponse();
-  }
-
-  @override
-  Future<ChangeStatusResponse> changeStatus(
-      ServiceCall call, ChangeStatusRequest request) {
-    // TODO: implement changeStatus
-    throw UnimplementedError();
   }
 
   @override
   Stream<Professor> getListProfessor(
       ServiceCall call, ListProfessorRequest request) async* {
+    l.v('GetListProfessor');
     final stream = provider.getAllProfessors();
     await for (final list in stream) {
       for (final professor in list) {
@@ -37,20 +32,17 @@ class GRPCService extends SearchServiceBase {
   }
 
   @override
-  Future<User> getUserInfoByUserId(
-          ServiceCall call, UserInfoByUserIdRequest request) async =>
-      throw UnimplementedError();
+  Future<User> getProfile(
+      ServiceCall call, UserInfoByUserIdRequest request) async {
+    l.v('GetProfile with ${request.id}');
 
-  @override
-  Stream<Review> pendingReviews(
-      ServiceCall call, PendingReviewsRequest request) {
-    // TODO: implement pendingReviews
-    throw UnimplementedError();
+    return await provider.getUserByUserId(request.id);
   }
 
   @override
   Stream<Review> getReviewsByProfessorId(
       ServiceCall call, ReviewsByProfessorIdRequest request) async* {
+    l.v('GetReviewsByProfessorId with ${request.id}');
     final stream = provider.getAllReviewsByProfessor(request.id);
     await for (final list in stream) {
       for (final e in list) {
@@ -62,11 +54,47 @@ class GRPCService extends SearchServiceBase {
   @override
   Stream<Review> getReviewsByUserId(
       ServiceCall call, ReviewsByUserIdRequest request) async* {
+    l.v('GetReviewsByUserId with ${request.id}');
+
     final stream = provider.getAllReviewByUser(request.id);
     await for (final list in stream) {
       for (final e in list) {
         yield e;
       }
     }
+  }
+
+  @override
+  Future<EditProfileResponse> editProfile(
+      ServiceCall call, User request) async {
+    l.v('EditProfile with ${request.toString()}');
+
+    await provider.updateUser(request);
+    return EditProfileResponse();
+  }
+
+  @override
+  Future<EditReviewResponse> editReview(
+      ServiceCall call, Review request) async {
+    l.v('EditReview with ${request.toString()}');
+    await provider.updateReview(request);
+    return EditReviewResponse();
+  }
+
+  @override
+  Future<DeleteReviewResponse> deleteReview(
+      ServiceCall call, DeleteReviewRequest request) async {
+    l.v('DeleteReview with ${request.toString()}');
+
+    await provider.deleteReview(request.reviewId);
+    return DeleteReviewResponse();
+  }
+
+  @override
+  Future<AddProfileResponse> addProfile(ServiceCall call, User request) async {
+    l.v('AddProfile with ${request.toString()}');
+
+    await provider.addUser(request);
+    return AddProfileResponse();
   }
 }

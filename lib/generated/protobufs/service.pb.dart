@@ -13,6 +13,184 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
+class DeleteReviewRequest extends $pb.GeneratedMessage {
+  factory DeleteReviewRequest({
+    $core.String? reviewId,
+  }) {
+    final $result = create();
+    if (reviewId != null) {
+      $result.reviewId = reviewId;
+    }
+    return $result;
+  }
+  DeleteReviewRequest._() : super();
+  factory DeleteReviewRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory DeleteReviewRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'DeleteReviewRequest', createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'reviewId', protoName: 'reviewId')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  DeleteReviewRequest clone() => DeleteReviewRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  DeleteReviewRequest copyWith(void Function(DeleteReviewRequest) updates) => super.copyWith((message) => updates(message as DeleteReviewRequest)) as DeleteReviewRequest;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static DeleteReviewRequest create() => DeleteReviewRequest._();
+  DeleteReviewRequest createEmptyInstance() => create();
+  static $pb.PbList<DeleteReviewRequest> createRepeated() => $pb.PbList<DeleteReviewRequest>();
+  @$core.pragma('dart2js:noInline')
+  static DeleteReviewRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<DeleteReviewRequest>(create);
+  static DeleteReviewRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get reviewId => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set reviewId($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasReviewId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearReviewId() => clearField(1);
+}
+
+class AddProfileResponse extends $pb.GeneratedMessage {
+  factory AddProfileResponse() => create();
+  AddProfileResponse._() : super();
+  factory AddProfileResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory AddProfileResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'AddProfileResponse', createEmptyInstance: create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  AddProfileResponse clone() => AddProfileResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  AddProfileResponse copyWith(void Function(AddProfileResponse) updates) => super.copyWith((message) => updates(message as AddProfileResponse)) as AddProfileResponse;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static AddProfileResponse create() => AddProfileResponse._();
+  AddProfileResponse createEmptyInstance() => create();
+  static $pb.PbList<AddProfileResponse> createRepeated() => $pb.PbList<AddProfileResponse>();
+  @$core.pragma('dart2js:noInline')
+  static AddProfileResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<AddProfileResponse>(create);
+  static AddProfileResponse? _defaultInstance;
+}
+
+class DeleteReviewResponse extends $pb.GeneratedMessage {
+  factory DeleteReviewResponse() => create();
+  DeleteReviewResponse._() : super();
+  factory DeleteReviewResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory DeleteReviewResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'DeleteReviewResponse', createEmptyInstance: create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  DeleteReviewResponse clone() => DeleteReviewResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  DeleteReviewResponse copyWith(void Function(DeleteReviewResponse) updates) => super.copyWith((message) => updates(message as DeleteReviewResponse)) as DeleteReviewResponse;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static DeleteReviewResponse create() => DeleteReviewResponse._();
+  DeleteReviewResponse createEmptyInstance() => create();
+  static $pb.PbList<DeleteReviewResponse> createRepeated() => $pb.PbList<DeleteReviewResponse>();
+  @$core.pragma('dart2js:noInline')
+  static DeleteReviewResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<DeleteReviewResponse>(create);
+  static DeleteReviewResponse? _defaultInstance;
+}
+
+class EditReviewResponse extends $pb.GeneratedMessage {
+  factory EditReviewResponse() => create();
+  EditReviewResponse._() : super();
+  factory EditReviewResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory EditReviewResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EditReviewResponse', createEmptyInstance: create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  EditReviewResponse clone() => EditReviewResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  EditReviewResponse copyWith(void Function(EditReviewResponse) updates) => super.copyWith((message) => updates(message as EditReviewResponse)) as EditReviewResponse;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static EditReviewResponse create() => EditReviewResponse._();
+  EditReviewResponse createEmptyInstance() => create();
+  static $pb.PbList<EditReviewResponse> createRepeated() => $pb.PbList<EditReviewResponse>();
+  @$core.pragma('dart2js:noInline')
+  static EditReviewResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<EditReviewResponse>(create);
+  static EditReviewResponse? _defaultInstance;
+}
+
+class EditProfileResponse extends $pb.GeneratedMessage {
+  factory EditProfileResponse() => create();
+  EditProfileResponse._() : super();
+  factory EditProfileResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory EditProfileResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EditProfileResponse', createEmptyInstance: create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  EditProfileResponse clone() => EditProfileResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  EditProfileResponse copyWith(void Function(EditProfileResponse) updates) => super.copyWith((message) => updates(message as EditProfileResponse)) as EditProfileResponse;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static EditProfileResponse create() => EditProfileResponse._();
+  EditProfileResponse createEmptyInstance() => create();
+  static $pb.PbList<EditProfileResponse> createRepeated() => $pb.PbList<EditProfileResponse>();
+  @$core.pragma('dart2js:noInline')
+  static EditProfileResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<EditProfileResponse>(create);
+  static EditProfileResponse? _defaultInstance;
+}
+
 class ChangeStatusRequest extends $pb.GeneratedMessage {
   factory ChangeStatusRequest({
     $core.int? id,
@@ -77,70 +255,6 @@ class ChangeStatusRequest extends $pb.GeneratedMessage {
   void clearStatus() => clearField(2);
 }
 
-class ChangeStatusResponse extends $pb.GeneratedMessage {
-  factory ChangeStatusResponse() => create();
-  ChangeStatusResponse._() : super();
-  factory ChangeStatusResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory ChangeStatusResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ChangeStatusResponse', createEmptyInstance: create)
-    ..hasRequiredFields = false
-  ;
-
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-  'Will be removed in next major version')
-  ChangeStatusResponse clone() => ChangeStatusResponse()..mergeFromMessage(this);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-  'Will be removed in next major version')
-  ChangeStatusResponse copyWith(void Function(ChangeStatusResponse) updates) => super.copyWith((message) => updates(message as ChangeStatusResponse)) as ChangeStatusResponse;
-
-  $pb.BuilderInfo get info_ => _i;
-
-  @$core.pragma('dart2js:noInline')
-  static ChangeStatusResponse create() => ChangeStatusResponse._();
-  ChangeStatusResponse createEmptyInstance() => create();
-  static $pb.PbList<ChangeStatusResponse> createRepeated() => $pb.PbList<ChangeStatusResponse>();
-  @$core.pragma('dart2js:noInline')
-  static ChangeStatusResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ChangeStatusResponse>(create);
-  static ChangeStatusResponse? _defaultInstance;
-}
-
-class PendingReviewsRequest extends $pb.GeneratedMessage {
-  factory PendingReviewsRequest() => create();
-  PendingReviewsRequest._() : super();
-  factory PendingReviewsRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory PendingReviewsRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'PendingReviewsRequest', createEmptyInstance: create)
-    ..hasRequiredFields = false
-  ;
-
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-  'Will be removed in next major version')
-  PendingReviewsRequest clone() => PendingReviewsRequest()..mergeFromMessage(this);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-  'Will be removed in next major version')
-  PendingReviewsRequest copyWith(void Function(PendingReviewsRequest) updates) => super.copyWith((message) => updates(message as PendingReviewsRequest)) as PendingReviewsRequest;
-
-  $pb.BuilderInfo get info_ => _i;
-
-  @$core.pragma('dart2js:noInline')
-  static PendingReviewsRequest create() => PendingReviewsRequest._();
-  PendingReviewsRequest createEmptyInstance() => create();
-  static $pb.PbList<PendingReviewsRequest> createRepeated() => $pb.PbList<PendingReviewsRequest>();
-  @$core.pragma('dart2js:noInline')
-  static PendingReviewsRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<PendingReviewsRequest>(create);
-  static PendingReviewsRequest? _defaultInstance;
-}
-
 class UserInfoByUserIdRequest extends $pb.GeneratedMessage {
   factory UserInfoByUserIdRequest({
     $core.int? id,
@@ -189,58 +303,6 @@ class UserInfoByUserIdRequest extends $pb.GeneratedMessage {
   $core.bool hasId() => $_has(0);
   @$pb.TagNumber(1)
   void clearId() => clearField(1);
-}
-
-class AddReviewRequest extends $pb.GeneratedMessage {
-  factory AddReviewRequest({
-    Review? review,
-  }) {
-    final $result = create();
-    if (review != null) {
-      $result.review = review;
-    }
-    return $result;
-  }
-  AddReviewRequest._() : super();
-  factory AddReviewRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory AddReviewRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'AddReviewRequest', createEmptyInstance: create)
-    ..aOM<Review>(1, _omitFieldNames ? '' : 'review', subBuilder: Review.create)
-    ..hasRequiredFields = false
-  ;
-
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-  'Will be removed in next major version')
-  AddReviewRequest clone() => AddReviewRequest()..mergeFromMessage(this);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-  'Will be removed in next major version')
-  AddReviewRequest copyWith(void Function(AddReviewRequest) updates) => super.copyWith((message) => updates(message as AddReviewRequest)) as AddReviewRequest;
-
-  $pb.BuilderInfo get info_ => _i;
-
-  @$core.pragma('dart2js:noInline')
-  static AddReviewRequest create() => AddReviewRequest._();
-  AddReviewRequest createEmptyInstance() => create();
-  static $pb.PbList<AddReviewRequest> createRepeated() => $pb.PbList<AddReviewRequest>();
-  @$core.pragma('dart2js:noInline')
-  static AddReviewRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<AddReviewRequest>(create);
-  static AddReviewRequest? _defaultInstance;
-
-  @$pb.TagNumber(1)
-  Review get review => $_getN(0);
-  @$pb.TagNumber(1)
-  set review(Review v) { setField(1, v); }
-  @$pb.TagNumber(1)
-  $core.bool hasReview() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearReview() => clearField(1);
-  @$pb.TagNumber(1)
-  Review ensureReview() => $_ensure(0);
 }
 
 class AddReviewResponse extends $pb.GeneratedMessage {
@@ -588,7 +650,6 @@ class Review extends $pb.GeneratedMessage {
     $core.double? harshness,
     $core.String? date,
     $core.int? raiting,
-    $core.String? status,
     $core.int? professorId,
     $core.int? rating,
   }) {
@@ -620,9 +681,6 @@ class Review extends $pb.GeneratedMessage {
     if (raiting != null) {
       $result.raiting = raiting;
     }
-    if (status != null) {
-      $result.status = status;
-    }
     if (professorId != null) {
       $result.professorId = professorId;
     }
@@ -645,7 +703,6 @@ class Review extends $pb.GeneratedMessage {
     ..a<$core.double>(7, _omitFieldNames ? '' : 'harshness', $pb.PbFieldType.OF)
     ..aOS(8, _omitFieldNames ? '' : 'date')
     ..a<$core.int>(9, _omitFieldNames ? '' : 'raiting', $pb.PbFieldType.O3)
-    ..aOS(10, _omitFieldNames ? '' : 'status')
     ..a<$core.int>(11, _omitFieldNames ? '' : 'professorId', $pb.PbFieldType.O3)
     ..a<$core.int>(13, _omitFieldNames ? '' : 'rating', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
@@ -753,30 +810,21 @@ class Review extends $pb.GeneratedMessage {
   @$pb.TagNumber(9)
   void clearRaiting() => clearField(9);
 
-  @$pb.TagNumber(10)
-  $core.String get status => $_getSZ(9);
-  @$pb.TagNumber(10)
-  set status($core.String v) { $_setString(9, v); }
-  @$pb.TagNumber(10)
-  $core.bool hasStatus() => $_has(9);
-  @$pb.TagNumber(10)
-  void clearStatus() => clearField(10);
-
   @$pb.TagNumber(11)
-  $core.int get professorId => $_getIZ(10);
+  $core.int get professorId => $_getIZ(9);
   @$pb.TagNumber(11)
-  set professorId($core.int v) { $_setSignedInt32(10, v); }
+  set professorId($core.int v) { $_setSignedInt32(9, v); }
   @$pb.TagNumber(11)
-  $core.bool hasProfessorId() => $_has(10);
+  $core.bool hasProfessorId() => $_has(9);
   @$pb.TagNumber(11)
   void clearProfessorId() => clearField(11);
 
   @$pb.TagNumber(13)
-  $core.int get rating => $_getIZ(11);
+  $core.int get rating => $_getIZ(10);
   @$pb.TagNumber(13)
-  set rating($core.int v) { $_setSignedInt32(11, v); }
+  set rating($core.int v) { $_setSignedInt32(10, v); }
   @$pb.TagNumber(13)
-  $core.bool hasRating() => $_has(11);
+  $core.bool hasRating() => $_has(10);
   @$pb.TagNumber(13)
   void clearRating() => clearField(13);
 }

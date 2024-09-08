@@ -1,32 +1,38 @@
 syntax = "proto3";
 
 service SearchService {
-  rpc GetUserInfoByUserId(UserInfoByUserIdRequest) returns (User);
+
+  rpc AddProfile (User) returns (AddProfileResponse);
+  rpc EditProfile (User) returns (EditProfileResponse);
+  rpc GetProfile(UserInfoByUserIdRequest) returns (User);
   rpc GetListProfessor(ListProfessorRequest) returns (stream Professor);
+
+  rpc AddReview(Review) returns (AddReviewResponse);
   rpc GetReviewsByProfessorId(ReviewsByProfessorIdRequest) returns (stream Review);
   rpc GetReviewsByUserId(ReviewsByUserIdRequest) returns (stream Review);
-  rpc AddReview(AddReviewRequest) returns (AddReviewResponse);
-
-  rpc PendingReviews(PendingReviewsRequest) returns (stream Review);
-  rpc ChangeStatus(ChangeStatusRequest) returns (ChangeStatusResponse);
+  rpc EditReview(Review) returns (EditReviewResponse);
+  rpc DeleteReview (DeleteReviewRequest) returns (DeleteReviewResponse);
 }
+
+message DeleteReviewRequest{
+  string reviewId = 1;
+}
+
+message AddProfileResponse {}
+
+message DeleteReviewResponse {}
+
+message EditReviewResponse {}
+
+message EditProfileResponse {}
 
 message ChangeStatusRequest{
   int32 id = 1;
   string status = 2;
 }
 
-message ChangeStatusResponse {
-  
-}
-
-message PendingReviewsRequest {}
 message UserInfoByUserIdRequest {
   int32 id = 1;
-}
-
-message AddReviewRequest{
-  Review review = 1;
 }
 
 message AddReviewResponse{}
@@ -54,7 +60,6 @@ message Professor {
   string avatar = 3;
 }
 
-
 message Review {
   string review_id = 1;
   int32 user_id = 2;
@@ -65,7 +70,6 @@ message Review {
   float harshness = 7;
   string date = 8;
   int32 raiting = 9;
-  string status = 10;
   int32 professor_id = 11;
   int32 rating = 13;
 }
