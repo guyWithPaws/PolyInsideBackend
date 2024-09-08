@@ -13,4 +13,7 @@ This project is a unique WebApp, that allows you to view reviews on professors/w
 + id юзеров - Telegramm id + текущая дата в UNIX
 + нужны тестики как минимум для Validator'a
 + парсер преподов можно переписать на dart 
-
++ покрытие gRPC сервиса тестами + покрытие тестами базы данных
++ gRPC interceptors - добавить для отслеживания ошибок
++ предусмотреть миграцию базы в случае изменения 
++ добавить Sentry (?)
