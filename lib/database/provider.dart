@@ -7,7 +7,7 @@ abstract interface class DatabaseProvider {
   Stream<List<Review>> getAllReviewsByProfessor(int professorId);
   Stream<List<Professor>> findProfessorByName(String name);
   Stream<List<Review>> getAllReviewByUser(int userId);
-  Future<int> sendReview(Review review);
+  Future<int> addReview(Review review);
   Future<bool> updateReview(Review review);
   Future<bool> updateUser(User user);
   Future<int> deleteReview(String reviewId);

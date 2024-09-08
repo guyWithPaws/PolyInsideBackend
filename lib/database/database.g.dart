@@ -150,7 +150,7 @@ class $UsersTable extends Users with TableInfo<$UsersTable, User> {
   @override
   late final GeneratedColumn<int> id = GeneratedColumn<int>(
       'id', aliasedName, false,
-      type: DriftSqlType.int, requiredDuringInsert: true);
+      type: DriftSqlType.int, requiredDuringInsert: false);
   static const VerificationMeta _nameMeta = const VerificationMeta('name');
   @override
   late final GeneratedColumn<String> name = GeneratedColumn<String>(
@@ -182,8 +182,6 @@ class $UsersTable extends Users with TableInfo<$UsersTable, User> {
     final data = instance.toColumns(true);
     if (data.containsKey('id')) {
       context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
-    } else if (isInserting) {
-      context.missing(_idMeta);
     }
     if (data.containsKey('name')) {
       context.handle(
@@ -205,7 +203,7 @@ class $UsersTable extends Users with TableInfo<$UsersTable, User> {
   }
 
   @override
-  Set<GeneratedColumn> get $primaryKey => const {};
+  Set<GeneratedColumn> get $primaryKey => {id};
   @override
   User map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
@@ -232,36 +230,30 @@ class UsersCompanion extends UpdateCompanion<User> {
   final Value<String> name;
   final Value<Uint8List> avatar;
   final Value<int> rating;
-  final Value<int> rowid;
   const UsersCompanion({
     this.id = const Value.absent(),
     this.name = const Value.absent(),
     this.avatar = const Value.absent(),
     this.rating = const Value.absent(),
-    this.rowid = const Value.absent(),
   });
   UsersCompanion.insert({
-    required int id,
+    this.id = const Value.absent(),
     required String name,
     required Uint8List avatar,
     this.rating = const Value.absent(),
-    this.rowid = const Value.absent(),
-  })  : id = Value(id),
-        name = Value(name),
+  })  : name = Value(name),
         avatar = Value(avatar);
   static Insertable<User> custom({
     Expression<int>? id,
     Expression<String>? name,
     Expression<Uint8List>? avatar,
     Expression<int>? rating,
-    Expression<int>? rowid,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
       if (name != null) 'name': name,
       if (avatar != null) 'avatar': avatar,
       if (rating != null) 'rating': rating,
-      if (rowid != null) 'rowid': rowid,
     });
   }
 
@@ -269,14 +261,12 @@ class UsersCompanion extends UpdateCompanion<User> {
       {Value<int>? id,
       Value<String>? name,
       Value<Uint8List>? avatar,
-      Value<int>? rating,
-      Value<int>? rowid}) {
+      Value<int>? rating}) {
     return UsersCompanion(
       id: id ?? this.id,
       name: name ?? this.name,
       avatar: avatar ?? this.avatar,
       rating: rating ?? this.rating,
-      rowid: rowid ?? this.rowid,
     );
   }
 
@@ -295,9 +285,6 @@ class UsersCompanion extends UpdateCompanion<User> {
     if (rating.present) {
       map['rating'] = Variable<int>(rating.value);
     }
-    if (rowid.present) {
-      map['rowid'] = Variable<int>(rowid.value);
-    }
     return map;
   }
 
@@ -307,8 +294,7 @@ class UsersCompanion extends UpdateCompanion<User> {
           ..write('id: $id, ')
           ..write('name: $name, ')
           ..write('avatar: $avatar, ')
-          ..write('rating: $rating, ')
-          ..write('rowid: $rowid')
+          ..write('rating: $rating')
           ..write(')'))
         .toString();
   }
@@ -323,9 +309,7 @@ class $ReviewsTable extends Reviews with TableInfo<$ReviewsTable, Review> {
   @override
   late final GeneratedColumn<String> id = GeneratedColumn<String>(
       'id', aliasedName, false,
-      type: DriftSqlType.string,
-      requiredDuringInsert: true,
-      defaultConstraints: GeneratedColumn.constraintIsAlways('UNIQUE'));
+      type: DriftSqlType.string, requiredDuringInsert: true);
   static const VerificationMeta _userIdMeta = const VerificationMeta('userId');
   @override
   late final GeneratedColumn<int> userId = GeneratedColumn<int>(
@@ -469,7 +453,7 @@ class $ReviewsTable extends Reviews with TableInfo<$ReviewsTable, Review> {
   }
 
   @override
-  Set<GeneratedColumn> get $primaryKey => const {};
+  Set<GeneratedColumn> get $primaryKey => {id};
   @override
   Review map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
@@ -782,18 +766,16 @@ typedef $$ProfessorsTableProcessedTableManager = ProcessedTableManager<
     Professor,
     PrefetchHooks Function()>;
 typedef $$UsersTableCreateCompanionBuilder = UsersCompanion Function({
-  required int id,
+  Value<int> id,
   required String name,
   required Uint8List avatar,
   Value<int> rating,
-  Value<int> rowid,
 });
 typedef $$UsersTableUpdateCompanionBuilder = UsersCompanion Function({
   Value<int> id,
   Value<String> name,
   Value<Uint8List> avatar,
   Value<int> rating,
-  Value<int> rowid,
 });
 
 class $$UsersTableFilterComposer
@@ -868,28 +850,24 @@ class $$UsersTableTableManager extends RootTableManager<
             Value<String> name = const Value.absent(),
             Value<Uint8List> avatar = const Value.absent(),
             Value<int> rating = const Value.absent(),
-            Value<int> rowid = const Value.absent(),
           }) =>
               UsersCompanion(
             id: id,
             name: name,
             avatar: avatar,
             rating: rating,
-            rowid: rowid,
           ),
           createCompanionCallback: ({
-            required int id,
+            Value<int> id = const Value.absent(),
             required String name,
             required Uint8List avatar,
             Value<int> rating = const Value.absent(),
-            Value<int> rowid = const Value.absent(),
           }) =>
               UsersCompanion.insert(
             id: id,
             name: name,
             avatar: avatar,
             rating: rating,
-            rowid: rowid,
           ),
           withReferenceMapper: (p0) => p0
               .map((e) => (e.readTable(table), BaseReferences(db, table, e)))

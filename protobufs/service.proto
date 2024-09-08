@@ -18,7 +18,9 @@ message DeleteReviewRequest{
   string reviewId = 1;
 }
 
-message AddProfileResponse {}
+message AddProfileResponse {
+  int32 statusCode = 1;
+}
 
 message DeleteReviewResponse {}
 

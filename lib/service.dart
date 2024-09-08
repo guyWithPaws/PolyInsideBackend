@@ -12,7 +12,7 @@ class GRPCService extends SearchServiceBase {
   @override
   Future<AddReviewResponse> addReview(ServiceCall call, Review request) async {
     l.v('AddReview with ${request.toString()}');
-    await provider.sendReview(request);
+    await provider.addReview(request);
     return AddReviewResponse();
   }
 

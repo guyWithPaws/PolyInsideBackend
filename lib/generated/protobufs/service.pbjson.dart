@@ -28,11 +28,14 @@ final $typed_data.Uint8List deleteReviewRequestDescriptor = $convert.base64Decod
 @$core.Deprecated('Use addProfileResponseDescriptor instead')
 const AddProfileResponse$json = {
   '1': 'AddProfileResponse',
+  '2': [
+    {'1': 'statusCode', '3': 1, '4': 1, '5': 5, '10': 'statusCode'},
+  ],
 };
 
 /// Descriptor for `AddProfileResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List addProfileResponseDescriptor = $convert.base64Decode(
-    'ChJBZGRQcm9maWxlUmVzcG9uc2U=');
+    'ChJBZGRQcm9maWxlUmVzcG9uc2USHgoKc3RhdHVzQ29kZRgBIAEoBVIKc3RhdHVzQ29kZQ==');
 
 @$core.Deprecated('Use deleteReviewResponseDescriptor instead')
 const DeleteReviewResponse$json = {

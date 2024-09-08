@@ -30,10 +30,10 @@ class DatabaseProviderImpl implements DatabaseProvider {
           .watch();
 
   @override
-  Future<int> sendReview(Review review) async =>
+  Future<int> addReview(Review review) async =>
       await database.into(database.reviews).insert(
             ReviewsCompanion(
-              id: Value(review.reviewId),
+              id: Value('${review.userId}${review.date}'),
               rating: Value(review.rating),
               professorId: Value(review.professorId),
               professionalism: Value(review.professionalism),

@@ -47,18 +47,8 @@ Future<void> main(List<String> args) async {
   //     rating: 100,
   //   ),
   // );
-  await client.addReview(
-    Review(
-      userId: 123,
-      professorId: 34,
-      comment: 'prepod dushka',
-      date: DateTime.now().toIso8601String(),
-      raiting: 98,
-      professionalism: 1,
-      loyalty: 1,
-      objectivity: 1,
-      
-    ),
+  await client.editProfile(
+    User(id: 112312, name: 'Goxa', avatar: [], rating: 99),
   );
   return;
 }
