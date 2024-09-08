@@ -462,6 +462,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.1.0"
+  schedules:
+    dependency: "direct main"
+    description:
+      name: schedules
+      sha256: "2bb7883c91e385529d2f1570f68f4505c1eaaa975083c97ac2453e2e50360215"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.5"
   shelf:
     dependency: transitive
     description:
