@@ -7,6 +7,7 @@ import 'package:l/l.dart';
 import 'package:poly_inside_server/database/database.dart';
 import 'package:poly_inside_server/database/provider_impl.dart';
 import 'package:poly_inside_server/service.dart';
+import 'package:poly_inside_server/validator/validator.dart';
 
 Future<void> main() async {
   final file = File('server.log');
@@ -14,6 +15,7 @@ Future<void> main() async {
     () async {
       await runZonedGuarded(
         () async {
+          await Filter.instance.initializeAsyncLoaders();
           final database = AppDatabase(NativeDatabase(File('db.sqlite')));
           final provider = DatabaseProviderImpl(database: database);
           final server = Server.create(

@@ -3,6 +3,7 @@ import 'package:grpc/src/server/call.dart';
 import 'package:l/l.dart';
 import 'package:poly_inside_server/database/provider.dart';
 import 'package:poly_inside_server/generated/protobufs/service.pbgrpc.dart';
+import 'package:poly_inside_server/validator/validator.dart';
 
 class GRPCService extends SearchServiceBase {
   GRPCService({required this.provider});
@@ -12,8 +13,11 @@ class GRPCService extends SearchServiceBase {
   @override
   Future<AddReviewResponse> addReview(ServiceCall call, Review request) async {
     l.v('AddReview with ${request.toString()}');
-    await provider.addReview(request);
-    return AddReviewResponse();
+    final passed = Filter.instance.check(request.comment);
+    if (passed) {
+      await provider.addReview(request);
+    }
+    return AddReviewResponse()..passed = passed;
   }
 
   @override

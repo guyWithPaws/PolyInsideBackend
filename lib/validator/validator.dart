@@ -28,7 +28,7 @@ class Filter {
   Filter._();
   static final Filter instance = Filter._();
 
-  String check(String userMessage) {
+  bool check(String userMessage) {
     originalMessage = userMessage;
     messageWords = originalMessage.makeBeautiful();
     return messageAnalyzer();
@@ -68,7 +68,7 @@ class Filter {
     return alphabet;
   }
 
-  String messageAnalyzer() {
+  bool messageAnalyzer() {
     messageWords = messageWords
         .map((word) =>
             word.split('').map((letter) => alphabet[letter] ?? letter).join())
@@ -87,17 +87,17 @@ class Filter {
     return searchBadWord();
   }
 
-  String searchBadWord() {
+  bool searchBadWord() {
     var regExpBadWord = RegExp('');
     for (final word in messageWords) {
       for (final badWord in badWords) {
         regExpBadWord = RegExp(badWord);
         if (word.replaceAll(regExpBadWord, '').isEmpty) {
-          return FilterTypes.rejected.name;
+          return false;
         }
       }
     }
-    return FilterTypes.accepted.name;
+    return true;
   }
 }
 

@@ -18,9 +18,7 @@ message DeleteReviewRequest{
   string reviewId = 1;
 }
 
-message AddProfileResponse {
-  int32 statusCode = 1;
-}
+message AddProfileResponse {}
 
 message DeleteReviewResponse {}
 
@@ -37,7 +35,9 @@ message UserInfoByUserIdRequest {
   int32 id = 1;
 }
 
-message AddReviewResponse{}
+message AddReviewResponse{
+  bool passed = 1;
+}
 
 message ReviewsByUserIdRequest{
   int32 id = 1;

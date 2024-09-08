@@ -64,21 +64,12 @@ class DeleteReviewRequest extends $pb.GeneratedMessage {
 }
 
 class AddProfileResponse extends $pb.GeneratedMessage {
-  factory AddProfileResponse({
-    $core.int? statusCode,
-  }) {
-    final $result = create();
-    if (statusCode != null) {
-      $result.statusCode = statusCode;
-    }
-    return $result;
-  }
+  factory AddProfileResponse() => create();
   AddProfileResponse._() : super();
   factory AddProfileResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory AddProfileResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'AddProfileResponse', createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'statusCode', $pb.PbFieldType.O3, protoName: 'statusCode')
     ..hasRequiredFields = false
   ;
 
@@ -102,15 +93,6 @@ class AddProfileResponse extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static AddProfileResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<AddProfileResponse>(create);
   static AddProfileResponse? _defaultInstance;
-
-  @$pb.TagNumber(1)
-  $core.int get statusCode => $_getIZ(0);
-  @$pb.TagNumber(1)
-  set statusCode($core.int v) { $_setSignedInt32(0, v); }
-  @$pb.TagNumber(1)
-  $core.bool hasStatusCode() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearStatusCode() => clearField(1);
 }
 
 class DeleteReviewResponse extends $pb.GeneratedMessage {
@@ -324,12 +306,21 @@ class UserInfoByUserIdRequest extends $pb.GeneratedMessage {
 }
 
 class AddReviewResponse extends $pb.GeneratedMessage {
-  factory AddReviewResponse() => create();
+  factory AddReviewResponse({
+    $core.bool? passed,
+  }) {
+    final $result = create();
+    if (passed != null) {
+      $result.passed = passed;
+    }
+    return $result;
+  }
   AddReviewResponse._() : super();
   factory AddReviewResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
   factory AddReviewResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'AddReviewResponse', createEmptyInstance: create)
+    ..aOB(1, _omitFieldNames ? '' : 'passed')
     ..hasRequiredFields = false
   ;
 
@@ -353,6 +344,15 @@ class AddReviewResponse extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static AddReviewResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<AddReviewResponse>(create);
   static AddReviewResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.bool get passed => $_getBF(0);
+  @$pb.TagNumber(1)
+  set passed($core.bool v) { $_setBool(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasPassed() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearPassed() => clearField(1);
 }
 
 class ReviewsByUserIdRequest extends $pb.GeneratedMessage {

@@ -27,3 +27,6 @@ server:
 codegen:
 	@protoc --dart_out=grpc:lib/generated protobufs/service.proto
 	@dart run build_runner build
+
+docker:
+	

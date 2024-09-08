@@ -28,14 +28,11 @@ final $typed_data.Uint8List deleteReviewRequestDescriptor = $convert.base64Decod
 @$core.Deprecated('Use addProfileResponseDescriptor instead')
 const AddProfileResponse$json = {
   '1': 'AddProfileResponse',
-  '2': [
-    {'1': 'statusCode', '3': 1, '4': 1, '5': 5, '10': 'statusCode'},
-  ],
 };
 
 /// Descriptor for `AddProfileResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List addProfileResponseDescriptor = $convert.base64Decode(
-    'ChJBZGRQcm9maWxlUmVzcG9uc2USHgoKc3RhdHVzQ29kZRgBIAEoBVIKc3RhdHVzQ29kZQ==');
+    'ChJBZGRQcm9maWxlUmVzcG9uc2U=');
 
 @$core.Deprecated('Use deleteReviewResponseDescriptor instead')
 const DeleteReviewResponse$json = {
@@ -93,11 +90,14 @@ final $typed_data.Uint8List userInfoByUserIdRequestDescriptor = $convert.base64D
 @$core.Deprecated('Use addReviewResponseDescriptor instead')
 const AddReviewResponse$json = {
   '1': 'AddReviewResponse',
+  '2': [
+    {'1': 'passed', '3': 1, '4': 1, '5': 8, '10': 'passed'},
+  ],
 };
 
 /// Descriptor for `AddReviewResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List addReviewResponseDescriptor = $convert.base64Decode(
-    'ChFBZGRSZXZpZXdSZXNwb25zZQ==');
+    'ChFBZGRSZXZpZXdSZXNwb25zZRIWCgZwYXNzZWQYASABKAhSBnBhc3NlZA==');
 
 @$core.Deprecated('Use reviewsByUserIdRequestDescriptor instead')
 const ReviewsByUserIdRequest$json = {
