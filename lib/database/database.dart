@@ -16,21 +16,28 @@ class Users extends Table {
   TextColumn get name => text()();
   BlobColumn get avatar => blob()();
   IntColumn get rating => integer().withDefault(const Constant<int>(0))();
+
+
+  @override
+  // TODO: implement primaryKey
+  Set<Column<Object>>? get primaryKey => {id};
 }
 
 @UseRowClass(Review)
 class Reviews extends Table {
-  TextColumn get id => text().unique()();
+  TextColumn get id => text()();
   IntColumn get userId => integer()();
   IntColumn get professorId => integer()();
   TextColumn get comment => text()();
-  TextColumn get status => text()();
   RealColumn get objectivity => real()();
   RealColumn get loyalty => real()();
   RealColumn get professionalism => real()();
   RealColumn get harshness => real()();
   TextColumn get date => text()();
   IntColumn get rating => integer()();
+
+  @override
+  Set<Column<Object>>? get primaryKey => {id};
 }
 
 @DriftDatabase(tables: [Professors, Users, Reviews])

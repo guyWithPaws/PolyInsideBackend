@@ -150,7 +150,7 @@ class $UsersTable extends Users with TableInfo<$UsersTable, User> {
   @override
   late final GeneratedColumn<int> id = GeneratedColumn<int>(
       'id', aliasedName, false,
-      type: DriftSqlType.int, requiredDuringInsert: true);
+      type: DriftSqlType.int, requiredDuringInsert: false);
   static const VerificationMeta _nameMeta = const VerificationMeta('name');
   @override
   late final GeneratedColumn<String> name = GeneratedColumn<String>(
@@ -182,8 +182,6 @@ class $UsersTable extends Users with TableInfo<$UsersTable, User> {
     final data = instance.toColumns(true);
     if (data.containsKey('id')) {
       context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
-    } else if (isInserting) {
-      context.missing(_idMeta);
     }
     if (data.containsKey('name')) {
       context.handle(
@@ -205,7 +203,7 @@ class $UsersTable extends Users with TableInfo<$UsersTable, User> {
   }
 
   @override
-  Set<GeneratedColumn> get $primaryKey => const {};
+  Set<GeneratedColumn> get $primaryKey => {id};
   @override
   User map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
@@ -232,36 +230,30 @@ class UsersCompanion extends UpdateCompanion<User> {
   final Value<String> name;
   final Value<Uint8List> avatar;
   final Value<int> rating;
-  final Value<int> rowid;
   const UsersCompanion({
     this.id = const Value.absent(),
     this.name = const Value.absent(),
     this.avatar = const Value.absent(),
     this.rating = const Value.absent(),
-    this.rowid = const Value.absent(),
   });
   UsersCompanion.insert({
-    required int id,
+    this.id = const Value.absent(),
     required String name,
     required Uint8List avatar,
     this.rating = const Value.absent(),
-    this.rowid = const Value.absent(),
-  })  : id = Value(id),
-        name = Value(name),
+  })  : name = Value(name),
         avatar = Value(avatar);
   static Insertable<User> custom({
     Expression<int>? id,
     Expression<String>? name,
     Expression<Uint8List>? avatar,
     Expression<int>? rating,
-    Expression<int>? rowid,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
       if (name != null) 'name': name,
       if (avatar != null) 'avatar': avatar,
       if (rating != null) 'rating': rating,
-      if (rowid != null) 'rowid': rowid,
     });
   }
 
@@ -269,14 +261,12 @@ class UsersCompanion extends UpdateCompanion<User> {
       {Value<int>? id,
       Value<String>? name,
       Value<Uint8List>? avatar,
-      Value<int>? rating,
-      Value<int>? rowid}) {
+      Value<int>? rating}) {
     return UsersCompanion(
       id: id ?? this.id,
       name: name ?? this.name,
       avatar: avatar ?? this.avatar,
       rating: rating ?? this.rating,
-      rowid: rowid ?? this.rowid,
     );
   }
 
@@ -295,9 +285,6 @@ class UsersCompanion extends UpdateCompanion<User> {
     if (rating.present) {
       map['rating'] = Variable<int>(rating.value);
     }
-    if (rowid.present) {
-      map['rowid'] = Variable<int>(rowid.value);
-    }
     return map;
   }
 
@@ -307,8 +294,7 @@ class UsersCompanion extends UpdateCompanion<User> {
           ..write('id: $id, ')
           ..write('name: $name, ')
           ..write('avatar: $avatar, ')
-          ..write('rating: $rating, ')
-          ..write('rowid: $rowid')
+          ..write('rating: $rating')
           ..write(')'))
         .toString();
   }
@@ -340,11 +326,6 @@ class $ReviewsTable extends Reviews with TableInfo<$ReviewsTable, Review> {
   @override
   late final GeneratedColumn<String> comment = GeneratedColumn<String>(
       'comment', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
-  static const VerificationMeta _statusMeta = const VerificationMeta('status');
-  @override
-  late final GeneratedColumn<String> status = GeneratedColumn<String>(
-      'status', aliasedName, false,
       type: DriftSqlType.string, requiredDuringInsert: true);
   static const VerificationMeta _objectivityMeta =
       const VerificationMeta('objectivity');
@@ -386,7 +367,6 @@ class $ReviewsTable extends Reviews with TableInfo<$ReviewsTable, Review> {
         userId,
         professorId,
         comment,
-        status,
         objectivity,
         loyalty,
         professionalism,
@@ -428,12 +408,6 @@ class $ReviewsTable extends Reviews with TableInfo<$ReviewsTable, Review> {
           comment.isAcceptableOrUnknown(data['comment']!, _commentMeta));
     } else if (isInserting) {
       context.missing(_commentMeta);
-    }
-    if (data.containsKey('status')) {
-      context.handle(_statusMeta,
-          status.isAcceptableOrUnknown(data['status']!, _statusMeta));
-    } else if (isInserting) {
-      context.missing(_statusMeta);
     }
     if (data.containsKey('objectivity')) {
       context.handle(
@@ -479,7 +453,7 @@ class $ReviewsTable extends Reviews with TableInfo<$ReviewsTable, Review> {
   }
 
   @override
-  Set<GeneratedColumn> get $primaryKey => const {};
+  Set<GeneratedColumn> get $primaryKey => {id};
   @override
   Review map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
@@ -498,8 +472,6 @@ class $ReviewsTable extends Reviews with TableInfo<$ReviewsTable, Review> {
           .read(DriftSqlType.double, data['${effectivePrefix}harshness'])!,
       date: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}date'])!,
-      status: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}status'])!,
       professorId: attachedDatabase.typeMapping
           .read(DriftSqlType.int, data['${effectivePrefix}professor_id'])!,
       rating: attachedDatabase.typeMapping
@@ -518,7 +490,6 @@ class ReviewsCompanion extends UpdateCompanion<Review> {
   final Value<int> userId;
   final Value<int> professorId;
   final Value<String> comment;
-  final Value<String> status;
   final Value<double> objectivity;
   final Value<double> loyalty;
   final Value<double> professionalism;
@@ -531,7 +502,6 @@ class ReviewsCompanion extends UpdateCompanion<Review> {
     this.userId = const Value.absent(),
     this.professorId = const Value.absent(),
     this.comment = const Value.absent(),
-    this.status = const Value.absent(),
     this.objectivity = const Value.absent(),
     this.loyalty = const Value.absent(),
     this.professionalism = const Value.absent(),
@@ -545,7 +515,6 @@ class ReviewsCompanion extends UpdateCompanion<Review> {
     required int userId,
     required int professorId,
     required String comment,
-    required String status,
     required double objectivity,
     required double loyalty,
     required double professionalism,
@@ -557,7 +526,6 @@ class ReviewsCompanion extends UpdateCompanion<Review> {
         userId = Value(userId),
         professorId = Value(professorId),
         comment = Value(comment),
-        status = Value(status),
         objectivity = Value(objectivity),
         loyalty = Value(loyalty),
         professionalism = Value(professionalism),
@@ -569,7 +537,6 @@ class ReviewsCompanion extends UpdateCompanion<Review> {
     Expression<int>? userId,
     Expression<int>? professorId,
     Expression<String>? comment,
-    Expression<String>? status,
     Expression<double>? objectivity,
     Expression<double>? loyalty,
     Expression<double>? professionalism,
@@ -583,7 +550,6 @@ class ReviewsCompanion extends UpdateCompanion<Review> {
       if (userId != null) 'user_id': userId,
       if (professorId != null) 'professor_id': professorId,
       if (comment != null) 'comment': comment,
-      if (status != null) 'status': status,
       if (objectivity != null) 'objectivity': objectivity,
       if (loyalty != null) 'loyalty': loyalty,
       if (professionalism != null) 'professionalism': professionalism,
@@ -599,7 +565,6 @@ class ReviewsCompanion extends UpdateCompanion<Review> {
       Value<int>? userId,
       Value<int>? professorId,
       Value<String>? comment,
-      Value<String>? status,
       Value<double>? objectivity,
       Value<double>? loyalty,
       Value<double>? professionalism,
@@ -612,7 +577,6 @@ class ReviewsCompanion extends UpdateCompanion<Review> {
       userId: userId ?? this.userId,
       professorId: professorId ?? this.professorId,
       comment: comment ?? this.comment,
-      status: status ?? this.status,
       objectivity: objectivity ?? this.objectivity,
       loyalty: loyalty ?? this.loyalty,
       professionalism: professionalism ?? this.professionalism,
@@ -637,9 +601,6 @@ class ReviewsCompanion extends UpdateCompanion<Review> {
     }
     if (comment.present) {
       map['comment'] = Variable<String>(comment.value);
-    }
-    if (status.present) {
-      map['status'] = Variable<String>(status.value);
     }
     if (objectivity.present) {
       map['objectivity'] = Variable<double>(objectivity.value);
@@ -672,7 +633,6 @@ class ReviewsCompanion extends UpdateCompanion<Review> {
           ..write('userId: $userId, ')
           ..write('professorId: $professorId, ')
           ..write('comment: $comment, ')
-          ..write('status: $status, ')
           ..write('objectivity: $objectivity, ')
           ..write('loyalty: $loyalty, ')
           ..write('professionalism: $professionalism, ')
@@ -806,18 +766,16 @@ typedef $$ProfessorsTableProcessedTableManager = ProcessedTableManager<
     Professor,
     PrefetchHooks Function()>;
 typedef $$UsersTableCreateCompanionBuilder = UsersCompanion Function({
-  required int id,
+  Value<int> id,
   required String name,
   required Uint8List avatar,
   Value<int> rating,
-  Value<int> rowid,
 });
 typedef $$UsersTableUpdateCompanionBuilder = UsersCompanion Function({
   Value<int> id,
   Value<String> name,
   Value<Uint8List> avatar,
   Value<int> rating,
-  Value<int> rowid,
 });
 
 class $$UsersTableFilterComposer
@@ -892,28 +850,24 @@ class $$UsersTableTableManager extends RootTableManager<
             Value<String> name = const Value.absent(),
             Value<Uint8List> avatar = const Value.absent(),
             Value<int> rating = const Value.absent(),
-            Value<int> rowid = const Value.absent(),
           }) =>
               UsersCompanion(
             id: id,
             name: name,
             avatar: avatar,
             rating: rating,
-            rowid: rowid,
           ),
           createCompanionCallback: ({
-            required int id,
+            Value<int> id = const Value.absent(),
             required String name,
             required Uint8List avatar,
             Value<int> rating = const Value.absent(),
-            Value<int> rowid = const Value.absent(),
           }) =>
               UsersCompanion.insert(
             id: id,
             name: name,
             avatar: avatar,
             rating: rating,
-            rowid: rowid,
           ),
           withReferenceMapper: (p0) => p0
               .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
@@ -938,7 +892,6 @@ typedef $$ReviewsTableCreateCompanionBuilder = ReviewsCompanion Function({
   required int userId,
   required int professorId,
   required String comment,
-  required String status,
   required double objectivity,
   required double loyalty,
   required double professionalism,
@@ -952,7 +905,6 @@ typedef $$ReviewsTableUpdateCompanionBuilder = ReviewsCompanion Function({
   Value<int> userId,
   Value<int> professorId,
   Value<String> comment,
-  Value<String> status,
   Value<double> objectivity,
   Value<double> loyalty,
   Value<double> professionalism,
@@ -982,11 +934,6 @@ class $$ReviewsTableFilterComposer
 
   ColumnFilters<String> get comment => $state.composableBuilder(
       column: $state.table.comment,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<String> get status => $state.composableBuilder(
-      column: $state.table.status,
       builder: (column, joinBuilders) =>
           ColumnFilters(column, joinBuilders: joinBuilders));
 
@@ -1041,11 +988,6 @@ class $$ReviewsTableOrderingComposer
 
   ColumnOrderings<String> get comment => $state.composableBuilder(
       column: $state.table.comment,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<String> get status => $state.composableBuilder(
-      column: $state.table.status,
       builder: (column, joinBuilders) =>
           ColumnOrderings(column, joinBuilders: joinBuilders));
 
@@ -1104,7 +1046,6 @@ class $$ReviewsTableTableManager extends RootTableManager<
             Value<int> userId = const Value.absent(),
             Value<int> professorId = const Value.absent(),
             Value<String> comment = const Value.absent(),
-            Value<String> status = const Value.absent(),
             Value<double> objectivity = const Value.absent(),
             Value<double> loyalty = const Value.absent(),
             Value<double> professionalism = const Value.absent(),
@@ -1118,7 +1059,6 @@ class $$ReviewsTableTableManager extends RootTableManager<
             userId: userId,
             professorId: professorId,
             comment: comment,
-            status: status,
             objectivity: objectivity,
             loyalty: loyalty,
             professionalism: professionalism,
@@ -1132,7 +1072,6 @@ class $$ReviewsTableTableManager extends RootTableManager<
             required int userId,
             required int professorId,
             required String comment,
-            required String status,
             required double objectivity,
             required double loyalty,
             required double professionalism,
@@ -1146,7 +1085,6 @@ class $$ReviewsTableTableManager extends RootTableManager<
             userId: userId,
             professorId: professorId,
             comment: comment,
-            status: status,
             objectivity: objectivity,
             loyalty: loyalty,
             professionalism: professionalism,
