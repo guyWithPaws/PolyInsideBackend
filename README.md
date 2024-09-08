@@ -1,4 +1,4 @@
-# Best and the only app with Polytech professors reviews PolyInside#
+# Best and the only app with Polytech professors reviews PolyInside
 This project is a unique WebApp, that allows you to view reviews on professors/write your own reviews.
 
 # WebApp Pages:
