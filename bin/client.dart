@@ -32,7 +32,7 @@ class ServerCredentials {
 
 Future<void> main(List<String> args) async {
   await Filter.instance.initializeAsyncLoaders();
-  const text = 'хуй препод я люблю его очень сильно лучший наш слон';
+  const text = 'препод пизда люблю его очень сильно лучший наш слон';
 
   final stopwatch = Stopwatch()..start();
   final result = Filter.instance.check(text);

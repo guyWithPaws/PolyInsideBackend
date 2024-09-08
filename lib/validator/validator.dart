@@ -1,29 +1,26 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:drift/drift.dart';
+extension on String {
+  static final RegExp unneccessarySpace = RegExp(r'\s+');
+  static final RegExp unnecessarySymbols = RegExp('[0-9|.|,|!|?|/]');
+  static final RegExp tooShortWords = RegExp(r'\b[a-z]{1,2}\b');
+  static final RegExp reapitingSymbols = RegExp(r'(.)\1+');
 
-enum FilterTypes {
-  accepted,
-  rejected;
-
-  String get name {
-    switch (this) {
-      case FilterTypes.accepted:
-        return 'Accepted';
-      case FilterTypes.rejected:
-        return 'Rejected';
-    }
-  }
+  List<String> makeBeautiful() => replaceAll(unnecessarySymbols, ' ')
+      .replaceAll(tooShortWords, ' ')
+      .replaceAll(unneccessarySpace, ' ')
+      .toLowerCase()
+      .split(' ')
+      .toList();
 }
 
 class Filter {
-  late String message;
+  late String originalMessage;
+
   Map<String, String> alphabet = {};
   List<String> badWords = [];
-
-  List<String> words = [];
-  final RegExp space = RegExp(r'\s+');
+  List<String> messageWords = [];
 
   static File jsonFile = File(r'lib\validator\data\alphabet.json');
   static File txtFile = File(r'lib\validator\data\bad_words.txt');
@@ -32,8 +29,9 @@ class Filter {
   Filter._();
   static final Filter instance = Filter._();
 
-  String check(String message_) {
-    message = message_;
+  String check(String userMessage) {
+    originalMessage = userMessage;
+    messageWords = originalMessage.makeBeautiful();
     return messageAnalyzer();
   }
 
@@ -72,22 +70,27 @@ class Filter {
   }
 
   String messageAnalyzer() {
-    message = message.replaceAll(space, ' ');
-
-    
-    
-    words = message
-        .split(' ')
+    messageWords = messageWords
         .map((word) =>
             word.split('').map((letter) => alphabet[letter] ?? letter).join())
         .toList();
+
+    var localStorage = <String>[];
+    for (var i = 0; i < messageWords.length; ++i) {
+      var newWord = messageWords[i];
+      for (var j = i + 1; j < messageWords.length; ++j) {
+        newWord = newWord + messageWords[j];
+        localStorage.add(newWord);
+      }
+    }
+    messageWords.addAll(localStorage);
 
     return searchBadWord();
   }
 
   String searchBadWord() {
     var regExpBadWord = RegExp('');
-    for (final word in words) {
+    for (final word in messageWords) {
       for (final badWord in badWords) {
         regExpBadWord = RegExp(badWord);
         if (word.replaceAll(regExpBadWord, '').isEmpty) {
@@ -99,19 +102,16 @@ class Filter {
   }
 }
 
+enum FilterTypes {
+  accepted,
+  rejected;
 
-
-// ".": "",
-// ",": "",
-// "!": "",
-// "?": "",
-// "&": "",
-// ")": "",
-// "(": "",
-// "|": "",
-// "/": "",
-// "-": "",
-// "_": "",
-// "\"": "",
-// ";": "",
-// "®": ""
+  String get name {
+    switch (this) {
+      case FilterTypes.accepted:
+        return 'Accepted';
+      case FilterTypes.rejected:
+        return 'Rejected';
+    }
+  }
+}
