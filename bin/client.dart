@@ -47,7 +47,7 @@ Future<void> main(List<String> args) async {
   //     rating: 100,
   //   ),
   // );
-  await client.editProfile(
+  await client.updateProfile(
     User(id: 112312, name: 'Goxa', avatar: [], rating: 99),
   );
   return;

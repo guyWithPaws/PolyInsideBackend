@@ -145,13 +145,13 @@ class DeleteReviewResponse extends $pb.GeneratedMessage {
   static DeleteReviewResponse? _defaultInstance;
 }
 
-class EditReviewResponse extends $pb.GeneratedMessage {
-  factory EditReviewResponse() => create();
-  EditReviewResponse._() : super();
-  factory EditReviewResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory EditReviewResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+class UpdateReviewResponse extends $pb.GeneratedMessage {
+  factory UpdateReviewResponse() => create();
+  UpdateReviewResponse._() : super();
+  factory UpdateReviewResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory UpdateReviewResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EditReviewResponse', createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateReviewResponse', createEmptyInstance: create)
     ..hasRequiredFields = false
   ;
 
@@ -159,31 +159,31 @@ class EditReviewResponse extends $pb.GeneratedMessage {
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
   'Will be removed in next major version')
-  EditReviewResponse clone() => EditReviewResponse()..mergeFromMessage(this);
+  UpdateReviewResponse clone() => UpdateReviewResponse()..mergeFromMessage(this);
   @$core.Deprecated(
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
   'Will be removed in next major version')
-  EditReviewResponse copyWith(void Function(EditReviewResponse) updates) => super.copyWith((message) => updates(message as EditReviewResponse)) as EditReviewResponse;
+  UpdateReviewResponse copyWith(void Function(UpdateReviewResponse) updates) => super.copyWith((message) => updates(message as UpdateReviewResponse)) as UpdateReviewResponse;
 
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static EditReviewResponse create() => EditReviewResponse._();
-  EditReviewResponse createEmptyInstance() => create();
-  static $pb.PbList<EditReviewResponse> createRepeated() => $pb.PbList<EditReviewResponse>();
+  static UpdateReviewResponse create() => UpdateReviewResponse._();
+  UpdateReviewResponse createEmptyInstance() => create();
+  static $pb.PbList<UpdateReviewResponse> createRepeated() => $pb.PbList<UpdateReviewResponse>();
   @$core.pragma('dart2js:noInline')
-  static EditReviewResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<EditReviewResponse>(create);
-  static EditReviewResponse? _defaultInstance;
+  static UpdateReviewResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UpdateReviewResponse>(create);
+  static UpdateReviewResponse? _defaultInstance;
 }
 
-class EditProfileResponse extends $pb.GeneratedMessage {
-  factory EditProfileResponse() => create();
-  EditProfileResponse._() : super();
-  factory EditProfileResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory EditProfileResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+class UpdateProfileResponse extends $pb.GeneratedMessage {
+  factory UpdateProfileResponse() => create();
+  UpdateProfileResponse._() : super();
+  factory UpdateProfileResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory UpdateProfileResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'EditProfileResponse', createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateProfileResponse', createEmptyInstance: create)
     ..hasRequiredFields = false
   ;
 
@@ -191,22 +191,22 @@ class EditProfileResponse extends $pb.GeneratedMessage {
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
   'Will be removed in next major version')
-  EditProfileResponse clone() => EditProfileResponse()..mergeFromMessage(this);
+  UpdateProfileResponse clone() => UpdateProfileResponse()..mergeFromMessage(this);
   @$core.Deprecated(
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
   'Will be removed in next major version')
-  EditProfileResponse copyWith(void Function(EditProfileResponse) updates) => super.copyWith((message) => updates(message as EditProfileResponse)) as EditProfileResponse;
+  UpdateProfileResponse copyWith(void Function(UpdateProfileResponse) updates) => super.copyWith((message) => updates(message as UpdateProfileResponse)) as UpdateProfileResponse;
 
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static EditProfileResponse create() => EditProfileResponse._();
-  EditProfileResponse createEmptyInstance() => create();
-  static $pb.PbList<EditProfileResponse> createRepeated() => $pb.PbList<EditProfileResponse>();
+  static UpdateProfileResponse create() => UpdateProfileResponse._();
+  UpdateProfileResponse createEmptyInstance() => create();
+  static $pb.PbList<UpdateProfileResponse> createRepeated() => $pb.PbList<UpdateProfileResponse>();
   @$core.pragma('dart2js:noInline')
-  static EditProfileResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<EditProfileResponse>(create);
-  static EditProfileResponse? _defaultInstance;
+  static UpdateProfileResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UpdateProfileResponse>(create);
+  static UpdateProfileResponse? _defaultInstance;
 }
 
 class ChangeStatusRequest extends $pb.GeneratedMessage {

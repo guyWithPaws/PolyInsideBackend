@@ -3,14 +3,14 @@ syntax = "proto3";
 service SearchService {
 
   rpc AddProfile (User) returns (AddProfileResponse);
-  rpc EditProfile (User) returns (EditProfileResponse);
+  rpc UpdateProfile (User) returns (UpdateProfileResponse);
   rpc GetProfile(UserInfoByUserIdRequest) returns (User);
   rpc GetListProfessor(ListProfessorRequest) returns (stream Professor);
 
   rpc AddReview(Review) returns (AddReviewResponse);
   rpc GetReviewsByProfessorId(ReviewsByProfessorIdRequest) returns (stream Review);
   rpc GetReviewsByUserId(ReviewsByUserIdRequest) returns (stream Review);
-  rpc EditReview(Review) returns (EditReviewResponse);
+  rpc UpdateReview(Review) returns (UpdateReviewResponse);
   rpc DeleteReview (DeleteReviewRequest) returns (DeleteReviewResponse);
 }
 
@@ -24,9 +24,9 @@ message AddProfileResponse {
 
 message DeleteReviewResponse {}
 
-message EditReviewResponse {}
+message UpdateReviewResponse {}
 
-message EditProfileResponse {}
+message UpdateProfileResponse {}
 
 message ChangeStatusRequest{
   int32 id = 1;

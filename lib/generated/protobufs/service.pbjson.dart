@@ -46,23 +46,23 @@ const DeleteReviewResponse$json = {
 final $typed_data.Uint8List deleteReviewResponseDescriptor = $convert.base64Decode(
     'ChREZWxldGVSZXZpZXdSZXNwb25zZQ==');
 
-@$core.Deprecated('Use editReviewResponseDescriptor instead')
-const EditReviewResponse$json = {
-  '1': 'EditReviewResponse',
+@$core.Deprecated('Use updateReviewResponseDescriptor instead')
+const UpdateReviewResponse$json = {
+  '1': 'UpdateReviewResponse',
 };
 
-/// Descriptor for `EditReviewResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List editReviewResponseDescriptor = $convert.base64Decode(
-    'ChJFZGl0UmV2aWV3UmVzcG9uc2U=');
+/// Descriptor for `UpdateReviewResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List updateReviewResponseDescriptor = $convert.base64Decode(
+    'ChRVcGRhdGVSZXZpZXdSZXNwb25zZQ==');
 
-@$core.Deprecated('Use editProfileResponseDescriptor instead')
-const EditProfileResponse$json = {
-  '1': 'EditProfileResponse',
+@$core.Deprecated('Use updateProfileResponseDescriptor instead')
+const UpdateProfileResponse$json = {
+  '1': 'UpdateProfileResponse',
 };
 
-/// Descriptor for `EditProfileResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List editProfileResponseDescriptor = $convert.base64Decode(
-    'ChNFZGl0UHJvZmlsZVJlc3BvbnNl');
+/// Descriptor for `UpdateProfileResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List updateProfileResponseDescriptor = $convert.base64Decode(
+    'ChVVcGRhdGVQcm9maWxlUmVzcG9uc2U=');
 
 @$core.Deprecated('Use changeStatusRequestDescriptor instead')
 const ChangeStatusRequest$json = {
