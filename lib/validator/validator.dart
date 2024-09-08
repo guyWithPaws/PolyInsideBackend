@@ -5,7 +5,6 @@ extension on String {
   static final RegExp unneccessarySpace = RegExp(r'\s+');
   static final RegExp unnecessarySymbols = RegExp('[0-9|.|,|!|?|/]');
   static final RegExp tooShortWords = RegExp(r'\b[a-z]{1,2}\b');
-  static final RegExp reapitingSymbols = RegExp(r'(.)\1+');
 
   List<String> makeBeautiful() => replaceAll(unnecessarySymbols, ' ')
       .replaceAll(tooShortWords, ' ')

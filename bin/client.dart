@@ -2,8 +2,7 @@ import 'dart:convert';
 import 'dart:core';
 import 'dart:io';
 
-import 'package:grpc/grpc.dart';
-import 'package:poly_inside_server/generated/protobufs/service.pbgrpc.dart';
+import 'package:poly_inside_server/validator/validator.dart';
 
 class ServerCredentials {
   final String ip;
@@ -39,17 +38,4 @@ Future<void> main(List<String> args) async {
 
   print('Execution time: ${stopwatch.elapsed}');
   print('Result: $result');
-
-  return;
-
-  final credentials = ServerCredentials.fromJSON(r'secrets\credential.json');
-  final channel = ClientChannel(
-    credentials.ip,
-    port: credentials.port,
-    options: const ChannelOptions(
-      credentials: ChannelCredentials.insecure(),
-    ),
-  );
-  final client = SearchServiceClient(channel);
-  );
 }
