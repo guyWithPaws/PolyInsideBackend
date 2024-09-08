@@ -1,5 +1,16 @@
-A sample command-line application with an entrypoint in `bin/`, library code
-in `lib/`, and example unit test in `test/`.
+# Best and the only app with Polytech professors reviews PolyInside#
+This project is a unique WebApp, that allows you to view reviews on professors/write your own reviews.
 
-# ГЕНЕРИТЬ СНАЧАЛА gRPC, А ПОТОМ Drift 
-# КЛАССЫ ДРИФТА БЕРУТСЯ ИЗ gRPC
+# WebApp Pages:
++ main page with professors list
++ page with reviews on concrete professor
++ review creation page
++ user profile page 
+
+# Notes for devs:
++ ГЕНЕРИТЬ СНАЧАЛА gRPC, А ПОТОМ Drift 
++ КЛАССЫ ДРИФТА БЕРУТСЯ ИЗ gRPC
++ id юзеров - Telegramm id + текущая дата в UNIX
++ нужны тестики как минимум для Validator'a
++ парсер преподов можно переписать на dart 
+
