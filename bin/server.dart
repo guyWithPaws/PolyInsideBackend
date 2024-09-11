@@ -14,12 +14,12 @@ Future<void> main() async {
     () async {
       await runZonedGuarded(
         () async {
-          //await Filter.instance.initializeAsyncLoaders();
+          await Filter.instance.initializeAsyncLoaders();
 
           final database = AppDatabase(NativeDatabase(File('db.sqlite')));
           final provider = DatabaseProviderImpl(database: database);
-          //final parser = Parser(provider: provider);
-          //await parser.fillDatabase();
+          final parser = Parser(provider: provider);
+          await parser.fillDatabase();
 
           final server = Server.create(services: [
             GRPCService(provider: provider),
