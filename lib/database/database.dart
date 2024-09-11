@@ -5,7 +5,7 @@ part 'database.g.dart';
 
 @UseRowClass(Professor)
 class Professors extends Table {
-  TextColumn get id => text()();
+  IntColumn get id => integer()();
   TextColumn get name => text()();
   TextColumn get avatar => text()();
 
