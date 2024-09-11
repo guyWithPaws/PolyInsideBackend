@@ -26,6 +26,7 @@ class GRPCService extends SearchServiceBase {
   Stream<Professor> getListProfessor(
       ServiceCall call, ListProfessorRequest request) async* {
     l.v('GetListProfessor');
+    l.v(call.remoteAddress.toString());
     final stream = provider.getAllProfessors();
     await for (final list in stream) {
       for (final professor in list) {

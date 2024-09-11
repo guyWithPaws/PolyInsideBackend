@@ -11,9 +11,9 @@ class $ProfessorsTable extends Professors
   $ProfessorsTable(this.attachedDatabase, [this._alias]);
   static const VerificationMeta _idMeta = const VerificationMeta('id');
   @override
-  late final GeneratedColumn<String> id = GeneratedColumn<String>(
+  late final GeneratedColumn<int> id = GeneratedColumn<int>(
       'id', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
+      type: DriftSqlType.int, requiredDuringInsert: false);
   static const VerificationMeta _nameMeta = const VerificationMeta('name');
   @override
   late final GeneratedColumn<String> name = GeneratedColumn<String>(
@@ -38,8 +38,6 @@ class $ProfessorsTable extends Professors
     final data = instance.toColumns(true);
     if (data.containsKey('id')) {
       context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
-    } else if (isInserting) {
-      context.missing(_idMeta);
     }
     if (data.containsKey('name')) {
       context.handle(
@@ -63,7 +61,7 @@ class $ProfessorsTable extends Professors
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return Professor(
       id: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}id'])!,
+          .read(DriftSqlType.int, data['${effectivePrefix}id'])!,
       name: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}name'])!,
       avatar: attachedDatabase.typeMapping
@@ -78,48 +76,38 @@ class $ProfessorsTable extends Professors
 }
 
 class ProfessorsCompanion extends UpdateCompanion<Professor> {
-  final Value<String> id;
+  final Value<int> id;
   final Value<String> name;
   final Value<String> avatar;
-  final Value<int> rowid;
   const ProfessorsCompanion({
     this.id = const Value.absent(),
     this.name = const Value.absent(),
     this.avatar = const Value.absent(),
-    this.rowid = const Value.absent(),
   });
   ProfessorsCompanion.insert({
-    required String id,
+    this.id = const Value.absent(),
     required String name,
     required String avatar,
-    this.rowid = const Value.absent(),
-  })  : id = Value(id),
-        name = Value(name),
+  })  : name = Value(name),
         avatar = Value(avatar);
   static Insertable<Professor> custom({
-    Expression<String>? id,
+    Expression<int>? id,
     Expression<String>? name,
     Expression<String>? avatar,
-    Expression<int>? rowid,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
       if (name != null) 'name': name,
       if (avatar != null) 'avatar': avatar,
-      if (rowid != null) 'rowid': rowid,
     });
   }
 
   ProfessorsCompanion copyWith(
-      {Value<String>? id,
-      Value<String>? name,
-      Value<String>? avatar,
-      Value<int>? rowid}) {
+      {Value<int>? id, Value<String>? name, Value<String>? avatar}) {
     return ProfessorsCompanion(
       id: id ?? this.id,
       name: name ?? this.name,
       avatar: avatar ?? this.avatar,
-      rowid: rowid ?? this.rowid,
     );
   }
 
@@ -127,16 +115,13 @@ class ProfessorsCompanion extends UpdateCompanion<Professor> {
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     if (id.present) {
-      map['id'] = Variable<String>(id.value);
+      map['id'] = Variable<int>(id.value);
     }
     if (name.present) {
       map['name'] = Variable<String>(name.value);
     }
     if (avatar.present) {
       map['avatar'] = Variable<String>(avatar.value);
-    }
-    if (rowid.present) {
-      map['rowid'] = Variable<int>(rowid.value);
     }
     return map;
   }
@@ -146,8 +131,7 @@ class ProfessorsCompanion extends UpdateCompanion<Professor> {
     return (StringBuffer('ProfessorsCompanion(')
           ..write('id: $id, ')
           ..write('name: $name, ')
-          ..write('avatar: $avatar, ')
-          ..write('rowid: $rowid')
+          ..write('avatar: $avatar')
           ..write(')'))
         .toString();
   }
@@ -672,22 +656,20 @@ abstract class _$AppDatabase extends GeneratedDatabase {
 }
 
 typedef $$ProfessorsTableCreateCompanionBuilder = ProfessorsCompanion Function({
-  required String id,
+  Value<int> id,
   required String name,
   required String avatar,
-  Value<int> rowid,
 });
 typedef $$ProfessorsTableUpdateCompanionBuilder = ProfessorsCompanion Function({
-  Value<String> id,
+  Value<int> id,
   Value<String> name,
   Value<String> avatar,
-  Value<int> rowid,
 });
 
 class $$ProfessorsTableFilterComposer
     extends FilterComposer<_$AppDatabase, $ProfessorsTable> {
   $$ProfessorsTableFilterComposer(super.$state);
-  ColumnFilters<String> get id => $state.composableBuilder(
+  ColumnFilters<int> get id => $state.composableBuilder(
       column: $state.table.id,
       builder: (column, joinBuilders) =>
           ColumnFilters(column, joinBuilders: joinBuilders));
@@ -706,7 +688,7 @@ class $$ProfessorsTableFilterComposer
 class $$ProfessorsTableOrderingComposer
     extends OrderingComposer<_$AppDatabase, $ProfessorsTable> {
   $$ProfessorsTableOrderingComposer(super.$state);
-  ColumnOrderings<String> get id => $state.composableBuilder(
+  ColumnOrderings<int> get id => $state.composableBuilder(
       column: $state.table.id,
       builder: (column, joinBuilders) =>
           ColumnOrderings(column, joinBuilders: joinBuilders));
@@ -742,28 +724,24 @@ class $$ProfessorsTableTableManager extends RootTableManager<
           orderingComposer:
               $$ProfessorsTableOrderingComposer(ComposerState(db, table)),
           updateCompanionCallback: ({
-            Value<String> id = const Value.absent(),
+            Value<int> id = const Value.absent(),
             Value<String> name = const Value.absent(),
             Value<String> avatar = const Value.absent(),
-            Value<int> rowid = const Value.absent(),
           }) =>
               ProfessorsCompanion(
             id: id,
             name: name,
             avatar: avatar,
-            rowid: rowid,
           ),
           createCompanionCallback: ({
-            required String id,
+            Value<int> id = const Value.absent(),
             required String name,
             required String avatar,
-            Value<int> rowid = const Value.absent(),
           }) =>
               ProfessorsCompanion.insert(
             id: id,
             name: name,
             avatar: avatar,
-            rowid: rowid,
           ),
           withReferenceMapper: (p0) => p0
               .map((e) => (e.readTable(table), BaseReferences(db, table, e)))

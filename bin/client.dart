@@ -31,7 +31,7 @@ class ServerCredentials {
 }
 
 Future<void> main(List<String> args) async {
-  final channel = ClientChannel('87.228.18.201',
+  final channel = ClientChannel('127.0.0.1',
     port: 8080,
     options: const ChannelOptions(
         credentials: ChannelCredentials.insecure()));
