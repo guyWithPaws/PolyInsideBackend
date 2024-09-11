@@ -5,9 +5,12 @@ part 'database.g.dart';
 
 @UseRowClass(Professor)
 class Professors extends Table {
-  IntColumn get id => integer().autoIncrement()();
+  TextColumn get id => text()();
   TextColumn get name => text()();
   TextColumn get avatar => text()();
+
+  @override
+  Set<Column<Object>>? get primaryKey => {id};
 }
 
 @UseRowClass(User)
@@ -17,9 +20,7 @@ class Users extends Table {
   BlobColumn get avatar => blob()();
   IntColumn get rating => integer().withDefault(const Constant<int>(0))();
 
-
   @override
-  // TODO: implement primaryKey
   Set<Column<Object>>? get primaryKey => {id};
 }
 

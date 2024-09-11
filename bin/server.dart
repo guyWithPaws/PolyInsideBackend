@@ -18,14 +18,9 @@ Future<void> main() async {
           await Filter.instance.initializeAsyncLoaders();
           final database = AppDatabase(NativeDatabase(File('db.sqlite')));
           final provider = DatabaseProviderImpl(database: database);
-          final server = Server.create(
-            services: [
-              GRPCService(provider: provider),
-            ],
-            interceptors: [
-              
-            ]
-          );
+          final server = Server.create(services: [
+            GRPCService(provider: provider),
+          ], interceptors: []);
           await server.serve(port: 8080);
           l.i('Server listening on ${server.port}');
         },

@@ -22,8 +22,9 @@ const DeleteReviewRequest$json = {
 };
 
 /// Descriptor for `DeleteReviewRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List deleteReviewRequestDescriptor = $convert.base64Decode(
-    'ChNEZWxldGVSZXZpZXdSZXF1ZXN0EhoKCHJldmlld0lkGAEgASgJUghyZXZpZXdJZA==');
+final $typed_data.Uint8List deleteReviewRequestDescriptor =
+    $convert.base64Decode(
+        'ChNEZWxldGVSZXZpZXdSZXF1ZXN0EhoKCHJldmlld0lkGAEgASgJUghyZXZpZXdJZA==');
 
 @$core.Deprecated('Use addProfileResponseDescriptor instead')
 const AddProfileResponse$json = {
@@ -31,8 +32,8 @@ const AddProfileResponse$json = {
 };
 
 /// Descriptor for `AddProfileResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List addProfileResponseDescriptor = $convert.base64Decode(
-    'ChJBZGRQcm9maWxlUmVzcG9uc2U=');
+final $typed_data.Uint8List addProfileResponseDescriptor =
+    $convert.base64Decode('ChJBZGRQcm9maWxlUmVzcG9uc2U=');
 
 @$core.Deprecated('Use deleteReviewResponseDescriptor instead')
 const DeleteReviewResponse$json = {
@@ -40,8 +41,8 @@ const DeleteReviewResponse$json = {
 };
 
 /// Descriptor for `DeleteReviewResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List deleteReviewResponseDescriptor = $convert.base64Decode(
-    'ChREZWxldGVSZXZpZXdSZXNwb25zZQ==');
+final $typed_data.Uint8List deleteReviewResponseDescriptor =
+    $convert.base64Decode('ChREZWxldGVSZXZpZXdSZXNwb25zZQ==');
 
 @$core.Deprecated('Use updateReviewResponseDescriptor instead')
 const UpdateReviewResponse$json = {
@@ -49,8 +50,8 @@ const UpdateReviewResponse$json = {
 };
 
 /// Descriptor for `UpdateReviewResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List updateReviewResponseDescriptor = $convert.base64Decode(
-    'ChRVcGRhdGVSZXZpZXdSZXNwb25zZQ==');
+final $typed_data.Uint8List updateReviewResponseDescriptor =
+    $convert.base64Decode('ChRVcGRhdGVSZXZpZXdSZXNwb25zZQ==');
 
 @$core.Deprecated('Use updateProfileResponseDescriptor instead')
 const UpdateProfileResponse$json = {
@@ -58,8 +59,8 @@ const UpdateProfileResponse$json = {
 };
 
 /// Descriptor for `UpdateProfileResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List updateProfileResponseDescriptor = $convert.base64Decode(
-    'ChVVcGRhdGVQcm9maWxlUmVzcG9uc2U=');
+final $typed_data.Uint8List updateProfileResponseDescriptor =
+    $convert.base64Decode('ChVVcGRhdGVQcm9maWxlUmVzcG9uc2U=');
 
 @$core.Deprecated('Use changeStatusRequestDescriptor instead')
 const ChangeStatusRequest$json = {
@@ -84,8 +85,8 @@ const UserInfoByUserIdRequest$json = {
 };
 
 /// Descriptor for `UserInfoByUserIdRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List userInfoByUserIdRequestDescriptor = $convert.base64Decode(
-    'ChdVc2VySW5mb0J5VXNlcklkUmVxdWVzdBIOCgJpZBgBIAEoBVICaWQ=');
+final $typed_data.Uint8List userInfoByUserIdRequestDescriptor = $convert
+    .base64Decode('ChdVc2VySW5mb0J5VXNlcklkUmVxdWVzdBIOCgJpZBgBIAEoBVICaWQ=');
 
 @$core.Deprecated('Use addReviewResponseDescriptor instead')
 const AddReviewResponse$json = {
@@ -108,8 +109,8 @@ const ReviewsByUserIdRequest$json = {
 };
 
 /// Descriptor for `ReviewsByUserIdRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List reviewsByUserIdRequestDescriptor = $convert.base64Decode(
-    'ChZSZXZpZXdzQnlVc2VySWRSZXF1ZXN0Eg4KAmlkGAEgASgFUgJpZA==');
+final $typed_data.Uint8List reviewsByUserIdRequestDescriptor = $convert
+    .base64Decode('ChZSZXZpZXdzQnlVc2VySWRSZXF1ZXN0Eg4KAmlkGAEgASgFUgJpZA==');
 
 @$core.Deprecated('Use listProfessorRequestDescriptor instead')
 const ListProfessorRequest$json = {
@@ -117,8 +118,8 @@ const ListProfessorRequest$json = {
 };
 
 /// Descriptor for `ListProfessorRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List listProfessorRequestDescriptor = $convert.base64Decode(
-    'ChRMaXN0UHJvZmVzc29yUmVxdWVzdA==');
+final $typed_data.Uint8List listProfessorRequestDescriptor =
+    $convert.base64Decode('ChRMaXN0UHJvZmVzc29yUmVxdWVzdA==');
 
 @$core.Deprecated('Use reviewsByProfessorIdRequestDescriptor instead')
 const ReviewsByProfessorIdRequest$json = {
@@ -129,8 +130,9 @@ const ReviewsByProfessorIdRequest$json = {
 };
 
 /// Descriptor for `ReviewsByProfessorIdRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List reviewsByProfessorIdRequestDescriptor = $convert.base64Decode(
-    'ChtSZXZpZXdzQnlQcm9mZXNzb3JJZFJlcXVlc3QSDgoCaWQYASABKAVSAmlk');
+final $typed_data.Uint8List reviewsByProfessorIdRequestDescriptor =
+    $convert.base64Decode(
+        'ChtSZXZpZXdzQnlQcm9mZXNzb3JJZFJlcXVlc3QSDgoCaWQYASABKAVSAmlk');
 
 @$core.Deprecated('Use userDescriptor instead')
 const User$json = {
@@ -189,4 +191,3 @@ final $typed_data.Uint8List reviewDescriptor = $convert.base64Decode(
     '0YBiABKAJSD3Byb2Zlc3Npb25hbGlzbRIcCgloYXJzaG5lc3MYByABKAJSCWhhcnNobmVzcxIS'
     'CgRkYXRlGAggASgJUgRkYXRlEhgKB3JhaXRpbmcYCSABKAVSB3JhaXRpbmcSIQoMcHJvZmVzc2'
     '9yX2lkGAsgASgFUgtwcm9mZXNzb3JJZBIWCgZyYXRpbmcYDSABKAVSBnJhdGluZw==');
-
