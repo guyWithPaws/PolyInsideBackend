@@ -103,8 +103,11 @@ class Parser {
 
 void main() async {
   await l.capture(() async {
+    print('init');
     final database = AppDatabase(NativeDatabase(File('db.sqlite')));
+    print('database');
     final provider = DatabaseProviderImpl(database: database);
+    print('provider');
     final parser = Parser(provider: provider);
     await parser.fillDatabase();
   });
