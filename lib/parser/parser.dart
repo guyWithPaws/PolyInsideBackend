@@ -101,11 +101,11 @@ class Parser {
   }
 }
 
-void main() async {
-  await l.capture(() async {
-    final database = AppDatabase(NativeDatabase(File('db.sqlite')));
-    final provider = DatabaseProviderImpl(database: database);
-    final parser = Parser(provider: provider);
-    await parser.fillDatabase();
-  });
-}
+// void main() async {
+//   await l.capture(() async {
+//     final database = AppDatabase(NativeDatabase(File('db.sqlite')));
+//     final provider = DatabaseProviderImpl(database: database);
+//     final parser = Parser(provider: provider);
+//     await parser.fillDatabase();
+//   });
+// }
