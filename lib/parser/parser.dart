@@ -1,15 +1,11 @@
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:crypto/crypto.dart';
-import 'package:drift/native.dart';
 import 'package:html/parser.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 import 'package:l/l.dart';
-import 'package:poly_inside_server/database/database.dart';
 import 'package:poly_inside_server/database/provider.dart';
-import 'package:poly_inside_server/database/provider_impl.dart';
 import 'package:poly_inside_server/generated/protobufs/service.pb.dart';
 
 class Parser {
@@ -99,16 +95,4 @@ class Parser {
       }
     }
   }
-}
-
-void main() async {
-  await l.capture(() async {
-    print('init');
-    final database = AppDatabase(NativeDatabase(File('db.sqlite')));
-    print('database');
-    final provider = DatabaseProviderImpl(database: database);
-    print('provider');
-    final parser = Parser(provider: provider);
-    await parser.fillDatabase();
-  });
 }
