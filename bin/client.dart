@@ -2,6 +2,8 @@ import 'dart:convert';
 import 'dart:core';
 import 'dart:io';
 
+import 'package:grpc/grpc.dart';
+import 'package:poly_inside_server/generated/protobufs/service.pbgrpc.dart';
 
 class ServerCredentials {
   final String ip;
@@ -27,16 +29,14 @@ class ServerCredentials {
       this.connectionTimeout = const Duration(seconds: 30)});
 }
 
-// Future<void> main(List<String> args) async {
+Future<void> main(List<String> args) async {
+  final channel = ClientChannel('87.228.18.201',
+      port: 8080,
+      options:
+          const ChannelOptions(credentials: ChannelCredentials.insecure()));
+  final stub = SearchServiceClient(channel);
 
-//   final channel = ClientChannel(
-//     '127.0.0.1',
-//     port: 8080,
-//     options: const ChannelOptions(credentials: ChannelCredentials.insecure())
-//   );
-//   final stub = SearchServiceClient(channel);
-
-//   var data = stub.getListProfessor(ListProfessorRequest());
-//   await channel.shutdown();
-// }
-
+  var data = stub.getListProfessor(ListProfessorRequest());
+  data.forEach(print);
+  await channel.shutdown();
+}
