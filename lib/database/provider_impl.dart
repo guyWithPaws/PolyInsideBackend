@@ -106,4 +106,19 @@ class DatabaseProviderImpl implements DatabaseProvider {
           ),
         );
   }
+
+  @override
+  Future<void> addProfessor(Professor professor) async {
+    await database.into(database.professors).insert(
+          ProfessorsCompanion(
+            id: Value<String>(professor.id),
+            name: Value<String>(professor.name),
+            avatar: Value<String>(professor.avatar),
+          ),
+        );
+  }
+
+  @override
+  Future<List<Professor>> getOnceAllProfessors() async =>
+      await database.select(database.professors).get();
 }

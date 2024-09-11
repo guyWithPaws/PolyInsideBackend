@@ -78,7 +78,8 @@ class Filter {
     for (var i = 0; i < messageWords.length; ++i) {
       var newWord = messageWords[i];
       for (var j = i + 1; j < messageWords.length; ++j) {
-        newWord = newWord + messageWords[j];
+        var buffer = newWord + messageWords[j];
+        newWord = buffer;
         localStorage.add(newWord);
       }
     }

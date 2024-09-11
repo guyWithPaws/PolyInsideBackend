@@ -32,10 +32,6 @@ Future<void> main(List<String> args) async {
   await Filter.instance.initializeAsyncLoaders();
   const text = 'препод пизда люблю его очень сильно лучший наш слон';
 
-  final stopwatch = Stopwatch()..start();
+  // ignore: unused_local_variable
   final result = Filter.instance.check(text);
-  stopwatch.stop();
-
-  print('Execution time: ${stopwatch.elapsed}');
-  print('Result: $result');
 }

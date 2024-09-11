@@ -10,7 +10,7 @@ import 'package:poly_inside_server/service.dart';
 import 'package:poly_inside_server/validator/validator.dart';
 
 Future<void> main() async {
-  final file = File('server.log');
+  //final file = File('server.log');
   await l.capture(
     () async {
       await runZonedGuarded(
@@ -24,17 +24,13 @@ Future<void> main() async {
           await server.serve(port: 8080);
           l.i('Server listening on ${server.port}');
         },
-        (e, st) {
-          file
-            ..writeAsStringSync(e.toString())
-            ..writeAsStringSync(st.toString());
-          l.e(e, st);
-        },
+        l.e,
       );
     },
     LogOptions(
       outputInRelease: true,
       messageFormatting: (message, logLevel, dateTime) =>
+          // ignore: lines_longer_than_80_chars
           '${dateTime.toString().substring(0, dateTime.toString().length - 7)} | $message',
     ),
   );

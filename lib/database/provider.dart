@@ -11,4 +11,6 @@ abstract interface class DatabaseProvider {
   Future<bool> updateReview(Review review);
   Future<bool> updateUser(User user);
   Future<int> deleteReview(String reviewId);
+  Future<void> addProfessor(Professor professor);
+  Future<List<Professor>> getOnceAllProfessors();
 }

@@ -57,7 +57,7 @@ message User {
 }
 
 message Professor {
-  int32 id = 1;
+  string id = 1;
   string name = 2;
   string avatar = 3;
 }
