@@ -2,6 +2,8 @@ import 'dart:convert';
 import 'dart:core';
 import 'dart:io';
 
+import 'package:grpc/grpc.dart';
+import 'package:poly_inside_server/generated/protobufs/service.pbgrpc.dart';
 import 'package:poly_inside_server/validator/validator.dart';
 
 class ServerCredentials {
@@ -29,9 +31,18 @@ class ServerCredentials {
 }
 
 Future<void> main(List<String> args) async {
-  await Filter.instance.initializeAsyncLoaders();
-  const text = 'препод пизда люблю его очень сильно лучший наш слон';
 
-  // ignore: unused_local_variable
-  final result = Filter.instance.check(text);
+  final channel = ClientChannel(
+    '194.87.210.193',
+    port: 8080,
+    options: const ChannelOptions(credentials: ChannelCredentials.insecure()),
+  );
+  final stub = SearchServiceClient(channel);
+
+  var data = stub.getListProfessor(ListProfessorRequest());
+  await data.forEach(print);
+  await channel.shutdown();
+
+
+
 }
