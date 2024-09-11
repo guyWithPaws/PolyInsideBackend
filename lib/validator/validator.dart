@@ -21,8 +21,8 @@ class Filter {
   List<String> badWords = [];
   List<String> messageWords = [];
 
-  static File jsonFile = File(r'lib\validator\data\alphabet.json');
-  static File txtFile = File(r'lib\validator\data\bad_words.txt');
+  static File jsonFile = File('lib/validator/data/alphabet.json');
+  static File txtFile = File('lib/validator/data/bad_words.txt');
   static int numberOfBadWords = 4;
 
   Filter._();
