@@ -31,7 +31,7 @@ class ServerCredentials {
 
 Future<void> main(List<String> args) async {
   final channel = ClientChannel('87.228.18.201',
-      port: 8000,
+      port: 8080,
       options:
           const ChannelOptions(credentials: ChannelCredentials.insecure()));
   final stub = SearchServiceClient(channel);

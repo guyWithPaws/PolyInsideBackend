@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:crypto/crypto.dart';
 import 'package:html/parser.dart';
-import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
+import 'package:http/http.dart' as http;
 import 'package:l/l.dart';
 import 'package:poly_inside_server/database/provider.dart';
 import 'package:poly_inside_server/generated/protobufs/service.pb.dart';
@@ -46,7 +46,7 @@ class Parser {
       final lastPage = int.parse(htmlElements[0].children[length - 2].text);
 
       var linksToProfessors = <String>[];
-      for (var i = 1; i <= 10; i++) { //last page
+      for (var i = 1; i <= lastPage; i++) {
         l.i('Parser: Link to $i professor added. Link: https://www.spbstu.ru/university/about-the-university/staff/?arrFilter_ff%5BNAME%5D=&arrFilter_pf%5BPOSITION%5D=&arrFilter_pf%5BSCIENCE_TITLE%5D=&arrFilter_pf%5BSECTION_ID_1%5D=849&arrFilter_pf%5BSECTION_ID_2%5D=&arrFilter_pf%5BSECTION_ID_3%5D=&del_filter=%D0%A1%D0%B1%D1%80%D0%BE%D1%81%D0%B8%D1%82%D1%8C&PAGEN_1=$i&SIZEN_1=20');
         linksToProfessors.add(
             'https://www.spbstu.ru/university/about-the-university/staff/?arrFilter_ff%5BNAME%5D=&arrFilter_pf%5BPOSITION%5D=&arrFilter_pf%5BSCIENCE_TITLE%5D=&arrFilter_pf%5BSECTION_ID_1%5D=849&arrFilter_pf%5BSECTION_ID_2%5D=&arrFilter_pf%5BSECTION_ID_3%5D=&del_filter=%D0%A1%D0%B1%D1%80%D0%BE%D1%81%D0%B8%D1%82%D1%8C&PAGEN_1=$i&SIZEN_1=20');
