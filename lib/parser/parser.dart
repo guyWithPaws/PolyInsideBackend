@@ -16,7 +16,7 @@ class Parser {
   static const int maxRetries = 3;
 
   Parser({required this.provider}) {
-    l.i('[Parser]: Parser initialization was successful');
+    l.i('[Parser]: Parser initialization was successful.');
   }
 
   bool checkIsGoodResponce(Response response) {
@@ -24,8 +24,8 @@ class Parser {
       return true;
     } else {
       l
-        ..w('[Parser]: Bad responce with status code ${response.statusCode}')
-        ..i('[parser]: Skip professor');
+        ..w('[Parser]: Bad responce with status code ${response.statusCode}.')
+        ..i('[parser]: Skip professor.');
       return false;
     }
   }
@@ -57,7 +57,7 @@ class Parser {
 
     var linksToProfessors = <String>[];
     for (var i = 1; i <= lastPage; i++) {
-      l.i('Parser: Link to $i professor added. Link: https://www.spbstu.ru/university/about-the-university/staff/?arrFilter_ff%5BNAME%5D=&arrFilter_pf%5BPOSITION%5D=&arrFilter_pf%5BSCIENCE_TITLE%5D=&arrFilter_pf%5BSECTION_ID_1%5D=849&arrFilter_pf%5BSECTION_ID_2%5D=&arrFilter_pf%5BSECTION_ID_3%5D=&del_filter=%D0%A1%D0%B1%D1%80%D0%BE%D1%81%D0%B8%D1%82%D1%8C&PAGEN_1=$i&SIZEN_1=20');
+      l.i('[Parser]: Page $i added.');
       linksToProfessors.add(
           'https://www.spbstu.ru/university/about-the-university/staff/?arrFilter_ff%5BNAME%5D=&arrFilter_pf%5BPOSITION%5D=&arrFilter_pf%5BSCIENCE_TITLE%5D=&arrFilter_pf%5BSECTION_ID_1%5D=849&arrFilter_pf%5BSECTION_ID_2%5D=&arrFilter_pf%5BSECTION_ID_3%5D=&del_filter=%D0%A1%D0%B1%D1%80%D0%BE%D1%81%D0%B8%D1%82%D1%8C&PAGEN_1=$i&SIZEN_1=20');
     }
@@ -65,42 +65,49 @@ class Parser {
     var professorsNames = await getListOfProfessorsNames();
 
     for (final link in linksToProfessors) {
+      l.i('[Parser]: Link to $link');
       final response = await http.Client().get(Uri.parse(link));
 
       if (!checkIsGoodResponce(response)) {
         continue;
       }
 
-      var professorPage = parse(response.body);
-      var numberOfProfessor =
-          professorPage.getElementsByClassName('col-sm-9 col-md-10').length;
+      try {
+        var professorPage = parse(response.body);
+        var numberOfProfessor =
+            professorPage.getElementsByClassName('col-sm-9 col-md-10').length;
 
-      for (var number = 0; number < numberOfProfessor; number++) {
-        var professorName = professorPage
-            .getElementsByClassName('col-sm-9 col-md-10')[number]
-            .children[0]
-            .text;
-
-        if (professorsNames.contains(professorName) ||
-            professorsNames.isEmpty) {
-          var avatarSublink = professorPage
-              .getElementsByClassName('col-sm-3 col-md-2')[number]
+        for (var number = 0; number < numberOfProfessor; number++) {
+          var professorName = professorPage
+              .getElementsByClassName('col-sm-9 col-md-10')[number]
               .children[0]
-              .attributes['src']
-              .toString();
+              .text;
 
-          var professorAvatar = 'https://www.spbstu.ru/$avatarSublink';
+          if (professorsNames.contains(professorName) ||
+              professorsNames.isEmpty) {
+            var avatarSublink = professorPage
+                .getElementsByClassName('col-sm-3 col-md-2')[number]
+                .children[0]
+                .attributes['src']
+                .toString();
 
-          var professorIdBytes =
-              utf8.encode(professorName + DateTime.now().toString());
+            var professorAvatar = 'https://www.spbstu.ru/$avatarSublink';
 
-          var professorId = sha1.convert(professorIdBytes).toString();
+            var professorIdBytes =
+                utf8.encode(professorName + DateTime.now().toString());
 
-          await provider.addProfessor(
-            Professor(
-                id: professorId, name: professorName, avatar: professorAvatar),
-          );
+            var professorId = sha1.convert(professorIdBytes).toString();
+
+            await provider.addProfessor(
+              Professor(
+                  id: professorId,
+                  name: professorName,
+                  avatar: professorAvatar),
+            );
+          }
         }
+      } catch (e) {
+        l.i('[Parser]: Somethin went wrong! Skip this stage!');
       }
     }
 
