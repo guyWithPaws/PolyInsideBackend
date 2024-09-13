@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:l/l.dart';
+
 extension on String {
   static final RegExp unneccessarySpace = RegExp(r'\s+');
   static final RegExp unnecessarySymbols = RegExp('[0-9|.|,|!|?|/]');
@@ -37,6 +39,7 @@ class Filter {
   Future<void> initializeAsyncLoaders() async {
     alphabet = await loadAlphabetFromJsonFile();
     badWords = await loadWordsFromFile();
+    l.i('[Filter]: Filter initialization was successful');
   }
 
   Future<List<String>> loadWordsFromFile() async {

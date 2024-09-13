@@ -14,11 +14,12 @@ class Parser {
 
   final DatabaseProvider provider;
 
-  Parser({required this.provider});
+  Parser({required this.provider}) {
+    l.i('[Parser]: Parser initialization was successful');
+  }
 
   bool checkIsGoodResponce(Response response) {
     if (response.statusCode == 200) {
-      l.i('[Parser] Everything is OK. Start parsing...');
       return true;
     } else {
       l.w('Parser: Bad responce with status code ${response.statusCode}');
@@ -39,6 +40,8 @@ class Parser {
     final responce = await http.Client().get(Uri.parse(staffPage));
 
     if (checkIsGoodResponce(responce)) {
+      l.i('[Parser] Everything is OK. Start parsing...');
+
       final htmlDocument = parse(responce.body);
       final htmlElements = htmlDocument.getElementsByClassName('pagination');
 
@@ -94,5 +97,6 @@ class Parser {
         }
       }
     }
+    l.i('[Parser]: Database was updeted');
   }
 }

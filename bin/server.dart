@@ -15,18 +15,18 @@ Future<void> main() async {
     () async {
       await runZonedGuarded(
         () async {
-          //await Filter.instance.initializeAsyncLoaders();
+          await Filter.instance.initializeAsyncLoaders();
 
           final database = AppDatabase(NativeDatabase(File('db.sqlite')));
           final provider = DatabaseProviderImpl(database: database);
-          //final parser = Parser(provider: provider);
-          //await parser.fillDatabase();
+          final parser = Parser(provider: provider);
+          await parser.fillDatabase();
 
           final server = Server.create(services: [
             GRPCService(provider: provider),
           ], interceptors: []);
-          await server.serve(port: 8000);
-          l.i('Server listening on ${server.port}');
+          await server.serve(port: 8080);
+          l.i('[Server]: Server listening on ${server.port}');
         },
         l.e,
       );

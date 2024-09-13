@@ -38,5 +38,5 @@ Future<void> main(List<String> args) async {
 
   var data = stub.getListProfessor(ListProfessorRequest());
   data.forEach(print);
-  await channel.shutdown();
+  //await channel.shutdown();
 }
