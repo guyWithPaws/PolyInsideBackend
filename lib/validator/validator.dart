@@ -104,17 +104,3 @@ class Filter {
     return true;
   }
 }
-
-enum FilterTypes {
-  accepted,
-  rejected;
-
-  String get name {
-    switch (this) {
-      case FilterTypes.accepted:
-        return 'Accepted';
-      case FilterTypes.rejected:
-        return 'Rejected';
-    }
-  }
-}
