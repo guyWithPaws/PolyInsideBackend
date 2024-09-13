@@ -71,8 +71,7 @@ class Parser {
                 .children[0]
                 .text;
 
-            if (professorsNames.contains(professorName) ||
-                professorsNames.isEmpty) {
+            if (professorsNames.contains(professorName)) {
               var avatarSublink = professorPage
                   .getElementsByClassName('col-sm-3 col-md-2')[number]
                   .children[0]
